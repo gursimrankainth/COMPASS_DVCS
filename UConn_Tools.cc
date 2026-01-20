@@ -197,7 +197,6 @@ bool beamFluxCheck(const PaEvent &e, const PaVertex &v, int vertexIndex, int Run
 				const BeamFluxParams &params, PaParticle &beam, PaTrack &beam_track, 
 				PaTPar &Par_beam, EventFlags &flags) { // beamFlux loop begins 
 
-	// Keep just the signatures in a header file and move the body to a cc file 
 	// Check that there is an incoming muon associated with the vertex
 	int i_beam = v.InParticle();  
 	if (i_beam == -1) {  
@@ -273,7 +272,6 @@ bool beamFluxCheck(const PaEvent &e, const PaVertex &v, int vertexIndex, int Run
 	// Return true if all conditions are met
 	return true;
 } 
-
 
 // *************************  OUTMUCHECK DVCS *************************** 
 // 1. Function: outMuCheck -> check that all requirements are satisfied by the scattered muon

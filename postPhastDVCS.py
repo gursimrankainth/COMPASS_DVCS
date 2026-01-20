@@ -21,7 +21,7 @@ args = parser.parse_args()
 tree_name = "USR970"
 period = args.period if args.period else input("Enter the period (e.g. 09): ").strip()
 
-input_file = f"merged_P{period}.root"
+input_file = f"merged_P{period}_test.root"
 output_file = f"filtered_P{period}.root"
 output_tree_name = "USR970_filtered"
 
