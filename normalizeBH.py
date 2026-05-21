@@ -7,7 +7,7 @@ import datetime
 
 # **********************************
 # HEPGEN BH MC Data (generated data)
-gen_dir = "/eos/user/g/gkainth/BH/"
+gen_dir = "/Users/gursimran/cern/2016_data/BH/"
 mcGen_files = [[os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root")],
                [os.path.join(gen_dir, "gen_P05_muPlus.root"), os.path.join(gen_dir, "gen_P05_muMinus.root")],
                [os.path.join(gen_dir, "gen_P06_muPlus.root"), os.path.join(gen_dir, "gen_P06_muMinus.root")],
@@ -16,7 +16,7 @@ mcGen_files = [[os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_d
                [os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root")]]
 
 # HEPGEN BH MC Data (reconstructed data)
-rec_dir = "/eos/user/g/gkainth/BH/"
+rec_dir = "/Users/gursimran/cern/2016_data/BH/"
 mcRec_files = [[os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P05_muPlus.root"), os.path.join(rec_dir, "filtered_P05_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P06_muPlus.root"), os.path.join(rec_dir, "filtered_P06_muMinus.root")],
@@ -25,7 +25,7 @@ mcRec_files = [[os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(
                [os.path.join(rec_dir, "filtered_P09_muPlus.root"), os.path.join(rec_dir, "filtered_P09_muMinus.root")]]
 
 # Real data 
-real_dir = "/eos/user/g/gkainth/real/"
+real_dir = "/Users/gursimran/cern/2016_data/real/"
 real_files = [[os.path.join(real_dir, "filtered_P04.root")],
               [os.path.join(real_dir, "filtered_P05.root")],
               [os.path.join(real_dir, "filtered_P06.root")],

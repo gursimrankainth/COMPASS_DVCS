@@ -1,11 +1,8 @@
 import os
 import ROOT
-from ROOT import TLorentzVector
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from decimal import Decimal, getcontext
-from matplotlib import gridspec
 import datetime  
 import pickle
 
@@ -15,7 +12,7 @@ import pickle
 # *                    *** DATA PREP ***                            *
 # *******************************************************************
 # Generated MC data 
-gen_dir = "/eos/user/g/gkainth/BH/"
+gen_dir = "/Users/gursimran/cern/2016_data/BH"
 gen_files = [os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root")]
 
 """ gen_files = [os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root"),
@@ -38,7 +35,7 @@ print("Total Entries Generated: mu+:", tree_gen_muPlus.GetEntries(), ", mu-:", t
 
 # **********************************
 # Reconstructed MC data after full DVCS selection
-rec_dir = "/eos/user/g/gkainth/BH/"
+rec_dir = "/Users/gursimran/cern/2016_data/BH"
 rec_files = [os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root")]
 
 """ rec_files = [os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root"),
@@ -896,11 +893,12 @@ def main():
   # Error mu+ and mu- 
   acc_err_muPlus, acc_err_muMinus = acc_error_4d(arrays_4d)
 
+  """
   with open("acc_G_P04.pkl", "wb") as f:
     pickle.dump(acc_muPlus, f)
     pickle.dump(acc_muMinus, f)
   print("Saved to acc_G_P04.pkl.")
-
+  """
 
   """
   A_global = (

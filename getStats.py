@@ -9,7 +9,7 @@ from scipy.optimize import curve_fit
 
 # **********************************
 # Real data 
-real_dir = "/eos/user/g/gkainth/real/"
+real_dir = "/Users/gursimran/cern/2016_data/real/"
 real_files = [os.path.join(real_dir, "filtered_P04.root"),
               os.path.join(real_dir, "filtered_P05.root"),
               os.path.join(real_dir, "filtered_P06.root"),
@@ -18,7 +18,7 @@ real_files = [os.path.join(real_dir, "filtered_P04.root"),
               os.path.join(real_dir, "filtered_P09.root")]
 
 # HEPGEN BH MC Data (Generated data)
-gen_dir = "/eos/user/g/gkainth/BH/"
+gen_dir = "/Users/gursimran/cern/2016_data/BH/"
 gen_files = [os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root"),
              os.path.join(gen_dir, "gen_P05_muPlus.root"), os.path.join(gen_dir, "gen_P05_muMinus.root"),
              os.path.join(gen_dir, "gen_P06_muPlus.root"), os.path.join(gen_dir, "gen_P06_muMinus.root"),
@@ -27,7 +27,7 @@ gen_files = [os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir,
              os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root")]
 
 # HEPGEN BH MC Data (Reconstructed data)
-hepBH_dir = "/eos/user/g/gkainth/BH"
+hepBH_dir = "/Users/gursimran/cern/2016_data/BH"
 hepBH_files = [os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P05_muPlus.root"), os.path.join(hepBH_dir, "filtered_P05_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P06_muPlus.root"), os.path.join(hepBH_dir, "filtered_P06_muMinus.root"),
@@ -36,7 +36,7 @@ hepBH_files = [os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join
                os.path.join(hepBH_dir, "filtered_P09_muPlus.root"), os.path.join(hepBH_dir, "filtered_P09_muMinus.root")]
 
 # HEPGEN Invisible Pi0 MC Data (Reconstructed data)
-hepPi0_dir = "/eos/user/g/gkainth/HepgenPi0/"
+hepPi0_dir = "/Users/gursimran/cern/2016_data/HepgenPi0/"
 hepPi0_files = [os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P06_muMinus.root"),
@@ -45,7 +45,7 @@ hepPi0_files = [os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.jo
                 os.path.join(hepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P09_muMinus.root")]
 
 # LEPTO Invisible Pi0 MC Data (Reconstructed data)
-lepPi0_dir = "/eos/user/g/gkainth/LeptoPi0/"
+lepPi0_dir = "/Users/gursimran/cern/2016_data/LeptoPi0/"
 lepPi0_files = [os.path.join(lepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P06_muMinus.root"),
