@@ -34,7 +34,7 @@ real_files = [[os.path.join(real_dir, "filtered_P04.root")],
               [os.path.join(real_dir, "filtered_P09.root")]]
 
 # Flux files 
-flux_dir = "/afs/cern.ch/user/g/gkainth/phastPackages/flux_files/flux_Johannes/2016/flux_files"
+flux_dir = "/Users/gursimran/cern/configs/flux_Johannes/2016/flux_files"
 #flux_dir = "/afs/cern.ch/user/g/gkainth/phastPackages/flux_files/flux_Johannes/2016/flux_files_slot7.1"
 
 
@@ -49,9 +49,10 @@ period_run_ranges = {
   "P09": (275478, 275908),
 }
 
-def load_bad_spills(period, bad_spill_dir="/afs/cern.ch/user/g/gkainth/phastPackages/bad_spill"):
+def load_bad_spills(period, bad_spill_dir="/Users/gursimran/cern/configs/bad_spill/"):
   # Find matching bad spill file for the given period
   pattern = os.path.join(bad_spill_dir, f"P0{period}*bad_spill.lst")
+  print(pattern)
   matching_files = glob.glob(pattern)
   if len(matching_files) == 0:
     print("Bad spill file not found")
@@ -81,8 +82,7 @@ def get_flux(flux_dir=flux_dir, period=9):
   run_min, run_max = period_run_ranges[period_name]
 
   # Load bad spills
-  bad_spill_dir = "/afs/cern.ch/user/g/gkainth/phastPackages/bad_spill"
-  bad_spills = load_bad_spills(period, bad_spill_dir)
+  bad_spills = load_bad_spills(period)
   #print(f"Loaded {len(bad_spills)} bad spills ...")
 
   flux_muPlus = 0.0
