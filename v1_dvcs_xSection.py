@@ -1,8 +1,6 @@
 import ROOT
-from ROOT import TLorentzVector
 import pickle
 import os 
-import math
 import numpy as np
 import matplotlib.pyplot as plt
 from dvcs_constants_2016 import *
@@ -15,52 +13,53 @@ from scipy.optimize import curve_fit
 # Constants 
 alpha_em = 0.0072973525693 # electromagnetic fine structure constant 
 M_mu = 105.6583755e-3 # GeV/c
+phaseSpace = (4,4,4,8)
 
 # **********************************
 # Real data 
 real_dir = "/Users/gursimran/cern/2016_data/real/"
-real_files = [os.path.join(real_dir, "filtered_P04.root"),
+real_files = (os.path.join(real_dir, "filtered_P04.root"),
               os.path.join(real_dir, "filtered_P05.root"),
               os.path.join(real_dir, "filtered_P06.root"),
               os.path.join(real_dir, "filtered_P07.root"),
               os.path.join(real_dir, "filtered_P08.root"),
-              os.path.join(real_dir, "filtered_P09.root")]
+              os.path.join(real_dir, "filtered_P09.root"))
 
 # HEPGEN BH MC Data (Generated data)
 gen_dir = "/Users/gursimran/cern/2016_data/BH/"
-gen_files = [os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root"),
+gen_files = (os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root"),
              os.path.join(gen_dir, "gen_P05_muPlus.root"), os.path.join(gen_dir, "gen_P05_muMinus.root"),
              os.path.join(gen_dir, "gen_P06_muPlus.root"), os.path.join(gen_dir, "gen_P06_muMinus.root"),
              os.path.join(gen_dir, "gen_P07_muPlus.root"), os.path.join(gen_dir, "gen_P07_muMinus.root"),
              os.path.join(gen_dir, "gen_P08_muPlus.root"), os.path.join(gen_dir, "gen_P08_muMinus.root"),
-             os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root")]
+             os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root"))
 
 # HEPGEN BH MC Data (Reconstructed data)
 hepBH_dir = "/Users/gursimran/cern/2016_data/BH/"
-hepBH_files = [os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
+hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P05_muPlus.root"), os.path.join(hepBH_dir, "filtered_P05_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P06_muPlus.root"), os.path.join(hepBH_dir, "filtered_P06_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P07_muPlus.root"), os.path.join(hepBH_dir, "filtered_P07_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P08_muPlus.root"), os.path.join(hepBH_dir, "filtered_P08_muMinus.root"),
-               os.path.join(hepBH_dir, "filtered_P09_muPlus.root"), os.path.join(hepBH_dir, "filtered_P09_muMinus.root")]
+               os.path.join(hepBH_dir, "filtered_P09_muPlus.root"), os.path.join(hepBH_dir, "filtered_P09_muMinus.root"))
 
 # HEPGEN Invisible Pi0 MC Data (Reconstructed data)
 hepPi0_dir = "/Users/gursimran/cern/2016_data/HepgenPi0/"
-hepPi0_files = [os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
+hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P07_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P08_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P08_muMinus.root"),
-                os.path.join(hepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P09_muMinus.root")]
+                os.path.join(hepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P09_muMinus.root"))
 
 # LEPTO Invisible Pi0 MC Data (Reconstructed data)
 lepPi0_dir = "/Users/gursimran/cern/2016_data/LeptoPi0/"
-lepPi0_files = [os.path.join(lepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus.root"),
+lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P07_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P08_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P08_muMinus.root"),
-                os.path.join(lepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P09_muMinus.root")]
+                os.path.join(lepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P09_muMinus.root"))
 
 # **********************************
 # Total Luminosity 
@@ -540,12 +539,12 @@ def get_S(real_sum, BH_sum, lepPi0_sum, hepPi0_sum, period_idx, charge="muPlus")
   elif charge == "muMinus": 
     sum_term = real_sum - CBH_MUMINUS[period_idx]*BH_sum - CPI0_LEP_MUMINUS[period_idx]*R_LEPTO*lepPi0_sum - CPI0_HEP_MUMINUS[period_idx]*(1-R_LEPTO)*hepPi0_sum
   else:
-    print('Invalid charge, please use "muPlus" or "muMinus"')
+    raise ValueError('Invalid charge, please use "muPlus" or "muMinus"')
   return sum_term
 
 # **********************************
 # Get the mean cross section in (|t|, phi)
-def compute_sigma_t_phi(Ncorr_ijkl, luminosity, t_edges, delta_phi, Q2_edges, nu_edges):
+def compute_sigma_t_phi(Ncorr_ijkl):
   n_t, n_Q2, n_nu, n_phi = Ncorr_ijkl.shape
   sigma_t_phi = np.zeros((n_t, n_phi), dtype=np.float64)
 
@@ -564,8 +563,7 @@ def compute_sigma_t_phi(Ncorr_ijkl, luminosity, t_edges, delta_phi, Q2_edges, nu
 
       sigma_t_phi[it, iphi] = (
         S /
-        (luminosity *
-         delta_t *
+        (delta_t *
          delta_Q2_total *
          delta_nu_total *
          delta_phi[iphi])
@@ -574,7 +572,7 @@ def compute_sigma_t_phi(Ncorr_ijkl, luminosity, t_edges, delta_phi, Q2_edges, nu
   return sigma_t_phi
 
 # Integrate over phi (discrete sum over phi bins)
-def integrate_over_phi(sigma_t_phi, delta_phi):
+def integrate_over_phi(sigma_t_phi):
   n_t, n_phi = sigma_t_phi.shape
   sigma_t = np.zeros(n_t, dtype=np.float64)
 
@@ -755,7 +753,7 @@ def compute_4D_error(S_ijkl, A_ijkl, varS_ijkl, varA_ijkl):
 
 # **********************************
 # Get the error for the mean cross section in |t|, phi 
-def get_err_t_phi(var4D_array, luminosity, t_edges, delta_phi, Q2_edges, nu_edges):
+def get_err_t_phi(var4D_array):
   n_t, n_Q2, n_nu, n_phi = var4D_array.shape
   var_t_phi = np.zeros((n_t, n_phi), dtype=np.float64)
 
@@ -772,14 +770,14 @@ def get_err_t_phi(var4D_array, luminosity, t_edges, delta_phi, Q2_edges, nu_edge
         for inu in range(n_nu):
           total_var += var4D_array[it, iq, inu, iphi]
 
-      norm = luminosity * delta_t * delta_Q2_total * delta_nu_total * delta_phi[iphi]
+      norm = delta_t * delta_Q2_total * delta_nu_total * delta_phi[iphi]
       var_t_phi[it, iphi] = total_var / norm**2
 
   return var_t_phi
 
 # **********************************
 # Get the error for the |t| depedent cross section 
-def get_err_t(var_t_phi, delta_phi):
+def get_err_t(var_t_phi):
   n_t, n_phi = var_t_phi.shape
   var_t = np.zeros(n_t)
 
@@ -857,7 +855,7 @@ def toy_test_S_functions():
 # *******************************************************************
 # Get the slope for each period (averaged over both beam charges)
 # This value is a used for a spot check - does not follow the true procedure 
-def dvcs_slope_period_test(t_edges, sigma_muPlus, sigma_muMinus, err_muPlus, err_muMinus, period):
+def dvcs_slope_period_test(sigma_muPlus, sigma_muMinus, err_muPlus, err_muMinus, period):
   # Compute bin centers
   t_edges = np.array(t_edges, dtype=np.float64)
   t_centers = 0.5 * (t_edges[1:] + t_edges[:-1])
@@ -943,6 +941,9 @@ def main():
 
   # Loop over the periods 
   debug_main = False
+  total_sigma_t_muPlus = np.zeros((4,), dtype=np.float64)
+  total_sigma_t_muMinus = np.zeros((4,), dtype=np.float64)
+
   for idx, period in enumerate(PERIODS[:1]):
     print(idx, period)
     # ***********************************************
@@ -962,32 +963,32 @@ def main():
     # ***********************************************
     """ """
     # Get the real data sum term in the cross section 
-    real_ijkl_muPlus  = np.zeros((4,4,4,8), dtype=np.float64)
-    real_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    real_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
+    real_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     unweighted_sum(real_ijkl_muPlus, real_ijkl_muMinus, real_files, data="real", period=period)
     if debug_main: 
       print(f"Total real μ+ events: {np.sum(real_ijkl_muPlus)}")
       print(f"Total real μ- events: {np.sum(real_ijkl_muMinus)}")
     
     # Get the BH sum term in the cross section 
-    BH_ijkl_muPlus  = np.zeros((4,4,4,8), dtype=np.float64)
-    BH_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    BH_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
+    BH_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     weighted_sum(BH_ijkl_muPlus, BH_ijkl_muMinus, hepBH_files, data="hepBH", period=period)
     if debug_main:
       print(f"Total BH μ+ events: {np.sum(BH_ijkl_muPlus)}")
       print(f"Total BH μ- events: {np.sum(BH_ijkl_muMinus)}")
      
     # Get the inclusive inv. pi0 sum term in the cross section
-    lepPi0_ijkl_muPlus  = np.zeros((4,4,4,8), dtype=np.float64)
-    lepPi0_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    lepPi0_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
+    lepPi0_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     unweighted_sum(lepPi0_ijkl_muPlus, lepPi0_ijkl_muMinus, lepPi0_files, data="lepPi0", period=period)
     if debug_main:
       print(f"Total inc. pi0 μ+ events: {np.sum(lepPi0_ijkl_muPlus)}")
       print(f"Total inc. pi0 μ- events: {np.sum(lepPi0_ijkl_muMinus)}")
 
     # Get the eexclusive inv. pi0 sum term in the cross section 
-    hepPi0_ijkl_muPlus  = np.zeros((4,4,4,8), dtype=np.float64)
-    hepPi0_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    hepPi0_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
+    hepPi0_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     weighted_sum(hepPi0_ijkl_muPlus, hepPi0_ijkl_muMinus, hepPi0_files, data="hepPi0", period=period)
     if debug_main:
       print(f"Total exc. pi0 μ+ events: {np.sum(hepPi0_ijkl_muPlus)}")
@@ -1006,17 +1007,19 @@ def main():
     # *     *** T-DEPDENDENT CROSS SECTION ***      * 
     # ***********************************************
     # mu+ t-dependent cross section 
-    sigma_t_phi_muPlus = compute_sigma_t_phi(Ncorr_ijkl_muPlus, LUMINOSITY_MUPLUS[idx], 
-                                             t_edges, delta_phi, Q2_edges, nu_edges)
-    sigma_t_muPlus = integrate_over_phi(sigma_t_phi_muPlus, delta_phi)
-    sigma_t_muPlus /= 1e-33 
+    sigma_t_phi_muPlus = compute_sigma_t_phi(Ncorr_ijkl_muPlus)
+    sigma_t_muPlus = integrate_over_phi(sigma_t_phi_muPlus)
+    total_sigma_t_muPlus += sigma_t_muPlus # add per period unnormalized sigma_t to the total for the full 2016 sample 
+    sigma_t_muPlus /= LUMINOSITY_MUPLUS[idx]
+    sigma_t_muPlus *= 1e33 # convert to nb/GeV2
     print(period, "mu+ dsigma/dt (nb/GeV²):", sigma_t_muPlus)
 
     # mu- t-dependent cross section 
-    sigma_t_phi_muMinus = compute_sigma_t_phi(Ncorr_ijkl_muMinus, LUMINOSITY_MUMINUS[idx], 
-                                              t_edges, delta_phi, Q2_edges, nu_edges)
-    sigma_t_muMinus = integrate_over_phi(sigma_t_phi_muMinus, delta_phi)
-    sigma_t_muMinus /= 1e-33 
+    sigma_t_phi_muMinus = compute_sigma_t_phi(Ncorr_ijkl_muMinus)
+    sigma_t_muMinus = integrate_over_phi(sigma_t_phi_muMinus)
+    total_sigma_t_muMinus += sigma_t_muMinus # add per period unnormalized sigma_t to the total for the full 2016 sample 
+    sigma_t_muMinus /= LUMINOSITY_MUMINUS[idx]
+    sigma_t_muMinus *= 1e33 # convert to nb/GeV2
     print(period, "mu- dsigma/dt (nb/GeV²):", sigma_t_muMinus)
     
     # ************************************************
@@ -1027,29 +1030,29 @@ def main():
                                                       rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus) 
     
     # Get the sum term error 
-    dD_ijkl_muPlus = np.zeros((4,4,4,8), dtype=np.float64)
-    dD_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    dD_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    dD_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     unweighted_err_sum(dD_ijkl_muPlus, dD_ijkl_muMinus, real_files, data="real", period=period)
     if debug_main: 
       print("mu+ varD min/max:", np.min(dD_ijkl_muPlus), np.max(dD_ijkl_muPlus))
       print("mu- varD min/max:", np.min(dD_ijkl_muMinus), np.max(dD_ijkl_muMinus))
     
-    dB_ijkl_muPlus = np.zeros((4,4,4,8), dtype=np.float64)
-    dB_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    dB_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    dB_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     weighted_err_sum(dB_ijkl_muPlus, dB_ijkl_muMinus, hepBH_files, data="hepBH", period=period)
     if debug_main:
       print("mu+ varB min/max:", np.min(dB_ijkl_muPlus), np.max(dB_ijkl_muPlus))
       print("mu- varB min/max:", np.min(dB_ijkl_muMinus), np.max(dB_ijkl_muMinus))
 
-    dL_ijkl_muPlus = np.zeros((4,4,4,8), dtype=np.float64)
-    dL_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    dL_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    dL_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     unweighted_err_sum(dL_ijkl_muPlus, dL_ijkl_muMinus, lepPi0_files, data="lepPi0", period=period)
     if debug_main:
       print("mu+ varL min/max:", np.min(dL_ijkl_muPlus), np.max(dL_ijkl_muPlus))
       print("mu- varL min/max:", np.min(dL_ijkl_muMinus), np.max(dL_ijkl_muMinus))
 
-    dH_ijkl_muPlus = np.zeros((4,4,4,8), dtype=np.float64)
-    dH_ijkl_muMinus = np.zeros((4,4,4,8), dtype=np.float64)
+    dH_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    dH_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
     weighted_err_sum(dH_ijkl_muPlus, dH_ijkl_muMinus, hepPi0_files, data="hepPi0", period=period)
     if debug_main:
       print("mu+ varH min/max:", np.min(dH_ijkl_muPlus), np.max(dH_ijkl_muPlus))
@@ -1077,16 +1080,18 @@ def main():
     # ************************************************
     # mu+ t-dependent cross section  error 
     err_ijkl_muPlus = compute_4D_error(sum_ijkl_muPlus, acc_muPlus, dS_ijkl_muPlus, varAcc_muPlus)
-    err_t_phi_muPlus = get_err_t_phi(err_ijkl_muPlus, LUMINOSITY_MUPLUS[idx], t_edges, delta_phi, Q2_edges, nu_edges)
-    err_t_muPlus = get_err_t(err_t_phi_muPlus, delta_phi)
-    err_t_muPlus /= 1e-33
+    err_t_phi_muPlus = get_err_t_phi(err_ijkl_muPlus)
+    err_t_muPlus = get_err_t(err_t_phi_muPlus)
+    err_t_muPlus /= LUMINOSITY_MUPLUS[idx]
+    err_t_muPlus *= 1e33 # convert to nb/GeV2
     print(period, "mu+ error (nb/GeV²):", err_t_muPlus)
 
     # mu- t-dependent cross section error
     err_ijkl_muMinus = compute_4D_error(sum_ijkl_muMinus, acc_muMinus, dS_ijkl_muMinus, varAcc_muMinus)
-    err_t_phi_muMinus = get_err_t_phi(err_ijkl_muMinus, LUMINOSITY_MUMINUS[idx], t_edges, delta_phi, Q2_edges, nu_edges)
-    err_t_muMinus = get_err_t(err_t_phi_muMinus, delta_phi)
-    err_t_muMinus /= 1e-33
+    err_t_phi_muMinus = get_err_t_phi(err_ijkl_muMinus)
+    err_t_muMinus = get_err_t(err_t_phi_muMinus)
+    err_t_muMinus /= LUMINOSITY_MUMINUS[idx]
+    err_t_muMinus *= 1e33 # convert to nb/GeV2
     print(period, "mu- error (nb/GeV²):", err_t_muMinus)
     """ """
 
@@ -1096,7 +1101,7 @@ def main():
       B, B_err, sigma0, sigma0_err = dvcs_slope_period_test(t_edges, sigma_t_muPlus, sigma_t_muMinus, err_t_muPlus, err_t_muMinus, period)
       print(f"{period} Slope Test: B = {B:.3f} ± {B_err:.3f} GeV^-2, sigma0 = {sigma0:.2f} ± {sigma0_err:.2f} nb/GeV^2")
 
-    # Save results to the dictionary 
+    # Save per period results to the dictionary 
     dvcs_results[period] = {
       "sigma_muPlus": sigma_t_muPlus.copy(),
       "sigma_muMinus": sigma_t_muMinus.copy(),
@@ -1104,10 +1109,27 @@ def main():
       "err_muMinus": err_t_muMinus.copy()
     }
     """ """
+
+  # Save the total 2016 results to the dictionary 
+  total_sigma_t_muPlus /= tot_lum_muPlus
+  total_sigma_t_muPlus *= 1e33 # convert to nb/GeV2
+  print("total mu+ dsigma/dt (nb/GeV²):", total_sigma_t_muPlus)
+
+  total_sigma_t_muMinus /= tot_lum_muMinus
+  total_sigma_t_muMinus *= 1e33 # convert to nb/GeV2
+  print("total mu- dsigma/dt (nb/GeV²):", total_sigma_t_muMinus)
+
+  dvcs_results["total"] = {
+    "sigma_muPlus": total_sigma_t_muPlus.copy(),
+    "sigma_muMinus": total_sigma_t_muMinus.copy(),
+  }
+
   # Save dictionary to output file for later use 
+  """
   with open("dvcs_xSection_results.pkl", "wb") as f:
     pickle.dump(dvcs_results, f)
   print("Results written to 'dvcs_xSection_results.pkl'")
+  """
 
 if __name__ == "__main__":
   main()
