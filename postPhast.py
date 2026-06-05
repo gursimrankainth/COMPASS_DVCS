@@ -305,7 +305,7 @@ if produce_pi0 and n_kept_pi0 > 0:
   # prepare reader
   for i in range(out_tree_pi0.GetEntries()):
     out_tree_pi0.GetEntry(i)
-    key = (out_tree_pi0.Run, out_tree_pi0.Spill, out_tree_pi0.Evt)
+    key = (out_tree_pi0.Run, out_tree_pi0.Spill, out_tree_pi0.Evt, out_tree_pi0.mDST)
     counts[key] += 1
 
   out_tree_pi0_excl = out_tree_pi0.CloneTree(0)
@@ -313,7 +313,7 @@ if produce_pi0 and n_kept_pi0 > 0:
 
   for i in range(out_tree_pi0.GetEntries()):
     out_tree_pi0.GetEntry(i)
-    key = (out_tree_pi0.Run, out_tree_pi0.Spill, out_tree_pi0.Evt)
+    key = (out_tree_pi0.Run, out_tree_pi0.Spill, out_tree_pi0.Evt, out_tree_pi0.mDST)
 
     if counts[key] != 1:
       continue

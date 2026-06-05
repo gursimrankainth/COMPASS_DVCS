@@ -2,6 +2,7 @@ import ROOT
 import pickle
 import os 
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 from dvcs_constants_2016 import *
 from scipy.optimize import curve_fit
@@ -13,7 +14,7 @@ from scipy.optimize import curve_fit
 # Constants 
 alpha_em = 0.0072973525693 # electromagnetic fine structure constant 
 M_mu = 105.6583755e-3 # GeV/c
-phaseSpace = (4,4,4,8)
+phaseSpace = (4,4,4,8) # (t, Q2, nu, phi)
 
 # **********************************
 # Real data 
@@ -89,6 +90,18 @@ delta_phi  = np.diff(phi_edges)      # array of size n_phi_bins
 
 
 # *******************************************************************
+# *                 *** HELPER FUNCTIONS ***                        *
+# *******************************************************************
+# **********************************
+# Find the phase space bin (more efficient than using search sorted) 
+def getBin(edges: np.array, value: float, even_bins=True):
+  if even_bins:
+    bin_width = edges[1] - edges[0]
+    return int(math.floor((value - edges[0]) / bin_width))
+  return np.searchsorted(edges, value) - 1
+
+
+# *******************************************************************
 # *                    *** ACCEPTANCE ***                           *
 # *******************************************************************
 # **********************************
@@ -140,6 +153,8 @@ def fill_weights(data_type="gen", period="P04"):
 
     # Bin Q2
     Q2_bin  = np.searchsorted(Q2_edges, Q2) - 1
+    #Q2_bin_test = getBin(Q2_edges, Q2, even_bins=True)
+    #print(n_Q2, Q2, Q2_bin, Q2_bin_test)
     if Q2_bin < 0 or Q2_bin >= n_Q2:
       continue
 
@@ -943,8 +958,10 @@ def main():
   debug_main = False
   total_sigma_t_muPlus = np.zeros((4,), dtype=np.float64)
   total_sigma_t_muMinus = np.zeros((4,), dtype=np.float64)
+  total_err_t_muPlus = np.zeros((4,), dtype=np.float64)
+  total_err_t_muMinus = np.zeros((4,), dtype=np.float64)
 
-  for idx, period in enumerate(PERIODS[:1]):
+  for idx, period in enumerate(PERIODS):
     print(idx, period)
     # ***********************************************
     # *          *** 4D ACCEPTANCE ***              * 
@@ -1002,6 +1019,13 @@ def main():
     sum_ijkl_muMinus = get_S(real_ijkl_muMinus, BH_ijkl_muMinus, lepPi0_ijkl_muMinus, 
                                   hepPi0_ijkl_muMinus, period_idx=idx, charge="muMinus") 
     Ncorr_ijkl_muMinus = (1/acc_muMinus) * sum_ijkl_muMinus
+
+    """ out_file = f"dvcs_accVar_{period}.pkl"
+    with open(out_file, "wb") as f:
+      pickle.dump({"sum_muPlus": rec_muPlus_sq, "sum_muMinus": rec_muMinus_sq,
+                   "sum_muPlus": gen_muPlus_sq, "sum_muMinus": gen_muMinus_sq,
+                   },f)
+    print(f"Results written to '{out_file}'") """
 
     # ***********************************************
     # *     *** T-DEPDENDENT CROSS SECTION ***      * 
@@ -1082,6 +1106,7 @@ def main():
     err_ijkl_muPlus = compute_4D_error(sum_ijkl_muPlus, acc_muPlus, dS_ijkl_muPlus, varAcc_muPlus)
     err_t_phi_muPlus = get_err_t_phi(err_ijkl_muPlus)
     err_t_muPlus = get_err_t(err_t_phi_muPlus)
+    total_err_t_muPlus += err_t_muPlus # add per period unnormalized error_t to the total for the full 2016 sample 
     err_t_muPlus /= LUMINOSITY_MUPLUS[idx]
     err_t_muPlus *= 1e33 # convert to nb/GeV2
     print(period, "mu+ error (nb/GeV²):", err_t_muPlus)
@@ -1090,10 +1115,10 @@ def main():
     err_ijkl_muMinus = compute_4D_error(sum_ijkl_muMinus, acc_muMinus, dS_ijkl_muMinus, varAcc_muMinus)
     err_t_phi_muMinus = get_err_t_phi(err_ijkl_muMinus)
     err_t_muMinus = get_err_t(err_t_phi_muMinus)
+    total_err_t_muMinus += err_t_muMinus # add per period unnormalized error_t to the total for the full 2016 sample 
     err_t_muMinus /= LUMINOSITY_MUMINUS[idx]
     err_t_muMinus *= 1e33 # convert to nb/GeV2
     print(period, "mu- error (nb/GeV²):", err_t_muMinus)
-    """ """
 
     # Spot check to see if slopes seem reasonable - not actual fitting method but good approx. for a check
     # If the numbers seem unreasonable there is a problem somewhere 
@@ -1108,28 +1133,43 @@ def main():
       "err_muPlus": err_t_muPlus.copy(),
       "err_muMinus": err_t_muMinus.copy()
     }
-    """ """
 
-  # Save the total 2016 results to the dictionary 
+  # ***********************************************
+  # *         *** FULL 2016 SAMPLE  ***           * 
+  # ***********************************************
+  print("Total 2016 Sample")
+  # mu +
   total_sigma_t_muPlus /= tot_lum_muPlus
   total_sigma_t_muPlus *= 1e33 # convert to nb/GeV2
   print("total mu+ dsigma/dt (nb/GeV²):", total_sigma_t_muPlus)
 
+  total_err_t_muPlus /= tot_lum_muPlus
+  total_err_t_muPlus *= 1e33 # convert to nb/GeV2
+  print("total mu+ error (nb/GeV²):", total_err_t_muPlus)
+
+  # mu-
   total_sigma_t_muMinus /= tot_lum_muMinus
   total_sigma_t_muMinus *= 1e33 # convert to nb/GeV2
   print("total mu- dsigma/dt (nb/GeV²):", total_sigma_t_muMinus)
 
+  total_err_t_muMinus /= tot_lum_muMinus
+  total_err_t_muMinus *= 1e33 # convert to nb/GeV2
+  print("total mu- error (nb/GeV²):", total_err_t_muMinus)
+
+  # Save the total 2016 results to the dictionary 
   dvcs_results["total"] = {
     "sigma_muPlus": total_sigma_t_muPlus.copy(),
     "sigma_muMinus": total_sigma_t_muMinus.copy(),
+    "err_muPlus": total_err_t_muPlus.copy(),
+    "err_muMinus": total_err_t_muMinus.copy()
   }
-
+  
   # Save dictionary to output file for later use 
-  """
+  """ """
   with open("dvcs_xSection_results.pkl", "wb") as f:
     pickle.dump(dvcs_results, f)
   print("Results written to 'dvcs_xSection_results.pkl'")
-  """
+  
 
 if __name__ == "__main__":
   main()

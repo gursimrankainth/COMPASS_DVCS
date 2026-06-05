@@ -8,34 +8,33 @@ import datetime
 # **********************************
 # HEPGEN BH MC Data (generated data)
 gen_dir = "/Users/gursimran/cern/2016_data/BH/"
-mcGen_files = [[os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root")],
+mcGen_files = ([os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root")],
                [os.path.join(gen_dir, "gen_P05_muPlus.root"), os.path.join(gen_dir, "gen_P05_muMinus.root")],
                [os.path.join(gen_dir, "gen_P06_muPlus.root"), os.path.join(gen_dir, "gen_P06_muMinus.root")],
                [os.path.join(gen_dir, "gen_P07_muPlus.root"), os.path.join(gen_dir, "gen_P07_muMinus.root")],
                [os.path.join(gen_dir, "gen_P08_muPlus.root"), os.path.join(gen_dir, "gen_P08_muMinus.root")],
-               [os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root")]]
+               [os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root")])
 
 # HEPGEN BH MC Data (reconstructed data)
 rec_dir = "/Users/gursimran/cern/2016_data/BH/"
-mcRec_files = [[os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root")],
+mcRec_files = ([os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P05_muPlus.root"), os.path.join(rec_dir, "filtered_P05_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P06_muPlus.root"), os.path.join(rec_dir, "filtered_P06_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P07_muPlus.root"), os.path.join(rec_dir, "filtered_P07_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P08_muPlus.root"), os.path.join(rec_dir, "filtered_P08_muMinus.root")],
-               [os.path.join(rec_dir, "filtered_P09_muPlus.root"), os.path.join(rec_dir, "filtered_P09_muMinus.root")]]
+               [os.path.join(rec_dir, "filtered_P09_muPlus.root"), os.path.join(rec_dir, "filtered_P09_muMinus.root")])
 
 # Real data 
 real_dir = "/Users/gursimran/cern/2016_data/real/"
-real_files = [[os.path.join(real_dir, "filtered_P04.root")],
+real_files = ([os.path.join(real_dir, "filtered_P04.root")],
               [os.path.join(real_dir, "filtered_P05.root")],
               [os.path.join(real_dir, "filtered_P06.root")],
               [os.path.join(real_dir, "filtered_P07.root")],
               [os.path.join(real_dir, "filtered_P08.root")],
-              [os.path.join(real_dir, "filtered_P09.root")]]
+              [os.path.join(real_dir, "filtered_P09.root")])
 
 # Flux files 
 flux_dir = "/Users/gursimran/cern/configs/flux_Johannes/2016/flux_files"
-#flux_dir = "/afs/cern.ch/user/g/gkainth/phastPackages/flux_files/flux_Johannes/2016/flux_files_slot7.1"
 
 
 # **********************************
@@ -52,7 +51,6 @@ period_run_ranges = {
 def load_bad_spills(period, bad_spill_dir="/Users/gursimran/cern/configs/bad_spill/"):
   # Find matching bad spill file for the given period
   pattern = os.path.join(bad_spill_dir, f"P0{period}*bad_spill.lst")
-  print(pattern)
   matching_files = glob.glob(pattern)
   if len(matching_files) == 0:
     print("Bad spill file not found")
@@ -329,7 +327,7 @@ def plot_variable_allPeriods(
 # **********************************
 # Write calculated values to Python file for storage
 def write_constants_BH(intLum_muPlus, intLum_muMinus, const_muPlus, const_muMinus, year=2016):
-  constants_file = f"/afs/cern.ch/user/g/gkainth/dvcs_constants_{year}.py" 
+  constants_file = f"/Users/gursimran/cern/COMPASS_DVCS/dvcs_constants_{year}.py" 
   if not os.path.exists(constants_file):
     print(f"No constants file found for {year}: {constants_file}")
     return
@@ -394,12 +392,10 @@ def main():
   # Get the normalization constants
   const_muPlus = [l_data / l_mc for l_data, l_mc in zip(intLum_muPlus, intLumMC_muPlus)]
   const_muMinus = [l_data / l_mc for l_data, l_mc in zip(intLum_muMinus, intLumMC_muMinus)]
-  print("Period:", i, ", Const_p:", const_muPlus[0])
-  print("Period:", i, ", Const_m:", const_muMinus[0])
 
   # Plot the data for the exclusivity variable 
-  plot_variable_allPeriods(const_muPlus, const_muMinus, scale_factor=5.00, n_bins=27) # default plot is nu (full range)
-  plot_variable_allPeriods(const_muPlus, const_muMinus, var="Q2_fit", scale_factor=0.56, n_bins=22, x_min=1, x_max=11, logy=True, logx=True)
+  #plot_variable_allPeriods(const_muPlus, const_muMinus, scale_factor=5.00, n_bins=27) # default plot is nu (full range)
+  #plot_variable_allPeriods(const_muPlus, const_muMinus, var="Q2_fit", scale_factor=0.56, n_bins=22, x_min=1, x_max=11, logy=True, logx=True)
 
   # *** Save values *** 
   write_constants_BH(intLum_muPlus, intLum_muMinus, const_muPlus, const_muMinus)

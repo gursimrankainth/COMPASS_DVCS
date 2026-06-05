@@ -37,12 +37,20 @@ hepBH_files = [os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join
 
 # HEPGEN Invisible Pi0 MC Data (Reconstructed data)
 hepPi0_dir = "/Users/gursimran/cern/2016_data/HepgenPi0/"
-hepPi0_files = [os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
+""" hepPi0_files = [os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P07_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P08_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P08_muMinus.root"),
-                os.path.join(hepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P09_muMinus.root")]
+                os.path.join(hepPi0_dir, "filtered_P09_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P09_muMinus.root")] """
+
+hepPi0_files = [os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"),
+                os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"),
+                os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"),
+                os.path.join(hepPi0_dir, "filtered_P07_muPlus.root"),
+                os.path.join(hepPi0_dir, "filtered_P08_muPlus.root"),
+                os.path.join(hepPi0_dir, "filtered_P09_muPlus.root")]
+
 
 # LEPTO Invisible Pi0 MC Data (Reconstructed data)
 lepPi0_dir = "/Users/gursimran/cern/2016_data/LeptoPi0/"
@@ -72,6 +80,7 @@ def count_real_events(nu_bins, period="P04", mode="DVCS"):
 
         for i, (nu_min, nu_max) in enumerate(nu_bins):
           if nu_min <= nu < nu_max:
+            #if event.Q_beam ==1: 
             counts_data[i] += 1
             total_count += 1
             break  # avoid double counting
@@ -202,8 +211,8 @@ def count_LEP_pi0_events(nu_bins, period="P04", mode="DVCS"):
       # Find bin and accumulate
       for i, (nu_min, nu_max) in enumerate(nu_bins):
         if nu_min <= nu < nu_max:
-          counts_mc[i] += C
-          total_count += C
+          counts_mc[i] += 1 #C
+          total_count += 1 #C
           break
 
   # Output
@@ -221,10 +230,10 @@ def main():
   nu_bins = [(80,144), (32,80), (10,32)]
   for period in PERIODS:
     # mode can either be DVCS or pi0
-    #count_LEP_pi0_events(nu_bins, period=period, mode="DVCS")
-    count_HEP_pi0_events(nu_bins, period=period, mode="DVCS")
+    count_LEP_pi0_events(nu_bins, period=period, mode="pi0")
+    #count_HEP_pi0_events(nu_bins, period=period, mode="pi0")
     #count_BH_events(nu_bins, period=period)
-    #count_real_events(nu_bins, period=period, mode="DVCS")
+    #count_real_events(nu_bins, period=period, mode="pi0")
 
 if __name__ == "__main__":
   main()

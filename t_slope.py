@@ -48,8 +48,10 @@ def load_cross_sections(filename):
 # **********************************
 # Get the cross section dictionary; first index is period, second is value (sigma or err), third is t bin 
 # ex. results["P04"]["sigma_muPlus"][0] -> mu+ cross section for P04 in the first t bin 
-with open("dvcs_xSection_results_515.pkl", "rb") as f:
+with open("dvcs_xSection_results.pkl", "rb") as f:
   dvcs_results = pickle.load(f)
+
+print(dvcs_results)
 
 # **********************************
 # Average across all data (per t-bin)
@@ -76,8 +78,7 @@ def average_charge(results, charge="muPlus"):
       values.append(results[p][key_sigma][t])
       errors.append(results[p][key_err][t])
 
-    values = np.array(values)
-    errors = np.array(errors)
+    print(values, errors)
 
     # simple (unweighted) average
     avg = np.mean(values)
