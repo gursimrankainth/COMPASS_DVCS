@@ -36,7 +36,7 @@ print("Total Entries Generated: mu+:", tree_gen_muPlus.GetEntries(), ", mu-:", t
 # **********************************
 # Reconstructed MC data after full DVCS selection
 rec_dir = "/Users/gursimran/cern/2016_data/BH"
-rec_files = [os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root")]
+rec_files = [os.path.join(rec_dir, "earlyMULT_filtered_P04_muPlus.root"), os.path.join(rec_dir, "earlyMULT_filtered_P04_muMinus.root")]
 
 """ rec_files = [os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root"),
              os.path.join(rec_dir, "filtered_P05_muPlus.root"), os.path.join(rec_dir, "filtered_P05_muMinus.root"),
@@ -855,7 +855,7 @@ def main():
   
   # Final 4D shape: [Q2][nu][t][phi]
   shape_4d = (
-    len(Q2_edges_tight) - 1,
+    len(Q2_edges) - 1,
     len(nu_edges_tight) - 1,
     len(t_edges) - 1,
     len(phi_edges) - 1
@@ -863,10 +863,10 @@ def main():
   arrays_4d = init_acceptance_arrays(shape_4d)
   
   # Fill the arrays 
-  fill_weights_4d(tree_rec_muPlus, "muPlus", "rec", arrays_4d)
-  fill_weights_4d(tree_gen_muPlus, "muPlus", "gen", arrays_4d)
-  fill_weights_4d(tree_rec_muMinus, "muMinus", "rec", arrays_4d)
-  fill_weights_4d(tree_gen_muMinus, "muMinus", "gen", arrays_4d)
+  fill_weights_4d(tree_rec_muPlus, "muPlus", "rec", arrays_4d, Q2_edges=Q2_edges)
+  fill_weights_4d(tree_gen_muPlus, "muPlus", "gen", arrays_4d, Q2_edges=Q2_edges)
+  fill_weights_4d(tree_rec_muMinus, "muMinus", "rec", arrays_4d, Q2_edges=Q2_edges)
+  fill_weights_4d(tree_gen_muMinus, "muMinus", "gen", arrays_4d, Q2_edges=Q2_edges)
   # Get the acceptance 
   # mu+ 
   acc_muPlus = np.zeros_like(arrays_4d["rec_plus"])
@@ -893,12 +893,12 @@ def main():
   # Error mu+ and mu- 
   acc_err_muPlus, acc_err_muMinus = acc_error_4d(arrays_4d)
 
-  """
-  with open("acc_G_P04.pkl", "wb") as f:
+  """ """
+  with open("EARLYacc_G_P04.pkl", "wb") as f:
     pickle.dump(acc_muPlus, f)
     pickle.dump(acc_muMinus, f)
-  print("Saved to acc_G_P04.pkl.")
-  """
+  print("Saved to EARLYacc_G_P04.pkl.")
+  
 
   """
   A_global = (

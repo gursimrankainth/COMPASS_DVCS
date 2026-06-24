@@ -54,51 +54,12 @@ with open("dvcs_xSection_results.pkl", "rb") as f:
 print(dvcs_results)
 
 # **********************************
-# Average across all data (per t-bin)
-def average_charge(results, charge="muPlus"):
-  if charge == "muPlus": 
-    key_sigma = "sigma_muPlus"
-    key_err   = "err_muPlus"
-  elif charge == "muMinus":
-    key_sigma = "sigma_muMinus"
-    key_err   = "err_muMinus"
-  else: 
-    raise ValueError("Invalid charge. Use muPlus or muMinus")
-
-  n_t = 4  # number of t bins 
-
-  sigma_avg = []
-  err_avg = []
-
-  for t in range(n_t):
-    values = []
-    errors = []
-
-    for p in PERIODS:
-      values.append(results[p][key_sigma][t])
-      errors.append(results[p][key_err][t])
-
-    print(values, errors)
-
-    # simple (unweighted) average
-    avg = np.mean(values)
-
-    # propagate error for unweighted mean
-    # assumes uncorrelated uncertainties
-    err = np.sqrt(np.sum(errors**2)) / len(errors)
-
-    sigma_avg.append(avg)
-    err_avg.append(err)
-
-  return np.array(sigma_avg), np.array(err_avg)
-
-# **********************************
 # Average across both beam charges
 def average_all(sigma1, sigma2, err1, err2):
   sigma_avg = (sigma1 + sigma2) / 2
-  err_avg = (err1 + err2) / 2 
-  print(sigma_avg)
-  print(err_avg)
+  err_avg = 0.5 * np.sqrt(err1**2 + err2**2)
+  #print(sigma_avg)
+  #print(err_avg)
   return sigma_avg, err_avg
 
 
@@ -317,28 +278,22 @@ def weighted_avg_slope(values, errors):
 t_edges = [0.08, 0.136, 0.219, 0.36, 0.64]
  
 # ****************
-# Average across all periods
-sigma_muPlus_avg, err_muPlus_avg = average_charge(dvcs_results, charge="muPlus")
-sigma_muMinus_avg, err_muMinus_avg = average_charge(dvcs_results, charge="muMinus")
-print("\n--- Avg. cross sections per beam charge ---")
-print("mu+ dsigma/dt (nb/GeV²):", sigma_muPlus_avg)
-print("mu+ error (nb/GeV²)", err_muPlus_avg)
-print("mu- dsigma/dt (nb/GeV²):", sigma_muMinus_avg)
-print("mu- error (nb/GeV²)", err_muMinus_avg)
-
-# ****************
 # t-slopes per beam charge 
 print("\n--- Slopes per beam charge ---")
-dvcs_slope_likelihood_root(t_edges, sigma_muPlus_avg, err_muPlus_avg)
-dvcs_slope_likelihood_root(t_edges, sigma_muMinus_avg, err_muMinus_avg)
+print("mu+ dsigma/dt (nb/GeV²):", dvcs_results["total"]["sigma_muPlus"])
+print("mu+ error (nb/GeV²)", dvcs_results["total"]["err_muPlus"])
+dvcs_slope_likelihood_root(t_edges, dvcs_results["total"]["sigma_muPlus"], dvcs_results["total"]["err_muPlus"])
+print("\nmu- dsigma/dt (nb/GeV²):", dvcs_results["total"]["sigma_muMinus"])
+print("mu- error (nb/GeV²)", dvcs_results["total"]["err_muMinus"])
+dvcs_slope_likelihood_root(t_edges, dvcs_results["total"]["sigma_muMinus"], dvcs_results["total"]["err_muMinus"])
 
 # ****************
-sigma_combined, err_combined = average_all(sigma_muPlus_avg, sigma_muMinus_avg, err_muPlus_avg, err_muMinus_avg)
+sigma_combined, err_combined = average_all(dvcs_results["total"]["sigma_muPlus"], dvcs_results["total"]["sigma_muMinus"], dvcs_results["total"]["err_muPlus"], dvcs_results["total"]["err_muMinus"])
 print("\n--- Avg. cross section ---")
 print("dsigma/dt (nb/GeV²):", sigma_combined)
 print("error (nb/GeV²)", err_combined)
 
-print("\n--- Slope ---")
+print("\n--- Avg. slope ---")
 B_fit, B_var, B_err = dvcs_slope_likelihood_root(t_edges, sigma_combined, err_combined)
 _, _, sigma0_fit, sigma0_err = dvcs_slope_linear(t_edges, sigma_combined, err_combined)
 
@@ -350,7 +305,7 @@ P06, P06_err = average_all(dvcs_results["P06"]["sigma_muPlus"], dvcs_results["P0
 P07, P07_err = average_all(dvcs_results["P07"]["sigma_muPlus"], dvcs_results["P07"]["sigma_muMinus"], dvcs_results["P07"]["err_muPlus"], dvcs_results["P07"]["err_muMinus"])
 P08, P08_err = average_all(dvcs_results["P08"]["sigma_muPlus"], dvcs_results["P08"]["sigma_muMinus"], dvcs_results["P08"]["err_muPlus"], dvcs_results["P08"]["err_muMinus"])
 P09, P09_err = average_all(dvcs_results["P09"]["sigma_muPlus"], dvcs_results["P09"]["sigma_muMinus"], dvcs_results["P09"]["err_muPlus"], dvcs_results["P09"]["err_muMinus"])
-""" """
+
 # ****************
 # Test with Johannes' values 
 """ print("\n--- Test with 2023 results ---")
@@ -376,7 +331,7 @@ data = [
   (P08, P08_err, 'P08'),
   (P09, P09_err, 'P09')
 ] 
-""" """ 
+  
 
 def make_plot(data, B, B_err, y_int):
   # t bin centers

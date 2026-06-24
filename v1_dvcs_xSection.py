@@ -27,16 +27,15 @@ real_files = (os.path.join(real_dir, "filtered_P04.root"),
               os.path.join(real_dir, "filtered_P09.root"))
 
 # HEPGEN BH MC Data (Generated data)
-gen_dir = "/Users/gursimran/cern/2016_data/BH/"
-gen_files = (os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_dir, "gen_P04_muMinus.root"),
-             os.path.join(gen_dir, "gen_P05_muPlus.root"), os.path.join(gen_dir, "gen_P05_muMinus.root"),
-             os.path.join(gen_dir, "gen_P06_muPlus.root"), os.path.join(gen_dir, "gen_P06_muMinus.root"),
-             os.path.join(gen_dir, "gen_P07_muPlus.root"), os.path.join(gen_dir, "gen_P07_muMinus.root"),
-             os.path.join(gen_dir, "gen_P08_muPlus.root"), os.path.join(gen_dir, "gen_P08_muMinus.root"),
-             os.path.join(gen_dir, "gen_P09_muPlus.root"), os.path.join(gen_dir, "gen_P09_muMinus.root"))
+hepBH_dir = "/Users/gursimran/cern/2016_data/BH/"
+gen_files = (os.path.join(hepBH_dir, "gen_P04_muPlus.root"), os.path.join(hepBH_dir, "gen_P04_muMinus.root"),
+             os.path.join(hepBH_dir, "gen_P05_muPlus.root"), os.path.join(hepBH_dir, "gen_P05_muMinus.root"),
+             os.path.join(hepBH_dir, "gen_P06_muPlus.root"), os.path.join(hepBH_dir, "gen_P06_muMinus.root"),
+             os.path.join(hepBH_dir, "gen_P07_muPlus.root"), os.path.join(hepBH_dir, "gen_P07_muMinus.root"),
+             os.path.join(hepBH_dir, "gen_P08_muPlus.root"), os.path.join(hepBH_dir, "gen_P08_muMinus.root"),
+             os.path.join(hepBH_dir, "gen_P09_muPlus.root"), os.path.join(hepBH_dir, "gen_P09_muMinus.root"))
 
 # HEPGEN BH MC Data (Reconstructed data)
-hepBH_dir = "/Users/gursimran/cern/2016_data/BH/"
 hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P05_muPlus.root"), os.path.join(hepBH_dir, "filtered_P05_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P06_muPlus.root"), os.path.join(hepBH_dir, "filtered_P06_muMinus.root"),
@@ -604,8 +603,8 @@ def integrate_over_phi(sigma_t_phi):
 # *                *** CROSS SECTION ERROR ***                      *
 # *******************************************************************
 # **********************************
-# Get the (ΔD_ijkl)^2 or (ΔL_ijkl)^2 array per period 
-def unweighted_err_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
+# Fill the Var(D_ijkl) or Var(L_ijkl) array per period 
+def fill_unweighted_var_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
   # dont take the square root here, do that outside of the function
   if data == "real":
     chain = ROOT.TChain("USR970_filtered")
@@ -665,8 +664,8 @@ def unweighted_err_sum(muPlus_array, muMinus_array, files, data, period="P04"):
     elif charge == -1: 
       muMinus_array[i1][i2][i3][i4] += (1/fluxFac)**2
 
-# Get the (ΔB_ijkl)^2 or (ΔH_ijkl)^2 array per period
-def weighted_err_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
+# Fill the Var(B_ijkl) or Var(H_ijkl) array per period
+def fill_weighted_var_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
   # dont take the square root since we sqaure the sum when estimating the erro
   if data == "hepBH":
     chain = ROOT.TChain("USR970_filtered")
@@ -732,8 +731,8 @@ def weighted_err_sum(muPlus_array, muMinus_array, files, data, period="P04"):
       muMinus_array[i1][i2][i3][i4] += (weight/fluxFac)**2
 
 # **********************************
-# Get error for sum term (ΔS_ijkl)^2 in 4D cross section per period
-def get_err_S2(D_array, B_array, L_array, H_array, period_idx, charge="muPlus"):
+# Get variance for sum term S_ijkl in 4D cross section per period
+def get_var_S(D_array, B_array, L_array, H_array, period_idx, charge="muPlus"):
   # the arrays are just the sums, NOT the sqaure root of the sums (no need to sqaure them)
   t1 = D_array
   if charge == "muPlus":
@@ -750,25 +749,25 @@ def get_err_S2(D_array, B_array, L_array, H_array, period_idx, charge="muPlus"):
     print('Invalid charge, please use "muPlus" or "muMinus"')
   return sum_term
 
-# Get error for 4D cross section per period
-def compute_4D_error(S_ijkl, A_ijkl, varS_ijkl, varA_ijkl):
+# Get variance for 4D cross section per period
+def compute_4D_variance(S_ijkl, A_ijkl, varS_ijkl, varA_ijkl):
     Ncorr = S_ijkl / A_ijkl
-    err2 = np.zeros_like(Ncorr)
+    var4D = np.zeros_like(Ncorr)
 
     # Mask bins with negligible signal
     mask = (S_ijkl != 0) & (A_ijkl != 0)
 
     # Standard variance propagation formula
-    err2[mask] = (Ncorr[mask]**2) * (
+    var4D[mask] = (Ncorr[mask]**2) * (
       varS_ijkl[mask] / (S_ijkl[mask]**2) +
       varA_ijkl[mask] / (A_ijkl[mask]**2)
     )
 
-    return err2
+    return var4D
 
 # **********************************
-# Get the error for the mean cross section in |t|, phi 
-def get_err_t_phi(var4D_array):
+# Get the variance for the mean cross section in |t|, phi 
+def get_var_t_phi(var4D_array):
   n_t, n_Q2, n_nu, n_phi = var4D_array.shape
   var_t_phi = np.zeros((n_t, n_phi), dtype=np.float64)
 
@@ -791,8 +790,8 @@ def get_err_t_phi(var4D_array):
   return var_t_phi
 
 # **********************************
-# Get the error for the |t| depedent cross section 
-def get_err_t(var_t_phi):
+# Get the variance for the |t| depedent cross section 
+def get_var_t(var_t_phi):
   n_t, n_phi = var_t_phi.shape
   var_t = np.zeros(n_t)
 
@@ -804,10 +803,10 @@ def get_err_t(var_t_phi):
 
     var_t[it] = sum 
 
-  return np.sqrt(var_t)
+  return var_t
 
 # **********************************
-# Test get_err_S2 function with a small, known-value toy dataset
+# Test get_var_S function with a small, known-value toy dataset
 def toy_test_S_functions():
   # --- Toy array dimensions: [t][Q2][nu][phi] ---
   shape = (2,2,2,2)
@@ -831,15 +830,15 @@ def toy_test_S_functions():
   # --- Compute variance manually (Poisson-like) ---
   varS_manual = real_sum + (CBH**2)*BH_sum + (CPI0_LEP*R_LEPTO)**2*lepPi0_sum + (CPI0_HEP*(1-R_LEPTO))**2*hepPi0_sum
 
-  # --- Now use get_S and get_err_S2 (simulating pipeline) ---
-  # Wrap arrays in a dict to mimic what get_err_S2 expects
+  # --- Now use get_S and get_var_S (simulating pipeline) ---
+  # Wrap arrays in a dict to mimic what get_var_S expects
   D_array = real_sum
   B_array = BH_sum
   L_array = lepPi0_sum
   H_array = hepPi0_sum
 
   # Use the same function your pipeline uses (same mechanics as original)
-  def get_err_S2_toy(D_array, B_array, L_array, H_array, period_idx):
+  def get_var_S_toy(D_array, B_array, L_array, H_array, period_idx):
     t1 = D_array
     t2 = (CBH)**2 * B_array
     t3 = (CPI0_LEP * R_LEPTO)**2 * L_array
@@ -847,7 +846,7 @@ def toy_test_S_functions():
     return t1 + t2 + t3 + t4
 
   # Compute variance using the "pipeline" function
-  varS_pipeline = get_err_S2_toy(D_array, B_array, L_array, H_array, period_idx)
+  varS_pipeline = get_var_S_toy(D_array, B_array, L_array, H_array, period_idx)
 
   # --- Compare ---
   print("=== Toy test of S-term variance ===")
@@ -958,8 +957,8 @@ def main():
   debug_main = False
   total_sigma_t_muPlus = np.zeros((4,), dtype=np.float64)
   total_sigma_t_muMinus = np.zeros((4,), dtype=np.float64)
-  total_err_t_muPlus = np.zeros((4,), dtype=np.float64)
-  total_err_t_muMinus = np.zeros((4,), dtype=np.float64)
+  total_var_t_muPlus = np.zeros((4,), dtype=np.float64)
+  total_var_t_muMinus = np.zeros((4,), dtype=np.float64)
 
   for idx, period in enumerate(PERIODS):
     print(idx, period)
@@ -1054,48 +1053,48 @@ def main():
                                                       rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus) 
     
     # Get the sum term error 
-    dD_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    dD_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    unweighted_err_sum(dD_ijkl_muPlus, dD_ijkl_muMinus, real_files, data="real", period=period)
+    varD_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    varD_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
+    fill_unweighted_var_sum(varD_ijkl_muPlus, varD_ijkl_muMinus, real_files, data="real", period=period)
     if debug_main: 
-      print("mu+ varD min/max:", np.min(dD_ijkl_muPlus), np.max(dD_ijkl_muPlus))
-      print("mu- varD min/max:", np.min(dD_ijkl_muMinus), np.max(dD_ijkl_muMinus))
+      print("mu+ varD min/max:", np.min(varD_ijkl_muPlus), np.max(varD_ijkl_muPlus))
+      print("mu- varD min/max:", np.min(varD_ijkl_muMinus), np.max(varD_ijkl_muMinus))
     
-    dB_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    dB_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    weighted_err_sum(dB_ijkl_muPlus, dB_ijkl_muMinus, hepBH_files, data="hepBH", period=period)
+    varB_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    varB_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
+    fill_weighted_var_sum(varB_ijkl_muPlus, varB_ijkl_muMinus, hepBH_files, data="hepBH", period=period)
     if debug_main:
-      print("mu+ varB min/max:", np.min(dB_ijkl_muPlus), np.max(dB_ijkl_muPlus))
-      print("mu- varB min/max:", np.min(dB_ijkl_muMinus), np.max(dB_ijkl_muMinus))
+      print("mu+ varB min/max:", np.min(varB_ijkl_muPlus), np.max(varB_ijkl_muPlus))
+      print("mu- varB min/max:", np.min(varB_ijkl_muMinus), np.max(varB_ijkl_muMinus))
 
-    dL_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    dL_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    unweighted_err_sum(dL_ijkl_muPlus, dL_ijkl_muMinus, lepPi0_files, data="lepPi0", period=period)
+    varL_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    varL_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
+    fill_unweighted_var_sum(varL_ijkl_muPlus, varL_ijkl_muMinus, lepPi0_files, data="lepPi0", period=period)
     if debug_main:
-      print("mu+ varL min/max:", np.min(dL_ijkl_muPlus), np.max(dL_ijkl_muPlus))
-      print("mu- varL min/max:", np.min(dL_ijkl_muMinus), np.max(dL_ijkl_muMinus))
+      print("mu+ varL min/max:", np.min(varL_ijkl_muPlus), np.max(varL_ijkl_muPlus))
+      print("mu- varL min/max:", np.min(varL_ijkl_muMinus), np.max(varL_ijkl_muMinus))
 
-    dH_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    dH_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    weighted_err_sum(dH_ijkl_muPlus, dH_ijkl_muMinus, hepPi0_files, data="hepPi0", period=period)
+    varH_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
+    varH_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
+    fill_weighted_var_sum(varH_ijkl_muPlus, varH_ijkl_muMinus, hepPi0_files, data="hepPi0", period=period)
     if debug_main:
-      print("mu+ varH min/max:", np.min(dH_ijkl_muPlus), np.max(dH_ijkl_muPlus))
-      print("mu- varH min/max:", np.min(dH_ijkl_muMinus), np.max(dH_ijkl_muMinus))
+      print("mu+ varH min/max:", np.min(varH_ijkl_muPlus), np.max(varH_ijkl_muPlus))
+      print("mu- varH min/max:", np.min(varH_ijkl_muMinus), np.max(varH_ijkl_muMinus))
     
-    dS_ijkl_muPlus = get_err_S2(dD_ijkl_muPlus, dB_ijkl_muPlus, dL_ijkl_muPlus, dH_ijkl_muPlus, period_idx=idx, charge="muPlus")
-    dS_ijkl_muMinus = get_err_S2(dD_ijkl_muMinus, dB_ijkl_muMinus, dL_ijkl_muMinus, dH_ijkl_muMinus, period_idx=idx, charge="muMinus")
+    varS_ijkl_muPlus = get_var_S(varD_ijkl_muPlus, varB_ijkl_muPlus, varL_ijkl_muPlus, varH_ijkl_muPlus, period_idx=idx, charge="muPlus")
+    varS_ijkl_muMinus = get_var_S(varD_ijkl_muMinus, varB_ijkl_muMinus, varL_ijkl_muMinus, varH_ijkl_muMinus, period_idx=idx, charge="muMinus")
     if debug_main:
-      print("mu+ varS min/max:", np.min(dS_ijkl_muPlus), np.max(dS_ijkl_muPlus))
-      print("mu- varS min/max:", np.min(dS_ijkl_muMinus), np.max(dS_ijkl_muMinus))
+      print("mu+ varS min/max:", np.min(varS_ijkl_muPlus), np.max(varS_ijkl_muPlus))
+      print("mu- varS min/max:", np.min(varS_ijkl_muMinus), np.max(varS_ijkl_muMinus))
 
     if debug_main: # detailed error calculation check 
       print("Error diagnostics (muPlus only):")
       print("S_ijkl: min =", np.min(sum_ijkl_muPlus), "max =", np.max(sum_ijkl_muPlus))
       print("A_ijkl: min =", np.min(acc_muPlus), "max =", np.max(acc_muPlus))
-      print("varS_ijkl: min =", np.min(dS_ijkl_muPlus), "max =", np.max(dS_ijkl_muPlus))
+      print("varS_ijkl: min =", np.min(varS_ijkl_muPlus), "max =", np.max(varS_ijkl_muPlus))
       print("varA_ijkl: min =", np.min(varAcc_muPlus), "max =", np.max(varAcc_muPlus))
       print("S/A ratio: min =", np.min(sum_ijkl_muPlus/acc_muPlus), "max =", np.max(sum_ijkl_muPlus/acc_muPlus))
-      print("varS/S^2: min =", np.min(dS_ijkl_muPlus/(sum_ijkl_muPlus**2)), "max =", np.max(dS_ijkl_muPlus/(sum_ijkl_muPlus**2)))
+      print("varS/S^2: min =", np.min(varS_ijkl_muPlus/(sum_ijkl_muPlus**2)), "max =", np.max(varS_ijkl_muPlus/(sum_ijkl_muPlus**2)))
       print("varA/A^2: min =", np.min(varAcc_muPlus/(acc_muPlus**2)), "max =", np.max(varAcc_muPlus/(acc_muPlus**2)))
       print("(S/A)^2 ratio: min =", np.min((sum_ijkl_muPlus**2)/(acc_muPlus**2)), "max =", np.max((sum_ijkl_muPlus**2)/(acc_muPlus**2)))
 
@@ -1103,19 +1102,21 @@ def main():
     # *   *** T-DEPDENDENT CROSS SECTION ERROR ***   * 
     # ************************************************
     # mu+ t-dependent cross section  error 
-    err_ijkl_muPlus = compute_4D_error(sum_ijkl_muPlus, acc_muPlus, dS_ijkl_muPlus, varAcc_muPlus)
-    err_t_phi_muPlus = get_err_t_phi(err_ijkl_muPlus)
-    err_t_muPlus = get_err_t(err_t_phi_muPlus)
-    total_err_t_muPlus += err_t_muPlus # add per period unnormalized error_t to the total for the full 2016 sample 
+    var_ijkl_muPlus = compute_4D_variance(sum_ijkl_muPlus, acc_muPlus, varS_ijkl_muPlus, varAcc_muPlus)
+    var_t_phi_muPlus = get_var_t_phi(var_ijkl_muPlus)
+    var_t_muPlus = get_var_t(var_t_phi_muPlus)
+    total_var_t_muPlus += var_t_muPlus # add per period unnormalized variance_t to the total for the full 2016 sample
+    err_t_muPlus = np.sqrt(var_t_muPlus)
     err_t_muPlus /= LUMINOSITY_MUPLUS[idx]
     err_t_muPlus *= 1e33 # convert to nb/GeV2
     print(period, "mu+ error (nb/GeV²):", err_t_muPlus)
 
     # mu- t-dependent cross section error
-    err_ijkl_muMinus = compute_4D_error(sum_ijkl_muMinus, acc_muMinus, dS_ijkl_muMinus, varAcc_muMinus)
-    err_t_phi_muMinus = get_err_t_phi(err_ijkl_muMinus)
-    err_t_muMinus = get_err_t(err_t_phi_muMinus)
-    total_err_t_muMinus += err_t_muMinus # add per period unnormalized error_t to the total for the full 2016 sample 
+    var_ijkl_muMinus = compute_4D_variance(sum_ijkl_muMinus, acc_muMinus, varS_ijkl_muMinus, varAcc_muMinus)
+    var_t_phi_muMinus = get_var_t_phi(var_ijkl_muMinus)
+    var_t_muMinus = get_var_t(var_t_phi_muMinus)
+    total_var_t_muMinus += var_t_muMinus # add per period unnormalized variance_t to the total for the full 2016 sample
+    err_t_muMinus = np.sqrt(var_t_muMinus)
     err_t_muMinus /= LUMINOSITY_MUMINUS[idx]
     err_t_muMinus *= 1e33 # convert to nb/GeV2
     print(period, "mu- error (nb/GeV²):", err_t_muMinus)
@@ -1143,6 +1144,7 @@ def main():
   total_sigma_t_muPlus *= 1e33 # convert to nb/GeV2
   print("total mu+ dsigma/dt (nb/GeV²):", total_sigma_t_muPlus)
 
+  total_err_t_muPlus = np.sqrt(total_var_t_muPlus)
   total_err_t_muPlus /= tot_lum_muPlus
   total_err_t_muPlus *= 1e33 # convert to nb/GeV2
   print("total mu+ error (nb/GeV²):", total_err_t_muPlus)
@@ -1152,6 +1154,7 @@ def main():
   total_sigma_t_muMinus *= 1e33 # convert to nb/GeV2
   print("total mu- dsigma/dt (nb/GeV²):", total_sigma_t_muMinus)
 
+  total_err_t_muMinus = np.sqrt(total_var_t_muMinus)
   total_err_t_muMinus /= tot_lum_muMinus
   total_err_t_muMinus *= 1e33 # convert to nb/GeV2
   print("total mu- error (nb/GeV²):", total_err_t_muMinus)

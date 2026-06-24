@@ -74,7 +74,7 @@ class LikelihoodVar(ROOT.Math.IMultiGenFunction):
 
 # ********
 # Fit functions 
-def fit_slope_root(t_edges, dsigma_dt):
+def fit_slope_root(t_edges, dsigma_dt, debug=False):
   N = np.zeros(len(dsigma_dt))
 
   for i in range(len(dsigma_dt)):
@@ -83,44 +83,55 @@ def fit_slope_root(t_edges, dsigma_dt):
 
   func = LikelihoodSlope(N, t_edges)
 
-  fitter = ROOT.Fit.Fitter()
-  params = arr.array('d', [1.0])
-
-  fitter.FitFCN(func, params)
-
-  minimizer = fitter.GetMinimizer()
-  #minimizer.SetErrorDef(0.5)
+  minimizer = ROOT.Math.Factory.CreateMinimizer("Minuit2", "Migrad")
+  minimizer.SetFunction(func)
   minimizer.SetErrorDef(0.5)
+  minimizer.SetVariable(0, "B", 2.0, 0.001)
 
-  minimizer.SetVariable(0, "B", 0.2, 0.001)
-  minimizer.Minimize()
-  minimizer.Hesse()
+  min_status = minimizer.Minimize()
+  hesse_status = minimizer.Hesse()
+
+  if debug:
+    print("fit_slope_root Minimize:", min_status)
+    print("fit_slope_root Hesse:", hesse_status)
+    print("fit_slope_root Status:", minimizer.Status())
+    print("fit_slope_root B:", minimizer.X()[0])
+    print("fit_slope_root Error:", minimizer.Errors()[0])
+    print("fit_slope_root Cov:", minimizer.CovMatrix(0, 0))
 
   B_fit = minimizer.X()[0]
   cov   = minimizer.CovMatrix(0, 0)
 
   return B_fit, cov
 
-def fit_variance_root(t_edges, dsigma_dt_err):
+
+def fit_variance_root(t_edges, dsigma_dt_err, debug=False):
   sigma_t_error = np.zeros(len(dsigma_dt_err))
 
   for i in range(len(dsigma_dt_err)):
     delta_t = t_edges[i+1] - t_edges[i]
     sigma_t_error[i] = dsigma_dt_err[i] * delta_t**2
+  
+  if debug:
+    print("fit_variance_root sigma_t_error:", sigma_t_error)
 
   func = LikelihoodVar(sigma_t_error, t_edges)
 
-  fitter = ROOT.Fit.Fitter()
-  params = arr.array('d', [1.0])
-
-  fitter.FitFCN(func, params)
-
-  minimizer = fitter.GetMinimizer()
+  minimizer = ROOT.Math.Factory.CreateMinimizer("Minuit2", "Migrad")
+  minimizer.SetFunction(func)
   minimizer.SetErrorDef(0.5)
+  minimizer.SetVariable(0, "B", 2.0, 0.001)
 
-  minimizer.SetVariable(0, "B", 0.2, 0.001)
-  minimizer.Minimize()
-  minimizer.Hesse()
+  min_status = minimizer.Minimize()
+  hesse_status = minimizer.Hesse()
+
+  if debug:
+    print("fit_variance_root Minimize:", min_status)
+    print("fit_variance_root Hesse:", hesse_status)
+    print("fit_variance_root Status:", minimizer.Status())
+    print("fit_variance_root B:", minimizer.X()[0])
+    print("fit_variance_root Error:", minimizer.Errors()[0])
+    print("fit_variance_root Cov:", minimizer.CovMatrix(0, 0))
 
   B_fit = minimizer.X()[0]
   cov   = minimizer.CovMatrix(0, 0)
@@ -129,10 +140,9 @@ def fit_variance_root(t_edges, dsigma_dt_err):
 
 # ********
 # Final result 
-def dvcs_slope_likelihood_root(t_edges, dsigma_dt, dsigma_dt_err):
-  B_fit, cov_main = fit_slope_root(t_edges, dsigma_dt)
-  B_var_fit, cov_var = fit_variance_root(t_edges, dsigma_dt_err)
-
+def dvcs_slope_likelihood_root(t_edges, dsigma_dt, dsigma_dt_err, debug=False):
+  B_fit, cov_main = fit_slope_root(t_edges, dsigma_dt, debug=debug)
+  B_var_fit, cov_var = fit_variance_root(t_edges, dsigma_dt_err, debug=debug)
   B_err_combined = np.sqrt(cov_main**2 / cov_var)
 
   print("B fit =", B_fit)
