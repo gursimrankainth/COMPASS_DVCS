@@ -110,7 +110,7 @@ def fit_variance_root(t_edges, dsigma_dt_err, debug=False):
 
   for i in range(len(dsigma_dt_err)):
     delta_t = t_edges[i+1] - t_edges[i]
-    sigma_t_error[i] = dsigma_dt_err[i] * delta_t**2
+    sigma_t_error[i] = dsigma_dt_err[i]**2 * delta_t**2
   
   if debug:
     print("fit_variance_root sigma_t_error:", sigma_t_error)
