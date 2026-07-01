@@ -1,10 +1,5 @@
 import ROOT
 import numpy as np
-import array as arr
-import pickle
-import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
-from scipy.optimize import minimize
 from dvcs_constants_2016 import * 
 
 # **********************************

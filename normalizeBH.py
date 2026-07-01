@@ -1,8 +1,6 @@
 import os
 import glob
 import ROOT
-import numpy as np
-from array import array
 import datetime
 
 # **********************************
