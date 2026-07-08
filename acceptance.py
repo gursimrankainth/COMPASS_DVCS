@@ -1,9 +1,7 @@
 import os
 import ROOT
-import math
 import numpy as np
 import matplotlib.pyplot as plt
-import datetime  
 import pickle
 
 # TODO: Use all data instead of just P04  - just one period is used right now for testing 
