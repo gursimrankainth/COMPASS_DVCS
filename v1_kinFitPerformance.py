@@ -123,7 +123,15 @@ PLOT_CONFIGS = {
     ("red_chi2", "#chi^{2}/ndf", 0, 10),
     ("cons_mom", "p_{#mu} + p_{p} - p_{#mu'} - p_{#gamma} - p_{p'}", -1, 1),
     ("worst_pull", "Largest pull^{2} contributor", 0, 20),
-  )
+  ),
+  "conf_level_2d": (
+    ("cl_vs_red_chi2", "Confidence level", 0, 1, "#chi^{2}/ndf", 0, 10),
+  ),
+  "unfit_vars": (
+    ("unfit_inMu_px", "(P_{#mu})_{X}", 0, 20),
+    ("unfit_inMu_py", "(P_{#mu})_{Y}", 0, 20),
+    ("unfit_inMu_pz", "(P_{#mu})_{Z}", 140, 180),
+  ),
 }
 
 # **********************************
@@ -178,6 +186,17 @@ CL_EXPRESSIONS = {
   "chi2": "chi2_fit",
   "red_chi2": "chi2_fit / ndf_fit",
   "cons_mom": "inMuFit_TL.P() + targetFit_TL.P() - outMuFit_TL.P() - gammaFit_TL.P() - protonFit_TL.P()", 
+}
+
+CL_2D_EXPRESSIONS = {
+  "cl_vs_red_chi2": "chi2_fit / ndf_fit:TMath::Prob(chi2_fit, ndf_fit)",
+}
+
+# **********************************
+UNFIT_VAR_EXPRESSIONS = {
+  "unfit_inMu_px": "inMu_TL.Px()",
+  "unfit_inMu_py": "inMu_TL.Py()",
+  "unfit_inMu_pz": "inMu_TL.Pz()",
 }
 
 # **********************************
@@ -280,11 +299,7 @@ def formatClCutLabel(clCut):
 # Initialize the histograms  
 def initPullHists(dataType="real", groupName="inMu"):
   if groupName == "all":
-    groups = (
-      group
-      for name, group in PLOT_CONFIGS.items()
-      if name != "conf_level"
-    )
+    groups = (PLOT_CONFIGS[name] for name in PULL_EXPRESSIONS)
   else:
     if groupName not in PLOT_CONFIGS:
       raise ValueError(f"Unknown histogram group '{groupName}'. Options are: all, {', '.join(PLOT_CONFIGS)}")
@@ -317,7 +332,7 @@ def fillPullHistsWithDraw(chain, histograms, groupName="inMu", selection="nu > 1
 
 # **********************************
 # Format and save each plot as a png 
-def savePullHistsToPngs(histsByDataset, outputDir=out_dir):
+def savePullHistsToPngs(histsByDataset, outputDir=out_dir, plotLabel=None):
   os.makedirs(outputDir, exist_ok=True)
 
   c0 = ROOT.TCanvas("c0", "histogram canvas", 1000, 700)
@@ -412,6 +427,13 @@ def savePullHistsToPngs(histsByDataset, outputDir=out_dir):
       legend.AddEntry(hist_plot, DATA_CONFIGS[dataset]["label"], "lf")
     legend.Draw()
 
+    plot_label_text = None
+    if plotLabel is not None:
+      plot_label_text = ROOT.TLatex()
+      plot_label_text.SetNDC()
+      plot_label_text.SetTextSize(0.04)
+      plot_label_text.DrawLatex(0.16, 0.88, plotLabel)
+
     c0.Update()
     c0.SaveAs(os.path.join(outputDir, f"{name}.png"))
 
@@ -430,12 +452,28 @@ def initConfHists(dataType="real"):
         histograms[name].GetXaxis().SetBinLabel(i, pull_name)
     else:
       histograms[name] = ROOT.TH1F(f"h{dataType}_{name}", f";{title};Normalized events", 35, x_min, x_max)
+
+  for name, x_title, x_min, x_max, y_title, y_min, y_max in PLOT_CONFIGS["conf_level_2d"]:
+    histograms[name] = ROOT.TH2F(
+      f"h{dataType}_{name}",
+      f";{x_title};{y_title};Events",
+      35, x_min, x_max,
+      35, y_min, y_max,
+    )
   return histograms
 
 # **********************************
 # Fill confidence-level histograms
 def fillConfHistsWithDraw(chain, histograms, selection="nu > 10 && nu < 32"):
   for name, expression in CL_EXPRESSIONS.items():
+    if name not in histograms:
+      continue
+
+    hist = histograms[name]
+    hist.Reset()
+    chain.Draw(f"{expression} >> {hist.GetName()}", selection, "goff")
+
+  for name, expression in CL_2D_EXPRESSIONS.items():
     if name not in histograms:
       continue
 
@@ -506,6 +544,24 @@ def saveConfLevelToPngs(histsByDataset, outputDir=out_dir):
     if all(hists[name].GetEntries() == 0 for hists in histsByDataset.values()):
       continue
 
+    if histsByDataset[first_dataset][name].InheritsFrom("TH2"):
+      c0.SetRightMargin(0.15)
+      multiple_datasets = len(histsByDataset) > 1
+      for dataset, hists in histsByDataset.items():
+        hist_plot = hists[name].Clone(f"{hists[name].GetName()}_plot")
+        hist_plot.SetDirectory(0)
+        formatAxes(hist_plot)
+
+        c0.Clear()
+        hist_plot.Draw("COLZ")
+        c0.Update()
+
+        dataset_suffix = f"_{dataset}" if multiple_datasets else ""
+        c0.SaveAs(os.path.join(outputDir, f"conf_{name}{dataset_suffix}.png"))
+
+      c0.SetRightMargin(0.05)
+      continue
+
     plot_hists = {}
     for dataset, hists in histsByDataset.items():
       hist_plot = hists[name].Clone(f"{hists[name].GetName()}_plot")
@@ -555,6 +611,283 @@ def saveConfLevelToPngs(histsByDataset, outputDir=out_dir):
 
 
 # *******************************************************************
+# *                 *** UNFIT KIN. DISTRIBUTIONS ***                *
+# *******************************************************************
+# **********************************
+# Initialize the histograms for the unfit values of variables used in pulls (ex. inMu px)
+def initUnfitHists(dataType="real"):
+  histograms = {}
+  for name, title, x_min, x_max in PLOT_CONFIGS["unfit_vars"]:
+    histograms[name] = ROOT.TH1F(f"h{dataType}_{name}", f";{title};Normalized events", 35, x_min, x_max)
+  return histograms
+
+# **********************************
+# Fill unfit histograms
+def fillUnfitHistsWithDraw(chain, histograms, selection="nu > 10 && nu < 32"):
+  for name, expression in UNFIT_VAR_EXPRESSIONS.items():
+    if name not in histograms:
+      continue
+
+    hist = histograms[name]
+    hist.Reset()
+    chain.Draw(f"{expression} >> {hist.GetName()}", selection, "goff")
+
+# **********************************
+# Save unfit plots
+def saveUnfitToPngs(histsByDataset, outputDir=os.path.join(out_dir, "unfit")):
+  os.makedirs(outputDir, exist_ok=True)
+
+  c0 = ROOT.TCanvas("c_unfit", "unfit canvas", 1000, 700)
+  c0.SetLeftMargin(0.12)
+  c0.SetRightMargin(0.05)
+  c0.SetBottomMargin(0.14)
+  c0.SetTopMargin(0.07)
+
+  normalize_plots = len(histsByDataset) > 1
+  first_dataset = next(iter(histsByDataset))
+  for name in histsByDataset[first_dataset]:
+    if any(name not in hists for hists in histsByDataset.values()):
+      continue
+
+    if all(hists[name].GetEntries() == 0 for hists in histsByDataset.values()):
+      continue
+
+    plot_hists = {}
+    for dataset, hists in histsByDataset.items():
+      hist_plot = hists[name].Clone(f"{hists[name].GetName()}_plot")
+      hist_plot.SetDirectory(0)
+      if normalize_plots:
+        normalizeHist(hist_plot)
+
+      style = DATA_CONFIGS[dataset]
+      hist_plot.SetLineColor(style["lineColor"])
+      hist_plot.SetLineWidth(2)
+      if style["fillColor"] is not None:
+        hist_plot.SetFillColorAlpha(style["fillColor"], 0.2)
+      if style["markerStyle"] is not None:
+        hist_plot.SetMarkerColor(style["lineColor"])
+        hist_plot.SetMarkerStyle(style["markerStyle"])
+        hist_plot.SetMarkerSize(2.0)
+
+      plot_hists[dataset] = hist_plot
+
+    y_max = max(hist.GetMaximum() for hist in plot_hists.values())
+    axis_dataset = next((dataset for dataset in plot_hists if dataset != "real"), next(iter(plot_hists)))
+    axis_hist = plot_hists[axis_dataset]
+    if y_max > 0:
+      axis_hist.SetMaximum(1.2 * y_max)
+    axis_hist.SetMinimum(0)
+    axis_hist.GetYaxis().SetTitle("Normalized events" if normalize_plots else "Events")
+    formatAxes(axis_hist)
+
+    c0.Clear()
+    axis_hist.Draw("HIST")
+    for dataset, hist_plot in plot_hists.items():
+      if dataset == axis_dataset:
+        continue
+
+      draw_option = "HIST SAME"
+      hist_plot.Draw(draw_option)
+
+    legend = ROOT.TLegend(0.72, 0.76, 0.92, 0.90)
+    legend.SetTextSize(0.03)
+    for dataset, hist_plot in plot_hists.items():
+      legend_option = "l" if DATA_CONFIGS[dataset]["fillColor"] is None else "lf"
+      legend.AddEntry(hist_plot, DATA_CONFIGS[dataset]["label"], legend_option)
+    legend.Draw()
+
+    c0.Update()
+    c0.SaveAs(os.path.join(outputDir, f"{name}.png"))
+
+
+# *******************************************************************
+# *                  *** PI0 DISTORTION CHECK ***                   *
+# *******************************************************************
+# **********************************
+# The pull distributions are distorted because the kinematic fit enforces DVCS topology on pi0 events.
+# Make the unfit missing-mass distribution and its correlation with reduced chi2.
+def makePi0MissingMass(selection="nu > 10 && nu < 32", outputDir=None):
+  if outputDir is None:
+    outputDir = out_dir
+  os.makedirs(outputDir, exist_ok=True)
+
+  pi0_datasets = ("hep_pi0", "lep_pi0")
+  proton_mass = 0.93827208816  # GeV/c^2
+  target_TL = ROOT.TLorentzVector(0, 0, 0, proton_mass)
+  mass_hists = {}
+  mass_vs_red_chi2_hists = {}
+
+  for dataset in pi0_datasets:
+    dataset_config = DATA_CONFIGS[dataset]
+    data_type = dataset_config["dataType"]
+    chain = dataset_config["chain"]
+    n_2d_bins = 15 if dataset == "lep_pi0" else 35
+
+    mass_hist = ROOT.TH1F(f"h{data_type}_pi0_MM",";M_{X}(#mu p #rightarrow #mu' p' #gamma X) [GeV/c^{2}];Normalized events",35, 0.115, 2.5,)
+    mass_vs_red_chi2_hist = ROOT.TH2F(f"h{data_type}_pi0_MM_redChi2",";M_{X}(#mu p #rightarrow #mu' p' #gamma X) [GeV/c^{2}];#chi^{2}/ndf;Events",n_2d_bins, 0.115, 2.5, n_2d_bins, 0, 10,
+    )
+
+    selection_formula = ROOT.TTreeFormula(f"pi0_MM_selection_{dataset}", selection, chain)
+    current_tree_number = -1
+    for i_entry in range(chain.GetEntries()):
+      chain.GetEntry(i_entry)
+      if chain.GetTreeNumber() != current_tree_number:
+        current_tree_number = chain.GetTreeNumber()
+        selection_formula.UpdateFormulaLeaves()
+
+      if not selection_formula.EvalInstance() or chain.ndf_fit <= 0:
+        continue
+
+      pi0_miss = chain.inMu_TL + target_TL - chain.outMu_TL - chain.p_camera_TL
+      pi0_missing_mass = pi0_miss.M()
+      reduced_chi2 = chain.chi2_fit / chain.ndf_fit
+      if not math.isfinite(pi0_missing_mass) or not math.isfinite(reduced_chi2):
+        continue
+
+      mass_hist.Fill(pi0_missing_mass)
+      mass_vs_red_chi2_hist.Fill(pi0_missing_mass, reduced_chi2)
+
+    mass_hists[dataset] = mass_hist
+    mass_vs_red_chi2_hists[dataset] = mass_vs_red_chi2_hist
+
+  c0 = ROOT.TCanvas("c_pi0_MM", "pi0 missing mass canvas", 1000, 700)
+  c0.SetLeftMargin(0.12)
+  c0.SetRightMargin(0.05)
+  c0.SetBottomMargin(0.14)
+  c0.SetTopMargin(0.07)
+
+  plot_hists = {}
+  for dataset, hist in mass_hists.items():
+    hist_plot = hist.Clone(f"{hist.GetName()}_plot")
+    hist_plot.SetDirectory(0)
+    normalizeHist(hist_plot)
+
+    style = DATA_CONFIGS[dataset]
+    hist_plot.SetLineColor(style["lineColor"])
+    hist_plot.SetLineWidth(2)
+    hist_plot.SetFillColorAlpha(style["fillColor"], 0.2)
+    plot_hists[dataset] = hist_plot
+
+  axis_dataset = next(iter(plot_hists))
+  axis_hist = plot_hists[axis_dataset]
+  y_max = max(hist.GetMaximum() for hist in plot_hists.values())
+  if y_max > 0:
+    axis_hist.SetMaximum(1.2 * y_max)
+  axis_hist.SetMinimum(0)
+  formatAxes(axis_hist)
+
+  axis_hist.Draw("HIST")
+  for dataset, hist_plot in plot_hists.items():
+    if dataset != axis_dataset:
+      hist_plot.Draw("HIST SAME")
+
+  legend = ROOT.TLegend(0.67, 0.76, 0.92, 0.90)
+  legend.SetTextSize(0.03)
+  for dataset, hist_plot in plot_hists.items():
+    legend.AddEntry(hist_plot, DATA_CONFIGS[dataset]["label"], "lf")
+  legend.Draw()
+  c0.SaveAs(os.path.join(outputDir, "pi0_missing_mass.png"))
+
+  c0.SetRightMargin(0.15)
+  for dataset, hist in mass_vs_red_chi2_hists.items():
+    c0.Clear()
+    formatAxes(hist)
+    hist.Draw("COLZ")
+    c0.SaveAs(os.path.join(outputDir, f"pi0_missing_mass_vs_red_chi2_{dataset}.png"))
+
+
+# **********************************
+# Fill pull histograms after applying a cut on the unfit missing mass.
+def fillPullHistsByMissingMass(chain, histograms, massCut, selection="nu > 10 && nu < 32"):
+  proton_mass = 0.93827208816  # GeV/c^2
+  target_TL = ROOT.TLorentzVector(0, 0, 0, proton_mass)
+  selection_formula = ROOT.TTreeFormula("pi0_pull_mass_selection", selection, chain)
+  pull_formulas = {
+    name: ROOT.TTreeFormula(f"pi0_pull_mass_{name}", expression, chain)
+    for name, expression in PROTON_PULL_EXPRESSIONS.items()
+  }
+
+  for hist in histograms.values():
+    hist.Reset()
+
+  selected_events = 0
+  current_tree_number = -1
+  for i_entry in range(chain.GetEntries()):
+    chain.GetEntry(i_entry)
+    if chain.GetTreeNumber() != current_tree_number:
+      current_tree_number = chain.GetTreeNumber()
+      selection_formula.UpdateFormulaLeaves()
+      for formula in pull_formulas.values():
+        formula.UpdateFormulaLeaves()
+
+    if not selection_formula.EvalInstance():
+      continue
+
+    missing = chain.inMu_TL + target_TL - chain.outMu_TL - chain.p_camera_TL
+    missing_mass = missing.M()
+    if not math.isfinite(missing_mass) or not massCut(missing_mass):
+      continue
+
+    selected_events += 1
+    for name, formula in pull_formulas.items():
+      pull = formula.EvalInstance()
+      if math.isfinite(pull):
+        histograms[name].Fill(pull)
+
+  return selected_events
+
+
+# **********************************
+# Compare Hepgen pi0 proton pulls with Lepto pi0 pulls in three missing-mass regions.
+def makePi0ProtonPullsByMissingMass(selection="nu > 10 && nu < 32", outputDir=None):
+  if outputDir is None:
+    outputDir = os.path.join(out_dir, "pi0_proton_pulls_by_missing_mass")
+
+  hep_config = DATA_CONFIGS["hep_pi0"]
+  hep_hists = initPullHists(dataType=hep_config["dataType"], groupName="proton")
+  fillPullHistsWithDraw(
+    hep_config["chain"],
+    hep_hists,
+    groupName="proton",
+    selection=selection,
+  )
+
+  mass_regions = (
+    ("region1_Mx_lt_0p8", "Lepto cut: M_{X} < 0.8 GeV/c^{2}", "Mx < 0.8 GeV/c^2", lambda mass: mass < 0.8),
+    ("region2_Mx_0p8_to_1p2", "Lepto cut: 0.8 < M_{X} < 1.2 GeV/c^{2}", "0.8 < Mx < 1.2 GeV/c^2", lambda mass: 0.8 < mass < 1.2),
+    ("region3_Mx_gt_1p2", "Lepto cut: M_{X} > 1.2 GeV/c^{2}", "Mx > 1.2 GeV/c^2", lambda mass: mass > 1.2),
+  )
+
+  lep_config = DATA_CONFIGS["lep_pi0"]
+  region_event_counts = []
+  for region_name, region_label, summary_label, mass_cut in mass_regions:
+    lep_hists = initPullHists(
+      dataType=f"{lep_config['dataType']}_{region_name}",
+      groupName="proton",
+    )
+    event_count = fillPullHistsByMissingMass(
+      lep_config["chain"],
+      lep_hists,
+      massCut=mass_cut,
+      selection=selection,
+    )
+    region_event_counts.append((summary_label, event_count))
+
+    savePullHistsToPngs(
+      {"hep_pi0": hep_hists, "lep_pi0": lep_hists},
+      outputDir=os.path.join(outputDir, region_name),
+      plotLabel=region_label,
+    )
+
+  total_region_events = sum(count for _, count in region_event_counts)
+  print("\nLepto Pi0 missing-mass region summary:")
+  for summary_label, event_count in region_event_counts:
+    fraction = 100.0 * event_count / total_region_events if total_region_events > 0 else 0.0
+    print(f"  {summary_label}: {event_count} events ({fraction:.1f}%)")
+  print(f"  Total across regions: {total_region_events} events")
+
+
+# *******************************************************************
 # *                    *** WRAPPER FUNCTIONS ***                    *
 # *******************************************************************
 # **********************************
@@ -595,6 +928,22 @@ def makeConfLevel(data_set="real"):
 
   saveConfLevelToPngs(hists_by_dataset)
 
+# **********************************
+# Wrapper to make the unfit distributions
+def makeUnfit(data_set="real", selection="nu > 10 && nu < 32", outputDir=None):
+  if outputDir is None:
+    outputDir = os.path.join(out_dir, "unfit")
+
+  selected_datasets = selectDatasets(data_set)
+  hists_by_dataset = {}
+  for dataset in selected_datasets:
+    dataset_config = DATA_CONFIGS[dataset]
+    histograms = initUnfitHists(dataType=dataset_config["dataType"])
+    fillUnfitHistsWithDraw(dataset_config["chain"], histograms, selection=selection)
+    hists_by_dataset[dataset] = histograms
+
+  saveUnfitToPngs(hists_by_dataset, outputDir=outputDir)
+
 
 # *******************************************************************
 # *                       *** MAIN ***                              *
@@ -604,7 +953,10 @@ def makeConfLevel(data_set="real"):
 def main():
   #makePulls(data_set="all", groupName="all")
   #makeConfLevel(data_set="real")
-  makePulls(data_set="all", groupName="gamma", clCut=0.1)
+  #makePulls(data_set="all", groupName="gamma", clCut=0.1)
+  #makeUnfit(data_set="real")
+  #makePi0MissingMass()
+  makePi0ProtonPullsByMissingMass()
 
 if __name__ == "__main__":
   main()
