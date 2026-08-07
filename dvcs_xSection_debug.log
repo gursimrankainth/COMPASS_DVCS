@@ -1,0 +1,32 @@
+Finished integrating over phi for all arrays
+Finished computing acceptance
+Finished computing acceptance error
+Acceptance plot created successfully!
+Total real μ+ events: 2889025.582723719
+Total real μ- events: 2062727.7170729206
+Total BH μ+ events: 177988697.57891908
+Total BH μ- events: 171772776.1619912
+Total inc. pi0 μ+ events: 1448206.2304220549
+Total inc. pi0 μ- events: 1375430.49526087
+Total exc. pi0 μ+ events: 38546793.327462
+Total exc. pi0 μ- events: 38786671.62591779
+Results written to 'G_arrays_P04.pkl'
+mu+ varD min/max: 0.0 5830713407.380136
+mu- varD min/max: 0.0 5313235705.363291
+mu+ varB min/max: 395219.82543336594 711755515334.9387
+mu- varB min/max: 345896.7170408736 627752423262.378
+mu+ varL min/max: 0.0 3719578981.0360417
+mu- varL min/max: 0.0 3165916093.1006336
+mu+ varH min/max: 1926053.3176617266 1696215292.7847822
+mu- varH min/max: 1152576.3487498688 1604673603.8667893
+mu+ varS min/max: 179.85322420281466 5830735166.877478
+mu- varS min/max: 108.66735041332964 5313237380.88914
+Error diagnostics (muPlus only):
+S_ijkl: min = -48153.51138508728 max = 74796.28793764747
+A_ijkl: min = 0.19264127251574772 max = 0.4072289282574127
+varS_ijkl: min = 179.85322420281466 max = 5830735166.877478
+varA_ijkl: min = 0.00029417285264156574 max = 0.001975764529283518
+S/A ratio: min = -183491.41344794567 max = 261522.7216839412
+varS/S^2: min = 0.0018581857658248613 max = 2649.396058181724
+varA/A^2: min = 0.002545772070632873 max = 0.016442812366624225
+(S/A)^2 ratio: min = 119708.58221199835 max = 68394133956.97616
