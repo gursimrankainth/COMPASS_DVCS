@@ -15,7 +15,6 @@ from typing import Sequence
 # Constants 
 alpha_em = 0.0072973525693 # electromagnetic fine structure constant 
 M_mu = 105.6583755e-3 # GeV/c
-phaseSpace = (4,4,4,8) # (t, Q2, nu, phi)
 
 # **********************************
 # Real data 
@@ -87,6 +86,14 @@ phi_bins = list(zip(phi_edges[:-1], phi_edges[1:]))
 delta_nu   = np.diff(nu_edges)       # array of size n_nu_bins
 delta_Q2   = np.diff(Q2_edges)       # array of size n_Q2_bins
 delta_phi  = np.diff(phi_edges)      # array of size n_phi_bins
+
+# Define the phase space (t, Q2, nu, phi)
+phaseSpace = (
+  len(t_edges) - 1,
+  len(Q2_edges) - 1,
+  len(nu_edges) - 1,
+  len(phi_edges) - 1
+)
 
 
 # *******************************************************************
@@ -191,15 +198,11 @@ def compute_acceptance(rec_muPlus: np.ndarray, rec_muMinus: np.ndarray, gen_muPl
 
   # muPlus 
   mask_muPlus = gen_muPlus != 0.0
-  acc_muPlus[mask_muPlus] = (
-    rec_muPlus[mask_muPlus] / gen_muPlus[mask_muPlus]
-  )
+  np.divide(rec_muPlus, gen_muPlus, out=acc_muPlus, where=mask_muPlus)
 
   # muMinus
   mask_muMinus = gen_muMinus != 0.0
-  acc_muMinus[mask_muMinus] = (
-    rec_muMinus[mask_muMinus] / gen_muMinus[mask_muMinus]
-  )
+  np.divide(rec_muMinus, gen_muMinus, out=acc_muMinus, where=mask_muMinus)
 
   return acc_muPlus, acc_muMinus
 
@@ -688,7 +691,7 @@ def get_var_t(var_t_phi: np.ndarray) -> np.ndarray:
 # *******************************************************************
 # **********************************
 # Main function - exclude or include functions here 
-debug_main = True
+debug_main = False
 
 def main() -> None:
   # Dictionary to store the results 
@@ -766,11 +769,13 @@ def main() -> None:
     # Acceptance corrected counts
     sum_ijkl_muPlus = get_S(real_ijkl_muPlus, BH_ijkl_muPlus, lepPi0_ijkl_muPlus, 
                                   hepPi0_ijkl_muPlus, period_idx=idx, charge="muPlus") 
-    Ncorr_ijkl_muPlus = (1/acc_muPlus) * sum_ijkl_muPlus
+    Ncorr_ijkl_muPlus = np.zeros_like(sum_ijkl_muPlus)
+    np.divide(sum_ijkl_muPlus, acc_muPlus, out=Ncorr_ijkl_muPlus, where=acc_muPlus != 0)
 
     sum_ijkl_muMinus = get_S(real_ijkl_muMinus, BH_ijkl_muMinus, lepPi0_ijkl_muMinus, 
                                   hepPi0_ijkl_muMinus, period_idx=idx, charge="muMinus") 
-    Ncorr_ijkl_muMinus = (1/acc_muMinus) * sum_ijkl_muMinus
+    Ncorr_ijkl_muMinus = np.zeros_like(sum_ijkl_muMinus)
+    np.divide(sum_ijkl_muMinus, acc_muMinus, out=Ncorr_ijkl_muMinus, where=acc_muMinus != 0)
 
     # ***********************************************
     # *     *** T-DEPDENDENT CROSS SECTION ***      * 
