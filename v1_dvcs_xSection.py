@@ -19,7 +19,7 @@ phaseSpace = (4,4,4,8) # (t, Q2, nu, phi)
 # **********************************
 # Real data 
 real_dir = "/Users/gursimran/cern/2016_data/real/"
-real_files = (os.path.join(real_dir, "filtered_P04.root"),
+real_files = (os.path.join(real_dir, "filtered_P04_JTest.root"),
               os.path.join(real_dir, "filtered_P05.root"),
               os.path.join(real_dir, "filtered_P06.root"),
               os.path.join(real_dir, "filtered_P07.root"),
@@ -36,7 +36,7 @@ gen_files = (os.path.join(hepBH_dir, "gen_P04_muPlus.root"), os.path.join(hepBH_
              os.path.join(hepBH_dir, "gen_P09_muPlus.root"), os.path.join(hepBH_dir, "gen_P09_muMinus.root"))
 
 # HEPGEN BH MC Data (Reconstructed data)
-hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
+hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus_JTest.root"),
                os.path.join(hepBH_dir, "filtered_P05_muPlus.root"), os.path.join(hepBH_dir, "filtered_P05_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P06_muPlus.root"), os.path.join(hepBH_dir, "filtered_P06_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P07_muPlus.root"), os.path.join(hepBH_dir, "filtered_P07_muMinus.root"),
@@ -45,7 +45,7 @@ hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join
 
 # HEPGEN Invisible Pi0 MC Data (Reconstructed data)
 hepPi0_dir = "/Users/gursimran/cern/2016_data/HepgenPi0/"
-hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
+hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus_JTest.root"),
                 os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P07_muMinus.root"),
@@ -54,7 +54,7 @@ hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.jo
 
 # LEPTO Invisible Pi0 MC Data (Reconstructed data)
 lepPi0_dir = "/Users/gursimran/cern/2016_data/LeptoPi0/"
-lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus.root"),
+lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus_JTest.root"),
                 os.path.join(lepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P07_muMinus.root"),
@@ -960,7 +960,7 @@ def main():
   total_var_t_muPlus = np.zeros((4,), dtype=np.float64)
   total_var_t_muMinus = np.zeros((4,), dtype=np.float64)
 
-  for idx, period in enumerate(PERIODS):
+  for idx, period in enumerate(PERIODS[:1]):
     print(idx, period)
     # ***********************************************
     # *          *** 4D ACCEPTANCE ***              * 
@@ -1009,6 +1009,15 @@ def main():
     if debug_main:
       print(f"Total exc. pi0 μ+ events: {np.sum(hepPi0_ijkl_muPlus)}")
       print(f"Total exc. pi0 μ- events: {np.sum(hepPi0_ijkl_muMinus)}")
+
+    out_file = f"G_arrays_{period}.pkl"
+    with open(out_file, "wb") as f:
+      pickle.dump({"real_muPlus": real_ijkl_muPlus, "real_muMinus": real_ijkl_muMinus,
+                   "BH_muPlus": BH_ijkl_muPlus, "BH_muMinus": BH_ijkl_muMinus,
+                   "lepPi0_muPlus": lepPi0_ijkl_muPlus, "lepPi0_muMinus": lepPi0_ijkl_muMinus,
+                   "hepPi0_muPlus": hepPi0_ijkl_muPlus, "hepPi0_muMinus": hepPi0_ijkl_muMinus,
+                   },f)
+    print(f"Results written to '{out_file}'")
 
     # Acceptance corrected counts
     sum_ijkl_muPlus = get_S(real_ijkl_muPlus, BH_ijkl_muPlus, lepPi0_ijkl_muPlus, 
@@ -1168,11 +1177,11 @@ def main():
   }
   
   # Save dictionary to output file for later use 
-  """ """
+  """ 
   with open("dvcs_xSection_results.pkl", "wb") as f:
     pickle.dump(dvcs_results, f)
   print("Results written to 'dvcs_xSection_results.pkl'")
-  
+  """
 
 if __name__ == "__main__":
   main()

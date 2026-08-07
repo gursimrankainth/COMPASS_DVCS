@@ -291,7 +291,6 @@ def buildSelection(selection="nu > 10 && nu < 32", clCut=None):
 def formatClCutLabel(clCut):
   return str(clCut).replace(".", "p")
 
-
 # *******************************************************************
 # *                   *** PULL HELPERS ***                          *
 # *******************************************************************
@@ -723,8 +722,8 @@ def makePi0MissingMass(selection="nu > 10 && nu < 32", outputDir=None):
     chain = dataset_config["chain"]
     n_2d_bins = 15 if dataset == "lep_pi0" else 35
 
-    mass_hist = ROOT.TH1F(f"h{data_type}_pi0_MM",";M_{X}(#mu p #rightarrow #mu' p' #gamma X) [GeV/c^{2}];Normalized events",35, 0.115, 2.5,)
-    mass_vs_red_chi2_hist = ROOT.TH2F(f"h{data_type}_pi0_MM_redChi2",";M_{X}(#mu p #rightarrow #mu' p' #gamma X) [GeV/c^{2}];#chi^{2}/ndf;Events",n_2d_bins, 0.115, 2.5, n_2d_bins, 0, 10,
+    mass_hist = ROOT.TH1F(f"h{data_type}_pi0_MM",";M_{X}(#mu p #rightarrow #mu' p' X) [GeV/c^{2}];Normalized events",35, 0.115, 2.5,)
+    mass_vs_red_chi2_hist = ROOT.TH2F(f"h{data_type}_pi0_MM_redChi2",";M_{X}(#mu p #rightarrow #mu' p' X) [GeV/c^{2}];#chi^{2}/ndf;Events",n_2d_bins, 0.115, 2.5, n_2d_bins, 0, 10,
     )
 
     selection_formula = ROOT.TTreeFormula(f"pi0_MM_selection_{dataset}", selection, chain)
@@ -774,6 +773,9 @@ def makePi0MissingMass(selection="nu > 10 && nu < 32", outputDir=None):
   if y_max > 0:
     axis_hist.SetMaximum(1.2 * y_max)
   axis_hist.SetMinimum(0)
+  axis_hist.GetXaxis().SetTitle(
+    "M_{X}(#mu p #rightarrow #mu' p' X) [GeV/c^{2}]"
+  )
   formatAxes(axis_hist)
 
   axis_hist.Draw("HIST")
@@ -899,7 +901,8 @@ def makePulls(data_set="all", groupName="all", selection="nu > 10 && nu < 32", c
   if groupName != "all" and groupName not in PULL_EXPRESSIONS:
     raise ValueError(f"Unknown pull group '{groupName}'. Options are: all, {', '.join(PULL_EXPRESSIONS)}")
 
-  selection = buildSelection(selection=selection, clCut=clCut)
+  base_selection = selection
+  cut_selection = buildSelection(selection=base_selection, clCut=clCut)
   if outputDir is None:
     outputDir = out_dir
     if clCut is not None:
@@ -907,11 +910,23 @@ def makePulls(data_set="all", groupName="all", selection="nu > 10 && nu < 32", c
 
   selected_datasets = selectDatasets(data_set)
   hists_by_dataset = {}
+  if clCut is not None:
+    print(f"\nEvent counts before and after CL > {clCut:g}:")
+
   for dataset in selected_datasets:
     dataset_config = DATA_CONFIGS[dataset]
     histograms = initPullHists(dataType=dataset_config["dataType"], groupName=groupName)
-    fillPullHistsWithDraw(dataset_config["chain"], histograms, groupName=groupName, selection=selection)
+    fillPullHistsWithDraw(dataset_config["chain"], histograms, groupName=groupName, selection=cut_selection)
     hists_by_dataset[dataset] = histograms
+
+    if clCut is not None:
+      events_before = dataset_config["chain"].GetEntries(base_selection)
+      events_after = dataset_config["chain"].GetEntries(cut_selection)
+      retained = 100.0 * events_after / events_before if events_before else 0.0
+      print(
+        f"  {dataset_config['label']}: {events_before} before, "
+        f"{events_after} after ({retained:.2f}% retained)"
+      )
 
   savePullHistsToPngs(hists_by_dataset, outputDir=outputDir)
 
@@ -953,10 +968,10 @@ def makeUnfit(data_set="real", selection="nu > 10 && nu < 32", outputDir=None):
 def main():
   #makePulls(data_set="all", groupName="all")
   #makeConfLevel(data_set="real")
-  #makePulls(data_set="all", groupName="gamma", clCut=0.1)
+  makePulls(data_set="all", groupName="gamma", clCut=0.05)
   #makeUnfit(data_set="real")
   #makePi0MissingMass()
-  makePi0ProtonPullsByMissingMass()
+  #makePi0ProtonPullsByMissingMass()
 
 if __name__ == "__main__":
   main()
