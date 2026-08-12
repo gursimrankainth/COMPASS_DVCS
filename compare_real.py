@@ -18,13 +18,17 @@ def load_arrays(g_file="G_arrays_P04.pkl", j_file="J_arrays_P04.pkl"):
   with open(j_file, "rb") as f:
     j_arrays = [pickle.load(f) for _ in range(8)]
 
-  # Convert [t, Q2, nu, phi] to [t, phi, nu, Q2].  The phi conventions
-  # run in opposite directions and are offset by three bins:
-  # colleague_phi = (3 - our_phi) % 8.
-  phi_map = (3 - np.arange(8)) % 8
+  # Convert [t, Q2, nu, phi] to [t, phi, nu, Q2].  The real-data phi
+  # conventions run in opposite directions and are offset by three bins.
+  real_phi_map = (3 - np.arange(8)) % 8
+
+  # All MC arrays require the same reversed convention, but with an
+  # additional four-bin shift relative to the real-data mapping.
+  mc_phi_map = (7 - np.arange(8)) % 8
 
   g_arrays = {}
   for name in ("real", "BH", "lepPi0", "hepPi0"):
+    phi_map = real_phi_map if name == "real" else mc_phi_map
     g_arrays[f"{name}_muPlus"] = np.transpose(
       g[f"{name}_muPlus"], (0, 3, 2, 1)
     )[:, phi_map, :, :]

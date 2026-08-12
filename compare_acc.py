@@ -50,7 +50,7 @@ def main():
     acc_muMinus_J = pickle.load(f)
 
   # Get my arrays from the pickle 
-  with open("EARLYacc_G_P04.pkl", "rb") as f:
+  with open("G_acc_P04.pkl", "rb") as f:
     acc_muPlus  = pickle.load(f)
     acc_muMinus = pickle.load(f)
 

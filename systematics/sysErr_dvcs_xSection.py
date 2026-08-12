@@ -4,8 +4,22 @@ import os
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-from dvcs_constants_2016_JTest import *
-from scipy.optimize import curve_fit
+from contextlib import redirect_stdout
+from typing import Sequence
+from tqdm import tqdm
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import dvcs_constants_2016 as const
+
+from dvcs_constant_scan import * 
+
+
+# Pickle containing the expensive, period-dependent acceptance calculation.
+ACCEPTANCE_CACHE_PATH = Path(__file__).with_name("acceptance_cache.pkl")
+SUM_CACHE_PATH = Path(__file__).with_name("sum_cache.pkl")
+
 
 # *******************************************************************
 # *                    *** DATA PREP ***                            *
@@ -14,12 +28,11 @@ from scipy.optimize import curve_fit
 # Constants 
 alpha_em = 0.0072973525693 # electromagnetic fine structure constant 
 M_mu = 105.6583755e-3 # GeV/c
-phaseSpace = (4,4,4,8) # (t, Q2, nu, phi)
 
 # **********************************
 # Real data 
 real_dir = "/Users/gursimran/cern/2016_data/real/"
-real_files = (os.path.join(real_dir, "filtered_P04_JTest.root"),
+real_files = (os.path.join(real_dir, "filtered_P04.root"),
               os.path.join(real_dir, "filtered_P05.root"),
               os.path.join(real_dir, "filtered_P06.root"),
               os.path.join(real_dir, "filtered_P07.root"),
@@ -36,7 +49,7 @@ gen_files = (os.path.join(hepBH_dir, "gen_P04_muPlus.root"), os.path.join(hepBH_
              os.path.join(hepBH_dir, "gen_P09_muPlus.root"), os.path.join(hepBH_dir, "gen_P09_muMinus.root"))
 
 # HEPGEN BH MC Data (Reconstructed data)
-hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus_JTest.root"),
+hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P05_muPlus.root"), os.path.join(hepBH_dir, "filtered_P05_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P06_muPlus.root"), os.path.join(hepBH_dir, "filtered_P06_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P07_muPlus.root"), os.path.join(hepBH_dir, "filtered_P07_muMinus.root"),
@@ -45,7 +58,7 @@ hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus_JTest.root"), os.pat
 
 # HEPGEN Invisible Pi0 MC Data (Reconstructed data)
 hepPi0_dir = "/Users/gursimran/cern/2016_data/HepgenPi0/"
-hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus_JTest.root"),
+hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P07_muMinus.root"),
@@ -54,7 +67,7 @@ hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.p
 
 # LEPTO Invisible Pi0 MC Data (Reconstructed data)
 lepPi0_dir = "/Users/gursimran/cern/2016_data/LeptoPi0/"
-lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus_JTest.root"),
+lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P07_muMinus.root"),
@@ -63,8 +76,8 @@ lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.p
 
 # **********************************
 # Total Luminosity 
-tot_lum_muPlus = np.sum(LUMINOSITY_MUPLUS)
-tot_lum_muMinus = np.sum(LUMINOSITY_MUMINUS)
+tot_lum_muPlus = np.sum(const.LUMINOSITY_MUPLUS)
+tot_lum_muMinus = np.sum(const.LUMINOSITY_MUMINUS)
 
 # **********************************
 # Binning scheme (same as what is used for the final accpetance)
@@ -87,17 +100,28 @@ delta_nu   = np.diff(nu_edges)       # array of size n_nu_bins
 delta_Q2   = np.diff(Q2_edges)       # array of size n_Q2_bins
 delta_phi  = np.diff(phi_edges)      # array of size n_phi_bins
 
+# Define the phase space (t, Q2, nu, phi)
+phaseSpace = (
+  len(t_edges) - 1,
+  len(Q2_edges) - 1,
+  len(nu_edges) - 1,
+  len(phi_edges) - 1
+)
+
 
 # *******************************************************************
 # *                 *** HELPER FUNCTIONS ***                        *
 # *******************************************************************
 # **********************************
-# Find the phase space bin (more efficient than using search sorted) 
-def getBin(edges: np.array, value: float, even_bins=True):
-  if even_bins:
-    bin_width = edges[1] - edges[0]
-    return int(math.floor((value - edges[0]) / bin_width))
-  return np.searchsorted(edges, value) - 1
+# Find all phase space bins (more efficient than handling each axis separately)
+# Type annotations used for functions are consistent with Python 3.9+.
+def getBin(Q2: float, nu: float, t: float, phi: float) -> tuple[int, int, int, int]:
+  Q2_bin = int(math.floor((Q2 - Q2_edges[0]) / (Q2_edges[1] - Q2_edges[0])))
+  nu_bin = int(math.floor((nu - nu_edges[0]) / (nu_edges[1] - nu_edges[0])))
+  t_bin = np.searchsorted(t_edges, abs(t)) - 1
+  phi_bin = int(math.floor((phi - phi_edges[0]) / (phi_edges[1] - phi_edges[0])))
+
+  return Q2_bin, nu_bin, t_bin, phi_bin
 
 
 # *******************************************************************
@@ -105,9 +129,8 @@ def getBin(edges: np.array, value: float, even_bins=True):
 # *******************************************************************
 # **********************************
 # Fill arrays with sum of weights in each bin 
-def fill_weights(data_type="gen", period="P04"):
+def fill_weights(data_type: str = "gen", period: str = "P04", shape: tuple[int, ...] = phaseSpace) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
   # Fixed binning structure (Axis order: [t][Q2][nu][phi])
-  shape = (4, 4, 4, 8)
   weights_muPlus     = np.zeros(shape, dtype=np.float64)
   weights_muMinus    = np.zeros(shape, dtype=np.float64)
   weights_muPlus_sq  = np.zeros(shape, dtype=np.float64)
@@ -151,31 +174,20 @@ def fill_weights(data_type="gen", period="P04"):
     phi = ((phi + np.pi) % (2*np.pi)) - np.pi
 
     # Bin Q2
-    Q2_bin  = np.searchsorted(Q2_edges, Q2) - 1
-    #Q2_bin_test = getBin(Q2_edges, Q2, even_bins=True)
-    #print(n_Q2, Q2, Q2_bin, Q2_bin_test)
+    Q2_bin, nu_bin, t_bin, phi_bin = getBin(Q2, nu, t, phi)
     if Q2_bin < 0 or Q2_bin >= n_Q2:
       continue
 
     # Bin nu
-    nu_bin  = np.searchsorted(nu_edges, nu) - 1
     if nu_bin < 0 or nu_bin >= n_nu:
       continue
 
     # Bin phi
-    phi_bin = np.searchsorted(phi_edges, phi) - 1
     if phi_bin < 0 or phi_bin >= n_phi:
       continue
 
     # Bin |t|
-    t_abs = abs(t)
-    t_bin = -1
-    for i, (t_low, t_high) in enumerate(t_bins):
-      if t_low <= t_abs < t_high:
-        t_bin = i
-        break
-
-    if t_bin == -1:
+    if t_bin < 0 or t_bin >= n_t:
       continue
 
     # Fill arrays
@@ -191,32 +203,28 @@ def fill_weights(data_type="gen", period="P04"):
 
 # **********************************
 # Get the acceptance 
-def compute_acceptance(rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus):
+def compute_acceptance(rec_muPlus: np.ndarray, rec_muMinus: np.ndarray, gen_muPlus: np.ndarray, gen_muMinus: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
   shape = rec_muPlus.shape
 
   acc_muPlus  = np.zeros(shape, dtype=np.float64)
   acc_muMinus = np.zeros(shape, dtype=np.float64)
 
   # muPlus 
-  mask_plus = gen_muPlus != 0.0
-  acc_muPlus[mask_plus] = (
-    rec_muPlus[mask_plus] / gen_muPlus[mask_plus]
-  )
+  mask_muPlus = gen_muPlus != 0.0
+  np.divide(rec_muPlus, gen_muPlus, out=acc_muPlus, where=mask_muPlus)
 
   # muMinus
-  mask_minus = gen_muMinus != 0.0
-  acc_muMinus[mask_minus] = (
-    rec_muMinus[mask_minus] / gen_muMinus[mask_minus]
-  )
+  mask_muMinus = gen_muMinus != 0.0
+  np.divide(rec_muMinus, gen_muMinus, out=acc_muMinus, where=mask_muMinus)
 
   return acc_muPlus, acc_muMinus
 
 # **********************************
 # Get the acceptance error (returns variance and standard deviation)
-def compute_acceptance_error(rec_muPlus_sq, rec_muMinus_sq,
-                             gen_muPlus_sq, gen_muMinus_sq,
-                             rec_muPlus, rec_muMinus,
-                             gen_muPlus, gen_muMinus):
+def compute_acceptance_error(rec_muPlus_sq: np.ndarray, rec_muMinus_sq: np.ndarray,
+                             gen_muPlus_sq: np.ndarray, gen_muMinus_sq: np.ndarray,
+                             rec_muPlus: np.ndarray, rec_muMinus: np.ndarray,
+                             gen_muPlus: np.ndarray, gen_muMinus: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
 
   shape = rec_muPlus.shape
 
@@ -261,11 +269,58 @@ def compute_acceptance_error(rec_muPlus_sq, rec_muMinus_sq,
 
   return var_muPlus, var_muMinus, err_muPlus, err_muMinus
 
+
+def load_cache(cache_path: Path = ACCEPTANCE_CACHE_PATH) -> dict:
+  """Load cached acceptance arrays, returning an empty cache if none exists."""
+  if not cache_path.exists():
+    return {}
+
+  with cache_path.open("rb") as cache_file:
+    cache = pickle.load(cache_file)
+  if not isinstance(cache, dict):
+    raise ValueError(f"Acceptance cache {cache_path} does not contain a dictionary")
+  return cache
+
+
+def save_acceptance_cache(cache: dict, cache_path: Path = ACCEPTANCE_CACHE_PATH) -> None:
+  """Save acceptance arrays for all calculated periods."""
+  with cache_path.open("wb") as cache_file:
+    pickle.dump(cache, cache_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def get_cached_acceptance(period: str, cache: dict) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+  """Return cached acceptance and variance arrays, checking their shape."""
+  required = ("acc_muPlus", "acc_muMinus", "varAcc_muPlus", "varAcc_muMinus")
+  if period not in cache or any(key not in cache[period] for key in required):
+    raise KeyError(period)
+
+  arrays = tuple(np.asarray(cache[period][key]) for key in required)
+  if any(array.shape != phaseSpace for array in arrays):
+    raise ValueError(f"Acceptance cache for {period} has an unexpected shape")
+  return arrays
+
+
+def get_cached_sums(period: str, cache: dict) -> tuple[np.ndarray, ...]:
+  """Return cached event-sum arrays for a period, checking their shapes."""
+  required = (
+    "real_muPlus", "real_muMinus", "varD_muPlus", "varD_muMinus",
+    "BH_muPlus", "BH_muMinus", "varB_muPlus", "varB_muMinus",
+    "lepPi0_muPlus", "lepPi0_muMinus", "varL_muPlus", "varL_muMinus",
+    "hepPi0_muPlus", "hepPi0_muMinus", "varH_muPlus", "varH_muMinus",
+  )
+  if period not in cache or any(key not in cache[period] for key in required):
+    raise KeyError(period)
+
+  arrays = tuple(np.asarray(cache[period][key]) for key in required)
+  if any(array.shape != phaseSpace for array in arrays):
+    raise ValueError(f"Sum cache for {period} has an unexpected shape")
+  return arrays
+
 # **********************************
 # Check that the acceptance and associated error make sense (test by integrating over phi)
 # Plotting funtion is used in test_acceptance
-def plot_acceptance_integrated_phi(acceptance_muPlus, acceptance_err_muPlus, 
-                                   acceptance_muMinus, acceptance_err_muMinus):
+def plot_acceptance_integrated_phi(acceptance_muPlus: np.ndarray, acceptance_err_muPlus: np.ndarray,
+                                   acceptance_muMinus: np.ndarray, acceptance_err_muMinus: np.ndarray) -> None:
   nu_bin_centers = 0.5 * (nu_edges[:-1] + nu_edges[1:])
   n_t_bins, n_Q2_bins, n_nu_bins = acceptance_muPlus.shape
 
@@ -367,8 +422,8 @@ def plot_acceptance_integrated_phi(acceptance_muPlus, acceptance_err_muPlus,
   plt.savefig("acceptance_integrated_phi.png", dpi=300)
 
 # Integrate over phi and plot the acceptance 
-def test_acceptance(rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq,
-                    gen_muPlus, gen_muMinus, gen_muPlus_sq, gen_muMinus_sq):
+def test_acceptance(rec_muPlus: np.ndarray, rec_muMinus: np.ndarray, rec_muPlus_sq: np.ndarray, rec_muMinus_sq: np.ndarray,
+                    gen_muPlus: np.ndarray, gen_muMinus: np.ndarray, gen_muPlus_sq: np.ndarray, gen_muMinus_sq: np.ndarray) -> None:
     
     # Sum over phi (same logic as in acceptance.py)
     rec_muPlus_phiInt  = np.sum(rec_muPlus, axis=3)
@@ -412,7 +467,7 @@ def test_acceptance(rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq,
 # *******************************************************************
 # **********************************
 # Transverse virtual photon flux factor 
-def getfluxFac(Q2, nu, y, E_mu, xbj):
+def getfluxFac(Q2: float, nu: float, y: float, E_mu: float, xbj: float) -> float:
   c1 = (alpha_em / (2 * np.pi)) * ((1 - xbj) / (Q2 * y * E_mu))
   c2 = y**2 * (1 - (2 * M_mu**2 / Q2))
   c3 = (2 / (1 + Q2 / nu**2)) * (1 - y - Q2 / (4 * E_mu**2))
@@ -421,7 +476,12 @@ def getfluxFac(Q2, nu, y, E_mu, xbj):
 
 # **********************************
 # Binned sum over the unweighted data for a single period (use for real and LEPTO pi0)
-def unweighted_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
+def unweighted_sum(files: Sequence[str], data: str, period: str = "P04") -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+  muPlus_array = np.zeros(phaseSpace, dtype=np.float64)
+  muMinus_array = np.zeros(phaseSpace, dtype=np.float64)
+  var_muPlus_array = np.zeros(phaseSpace, dtype=np.float64)
+  var_muMinus_array = np.zeros(phaseSpace, dtype=np.float64)
+
   if data == "real":
     chain = ROOT.TChain("USR970_filtered")
   elif data == "lepPi0":
@@ -450,39 +510,44 @@ def unweighted_sum(muPlus_array, muMinus_array, files, data, period="P04"):
     fluxFac = getfluxFac(Q2, nu, y, E_inMu, xbj)
 
     # Bin in Q2
-    Q2_bin  = np.searchsorted(Q2_edges, Q2) - 1
+    Q2_bin, nu_bin, t_bin, phi_bin = getBin(Q2, nu, t, phi)
     if Q2_bin < 0 or Q2_bin >= len(Q2_bins): 
       continue
 
     # Bin nu
-    nu_bin  = np.searchsorted(nu_edges, nu) - 1
     if nu_bin < 0 or nu_bin >= len(nu_bins):
       continue
 
     # Bin phi
-    phi_bin = np.searchsorted(phi_edges, phi) - 1
     if phi_bin < 0 or phi_bin >= len(phi_bins):
       continue
 
     # Bin |t|
-    t_bin = -1
-    for i, (t_low, t_high) in enumerate(t_bins):
-      if t_low <= np.abs(t) < t_high:
-        t_bin = i
-    if t_bin == -1: 
+    if t_bin < 0 or t_bin >= len(t_bins):
       continue 
 
     # Axis order: [t][Q2][nu][phi]
     i1, i2, i3, i4 = t_bin, Q2_bin, nu_bin, phi_bin
 
     if charge == 1:
-      muPlus_array[i1][i2][i3][i4] += (1/fluxFac)
+      value = 1/fluxFac
+      muPlus_array[i1, i2, i3, i4] += value
+      var_muPlus_array[i1, i2, i3, i4] += value**2
     elif charge == -1: 
-      muMinus_array[i1][i2][i3][i4] += (1/fluxFac)
+      value = 1/fluxFac
+      muMinus_array[i1, i2, i3, i4] += value
+      var_muMinus_array[i1, i2, i3, i4] += value**2
+
+  return muPlus_array, muMinus_array, var_muPlus_array, var_muMinus_array
 
 # **********************************
 # Binned sum over the weighted data for a single period (use for HEPGEN BH and HEPGEN pi0)
-def weighted_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
+def weighted_sum(files: Sequence[str], data: str, period: str = "P04") -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+  muPlus_array = np.zeros(phaseSpace, dtype=np.float64)
+  muMinus_array = np.zeros(phaseSpace, dtype=np.float64)
+  var_muPlus_array = np.zeros(phaseSpace, dtype=np.float64)
+  var_muMinus_array = np.zeros(phaseSpace, dtype=np.float64)
+
   if data == "hepBH":
     chain = ROOT.TChain("USR970_filtered")
   elif data == "hepPi0":
@@ -515,50 +580,65 @@ def weighted_sum(muPlus_array, muMinus_array, files, data, period="P04"):
     fluxFac = getfluxFac(Q2, nu, y, E_inMu, xbj)
 
     # Bin in Q2
-    Q2_bin  = np.searchsorted(Q2_edges, Q2) - 1
+    Q2_bin, nu_bin, t_bin, phi_bin = getBin(Q2, nu, t, phi)
     if Q2_bin < 0 or Q2_bin >= len(Q2_bins): 
       continue
 
     # Bin nu
-    nu_bin  = np.searchsorted(nu_edges, nu) - 1
     if nu_bin < 0 or nu_bin >= len(nu_bins):
       continue
 
     # Bin phi
-    phi_bin = np.searchsorted(phi_edges, phi) - 1
     if phi_bin < 0 or phi_bin >= len(phi_bins):
       continue
 
     # Bin |t|
-    t_bin = -1
-    for i, (t_low, t_high) in enumerate(t_bins):
-      if t_low <= np.abs(t) < t_high:
-        t_bin = i
-    if t_bin == -1: 
+    if t_bin < 0 or t_bin >= len(t_bins):
       continue 
 
     # Axis order: [t][Q2][nu][phi]
     i1, i2, i3, i4 = t_bin, Q2_bin, nu_bin, phi_bin
 
     if charge == 1:
-      muPlus_array[i1][i2][i3][i4] += (weight/fluxFac)
+      value = weight/fluxFac
+      muPlus_array[i1, i2, i3, i4] += value
+      var_muPlus_array[i1, i2, i3, i4] += value**2
     elif charge == -1: 
-      muMinus_array[i1][i2][i3][i4] += (weight/fluxFac)
+      value = weight/fluxFac
+      muMinus_array[i1, i2, i3, i4] += value
+      var_muMinus_array[i1, i2, i3, i4] += value**2
+
+  return muPlus_array, muMinus_array, var_muPlus_array, var_muMinus_array
 
 # **********************************
 # Get sum term in 4D cross section (per period)
-def get_S(real_sum, BH_sum, lepPi0_sum, hepPi0_sum, period_idx, charge="muPlus"):
+def get_S(real_sum: np.ndarray, BH_sum: np.ndarray, lepPi0_sum: np.ndarray, hepPi0_sum: np.ndarray,
+          period_idx: int, charge: str = "muPlus", systematic: str = "CBH",
+          fac: float = 1.0) -> np.ndarray:
+
+  if systematic not in systematicOptions:
+    raise ValueError(f"Unknown systematic {systematic!r}; choose from {systematicOptions}")
+
+  cbh_fac = fac if systematic == "CBH" else 1.0
+  cpi0_hep_fac = fac if systematic == "CPI0_HEP" else 1.0
+  cpi0_lep_fac = fac if systematic == "CPI0_LEP" else 1.0
+  r_lepto_fac = fac if systematic == "R_LEPTO" else 1.0
+
   if charge == "muPlus":
-    sum_term = real_sum - CBH_MUPLUS[period_idx]*BH_sum - CPI0_LEP_MUPLUS[period_idx]*R_LEPTO*lepPi0_sum - CPI0_HEP_MUPLUS[period_idx]*(1-R_LEPTO)*hepPi0_sum
+    sum_term = (real_sum - cbh_fac*const.CBH_MUPLUS[period_idx]*BH_sum
+                - cpi0_lep_fac*const.CPI0_LEP_MUPLUS[period_idx]*r_lepto_fac*const.R_LEPTO*lepPi0_sum
+                - cpi0_hep_fac*const.CPI0_HEP_MUPLUS[period_idx]*(1-r_lepto_fac*const.R_LEPTO)*hepPi0_sum)
   elif charge == "muMinus": 
-    sum_term = real_sum - CBH_MUMINUS[period_idx]*BH_sum - CPI0_LEP_MUMINUS[period_idx]*R_LEPTO*lepPi0_sum - CPI0_HEP_MUMINUS[period_idx]*(1-R_LEPTO)*hepPi0_sum
+    sum_term = (real_sum - cbh_fac*const.CBH_MUMINUS[period_idx]*BH_sum
+                - cpi0_lep_fac*const.CPI0_LEP_MUMINUS[period_idx]*r_lepto_fac*const.R_LEPTO*lepPi0_sum
+                - cpi0_hep_fac*const.CPI0_HEP_MUMINUS[period_idx]*(1-r_lepto_fac*const.R_LEPTO)*hepPi0_sum)
   else:
     raise ValueError('Invalid charge, please use "muPlus" or "muMinus"')
   return sum_term
 
 # **********************************
 # Get the mean cross section in (|t|, phi)
-def compute_sigma_t_phi(Ncorr_ijkl):
+def compute_sigma_t_phi(Ncorr_ijkl: np.ndarray) -> np.ndarray:
   n_t, n_Q2, n_nu, n_phi = Ncorr_ijkl.shape
   sigma_t_phi = np.zeros((n_t, n_phi), dtype=np.float64)
 
@@ -586,7 +666,7 @@ def compute_sigma_t_phi(Ncorr_ijkl):
   return sigma_t_phi
 
 # Integrate over phi (discrete sum over phi bins)
-def integrate_over_phi(sigma_t_phi):
+def integrate_over_phi(sigma_t_phi: np.ndarray) -> np.ndarray:
   n_t, n_phi = sigma_t_phi.shape
   sigma_t = np.zeros(n_t, dtype=np.float64)
 
@@ -604,153 +684,36 @@ def integrate_over_phi(sigma_t_phi):
 # *******************************************************************
 # **********************************
 # Fill the Var(D_ijkl) or Var(L_ijkl) array per period 
-def fill_unweighted_var_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
-  # dont take the square root here, do that outside of the function
-  if data == "real":
-    chain = ROOT.TChain("USR970_filtered")
-  elif data == "lepPi0":
-    chain = ROOT.TChain("USR970_filtered")
-  else: 
-    raise ValueError("data must be 'real' or 'lepPi0'")
+def get_var_S(D_array: np.ndarray, B_array: np.ndarray, L_array: np.ndarray, H_array: np.ndarray,
+              period_idx: int, charge: str = "muPlus", systematic: str = "CBH",
+              fac: float = 1.0) -> np.ndarray:
+  if systematic not in systematicOptions:
+    raise ValueError(f"Unknown systematic {systematic!r}; choose from {systematicOptions}")
 
-  for f in files: 
-    if period in f:
-      chain.Add(f)
+  cbh_fac = fac if systematic == "CBH" else 1.0
+  cpi0_hep_fac = fac if systematic == "CPI0_HEP" else 1.0
+  cpi0_lep_fac = fac if systematic == "CPI0_LEP" else 1.0
+  r_lepto = fac * const.R_LEPTO if systematic == "R_LEPTO" else const.R_LEPTO
 
-  for event in chain: 
-    charge = event.Q_beam
-    Q2 = event.Q2_fit
-    nu = event.nu_fit
-    y = event.y_fit
-    t = event.t_fit
-    xbj = event.xbj_fit
-    phi = event.phi_gg_fit
-    E_inMu = event.inMuFit_TL.E()
-
-    # Normalize phi 
-    phi = ((phi + np.pi) % (2*np.pi)) - np.pi
-
-    # Get the virtual photon flux factor
-    fluxFac = getfluxFac(Q2, nu, y, E_inMu, xbj)
-
-    # Bin in Q2
-    Q2_bin  = np.searchsorted(Q2_edges, Q2) - 1
-    if Q2_bin < 0 or Q2_bin >= len(Q2_bins): 
-      continue
-
-    # Bin nu
-    nu_bin  = np.searchsorted(nu_edges, nu) - 1
-    if nu_bin < 0 or nu_bin >= len(nu_bins):
-      continue
-
-    # Bin phi
-    phi_bin = np.searchsorted(phi_edges, phi) - 1
-    if phi_bin < 0 or phi_bin >= len(phi_bins):
-      continue
-
-    # Bin |t|
-    t_bin = -1
-    for i, (t_low, t_high) in enumerate(t_bins):
-      if t_low <= np.abs(t) < t_high:
-        t_bin = i
-    if t_bin == -1: 
-      continue 
-
-    # Axis order: [t][Q2][nu][phi]
-    i1, i2, i3, i4 = t_bin, Q2_bin, nu_bin, phi_bin
-
-    if charge == 1:
-      muPlus_array[i1][i2][i3][i4] += (1/fluxFac)**2
-    elif charge == -1: 
-      muMinus_array[i1][i2][i3][i4] += (1/fluxFac)**2
-
-# Fill the Var(B_ijkl) or Var(H_ijkl) array per period
-def fill_weighted_var_sum(muPlus_array, muMinus_array, files, data, period="P04"): 
-  # dont take the square root since we sqaure the sum when estimating the erro
-  if data == "hepBH":
-    chain = ROOT.TChain("USR970_filtered")
-  elif data == "hepPi0":
-    chain = ROOT.TChain("USR970_filtered")
-  else: 
-    raise ValueError("data must be 'hepBH' or 'hepPi0'")
-
-  for f in files: 
-    if period in f: 
-      chain.Add(f)
-
-  for event in chain: 
-    charge = event.Q_beam
-    Q2 = event.Q2_fit
-    nu = event.nu_fit
-    y = event.y_fit
-    t = event.t_fit
-    xbj = event.xbj_fit
-    phi = event.phi_gg_fit
-    E_inMu = event.inMuFit_TL.E()
-
-    # Normalize phi 
-    phi = ((phi + np.pi) % (2*np.pi)) - np.pi
-
-    if data == "hepBH":
-      weight = event.weight_PAMBH
-    else: 
-      weight = event.weight_all
-
-    # Get the virtual photon flux factor
-    fluxFac = getfluxFac(Q2, nu, y, E_inMu, xbj)
-
-    # Bin in Q2
-    Q2_bin  = np.searchsorted(Q2_edges, Q2) - 1
-    if Q2_bin < 0 or Q2_bin >= len(Q2_bins): 
-      continue
-
-    # Bin nu
-    nu_bin  = np.searchsorted(nu_edges, nu) - 1
-    if nu_bin < 0 or nu_bin >= len(nu_bins):
-      continue
-
-    # Bin phi
-    phi_bin = np.searchsorted(phi_edges, phi) - 1
-    if phi_bin < 0 or phi_bin >= len(phi_bins):
-      continue
-
-    # Bin |t|
-    t_bin = -1
-    for i, (t_low, t_high) in enumerate(t_bins):
-      if t_low <= np.abs(t) < t_high:
-        t_bin = i
-    if t_bin == -1: 
-      continue 
-
-    # Axis order: [t][Q2][nu][phi]
-    i1, i2, i3, i4 = t_bin, Q2_bin, nu_bin, phi_bin
-
-    if charge == 1:
-      muPlus_array[i1][i2][i3][i4] += (weight/fluxFac)**2
-    elif charge == -1: 
-      muMinus_array[i1][i2][i3][i4] += (weight/fluxFac)**2
-
-# **********************************
-# Get variance for sum term S_ijkl in 4D cross section per period
-def get_var_S(D_array, B_array, L_array, H_array, period_idx, charge="muPlus"):
   # the arrays are just the sums, NOT the sqaure root of the sums (no need to sqaure them)
   t1 = D_array
   if charge == "muPlus":
-    t2 = (CBH_MUPLUS[period_idx])**2 * B_array
-    t3 = (CPI0_LEP_MUPLUS[period_idx])**2 * (R_LEPTO)**2 * L_array
-    t4 = (CPI0_HEP_MUPLUS[period_idx])**2 * (1-R_LEPTO)**2 * H_array
+    t2 = (cbh_fac * const.CBH_MUPLUS[period_idx])**2 * B_array
+    t3 = (cpi0_lep_fac * const.CPI0_LEP_MUPLUS[period_idx])**2 * r_lepto**2 * L_array
+    t4 = (cpi0_hep_fac * const.CPI0_HEP_MUPLUS[period_idx])**2 * (1-r_lepto)**2 * H_array
     sum_term = t1 + t2 + t3 + t4
   elif charge == "muMinus": 
-    t2 = (CBH_MUMINUS[period_idx])**2 * B_array
-    t3 = (CPI0_LEP_MUMINUS[period_idx])**2 * (R_LEPTO)**2 * L_array
-    t4 = (CPI0_HEP_MUMINUS[period_idx])**2 * (1-R_LEPTO)**2 * H_array
+    t2 = (cbh_fac * const.CBH_MUMINUS[period_idx])**2 * B_array
+    t3 = (cpi0_lep_fac * const.CPI0_LEP_MUMINUS[period_idx])**2 * r_lepto**2 * L_array
+    t4 = (cpi0_hep_fac * const.CPI0_HEP_MUMINUS[period_idx])**2 * (1-r_lepto)**2 * H_array
     sum_term = t1 + t2 + t3 + t4
   else:
-    print('Invalid charge, please use "muPlus" or "muMinus"')
+    raise ValueError('Invalid charge, please use "muPlus" or "muMinus"')
   return sum_term
 
 # Get variance for 4D cross section per period
-def compute_4D_variance(S_ijkl, A_ijkl, varS_ijkl, varA_ijkl):
+def compute_4D_variance(S_ijkl: np.ndarray, A_ijkl: np.ndarray,
+                        varS_ijkl: np.ndarray, varA_ijkl: np.ndarray) -> np.ndarray:
     Ncorr = S_ijkl / A_ijkl
     var4D = np.zeros_like(Ncorr)
 
@@ -767,7 +730,7 @@ def compute_4D_variance(S_ijkl, A_ijkl, varS_ijkl, varA_ijkl):
 
 # **********************************
 # Get the variance for the mean cross section in |t|, phi 
-def get_var_t_phi(var4D_array):
+def get_var_t_phi(var4D_array: np.ndarray) -> np.ndarray:
   n_t, n_Q2, n_nu, n_phi = var4D_array.shape
   var_t_phi = np.zeros((n_t, n_phi), dtype=np.float64)
 
@@ -791,7 +754,7 @@ def get_var_t_phi(var4D_array):
 
 # **********************************
 # Get the variance for the |t| depedent cross section 
-def get_var_t(var_t_phi):
+def get_var_t(var_t_phi: np.ndarray) -> np.ndarray:
   n_t, n_phi = var_t_phi.shape
   var_t = np.zeros(n_t)
 
@@ -805,235 +768,93 @@ def get_var_t(var_t_phi):
 
   return var_t
 
-# **********************************
-# Test get_var_S function with a small, known-value toy dataset
-def toy_test_S_functions():
-  # --- Toy array dimensions: [t][Q2][nu][phi] ---
-  shape = (2,2,2,2)
-
-  # --- Create toy arrays with small integer counts ---
-  real_sum = np.full(shape, 100.0)       # 100 events in each bin
-  BH_sum = np.full(shape, 20.0)          # 20 BH events
-  lepPi0_sum = np.full(shape, 10.0)      # 10 LEP π0 events
-  hepPi0_sum = np.full(shape, 5.0)       # 5 HEP π0 events
-
-  # --- Coefficients ---
-  CBH = 1.0
-  CPI0_LEP = 1.0
-  CPI0_HEP = 1.0
-  R_LEPTO = 0.5
-  period_idx = 0
-
-  # --- Compute S manually ---
-  S_manual = real_sum - CBH*BH_sum - CPI0_LEP*R_LEPTO*lepPi0_sum - CPI0_HEP*(1-R_LEPTO)*hepPi0_sum
-
-  # --- Compute variance manually (Poisson-like) ---
-  varS_manual = real_sum + (CBH**2)*BH_sum + (CPI0_LEP*R_LEPTO)**2*lepPi0_sum + (CPI0_HEP*(1-R_LEPTO))**2*hepPi0_sum
-
-  # --- Now use get_S and get_var_S (simulating pipeline) ---
-  # Wrap arrays in a dict to mimic what get_var_S expects
-  D_array = real_sum
-  B_array = BH_sum
-  L_array = lepPi0_sum
-  H_array = hepPi0_sum
-
-  # Use the same function your pipeline uses (same mechanics as original)
-  def get_var_S_toy(D_array, B_array, L_array, H_array, period_idx):
-    t1 = D_array
-    t2 = (CBH)**2 * B_array
-    t3 = (CPI0_LEP * R_LEPTO)**2 * L_array
-    t4 = (CPI0_HEP * (1-R_LEPTO))**2 * H_array
-    return t1 + t2 + t3 + t4
-
-  # Compute variance using the "pipeline" function
-  varS_pipeline = get_var_S_toy(D_array, B_array, L_array, H_array, period_idx)
-
-  # --- Compare ---
-  print("=== Toy test of S-term variance ===")
-  print("Manual variance:\n", varS_manual)
-  print("Pipeline variance:\n", varS_pipeline)
-  print("Difference:\n", varS_pipeline - varS_manual)
-  print("Relative difference:\n", (varS_pipeline - varS_manual)/varS_manual)
-
-  # --- Check a single bin relative error ---
-  idx = (0,0,0,0)
-  print("\nExample single bin comparison:")
-  print("Manual sqrt(varS):", np.sqrt(varS_manual[idx]))
-  print("Pipeline sqrt(varS):", np.sqrt(varS_pipeline[idx]))
-  print("Manual relative error:", np.sqrt(varS_manual[idx])/S_manual[idx])
-  print("Pipeline relative error:", np.sqrt(varS_pipeline[idx])/S_manual[idx])
-
-
 # *******************************************************************
-# *                   *** T-SLOPE TEST ***                          *
+# *                  *** CROSS SECTION WRAPPER ***                  *
 # *******************************************************************
-# Get the slope for each period (averaged over both beam charges)
-# This value is a used for a spot check - does not follow the true procedure 
-def dvcs_slope_period_test(sigma_muPlus, sigma_muMinus, err_muPlus, err_muMinus, period):
-  # Compute bin centers
-  t_edges = np.array(t_edges, dtype=np.float64)
-  t_centers = 0.5 * (t_edges[1:] + t_edges[:-1])
+# Wrapper function used to detremine the t-dependent cross section and error 
+def computeXSec(systematic: str = "CBH", fac: float = 1.0,
+                recalcAcc: bool = False,
+                recalcSums: bool = False,
+                acceptance_cache_path: Path = ACCEPTANCE_CACHE_PATH,
+                sum_cache_path: Path = SUM_CACHE_PATH) -> dict:
+  if systematic not in systematicOptions:
+    raise ValueError(f"Unknown systematic {systematic!r}; choose from {systematicOptions}")
   
-  # Weighted average over μ+ and μ-
-  sigma_avg = (sigma_muPlus / err_muPlus**2 + sigma_muMinus / err_muMinus**2) / \
-              (1 / err_muPlus**2 + 1 / err_muMinus**2)
-  err_avg = 1 / np.sqrt(1 / err_muPlus**2 + 1 / err_muMinus**2)
-  print(sigma_avg)
-  print(err_avg)  
-
-  # Remove bad bins (important for stability)
-  mask = (err_avg > 0) & np.isfinite(sigma_avg)
-  t_fit = t_centers[mask]
-  sigma_fit = sigma_avg[mask]
-  err_fit = err_avg[mask]
-  
-  # Model
-  def model(t, sigma0, B):
-      return sigma0 * np.exp(-B * t)
-  
-  # Initial guess
-  sigma0_init = sigma_fit[0] if len(sigma_fit) > 0 else 1.0
-  B_init = 5.0
-  
-  popt, pcov = curve_fit(
-      model,
-      t_fit,
-      sigma_fit,
-      sigma=err_fit,
-      p0=[sigma0_init, B_init],
-      absolute_sigma=True
-  )
-  
-  sigma0_fit, B_fit = popt
-  sigma0_err, B_err = np.sqrt(np.diag(pcov))
-  
-  # Plot
-  plt.figure()
-  plt.errorbar(t_fit, sigma_fit, yerr=err_fit, fmt='o')
-
-  # Fit curve
-  t_smooth = np.linspace(min(t_fit), max(t_fit), 200)
-  plt.plot(t_smooth, model(t_smooth, sigma0_fit, B_fit), color='black')
-
-  plt.xlabel("|t| (GeV$^2$)")
-  plt.ylabel("dsigma/dt (nb/GeV$^2$)")
-  plt.title("DVCS t-slope fit")
-
-  # Fit result text
-  plt.text(
-      0.95, 0.95,
-      f"B = {B_fit:.3f} ± {B_err:.3f} GeV$^{{-2}}$",
-      transform=plt.gca().transAxes,
-      verticalalignment='top',
-      horizontalalignment='right',
-      fontsize=10,
-      bbox=dict(facecolor='white', alpha=0.7, edgecolor='none')
-  )
-
-  plt.tight_layout()
-  plt.yscale('log')
-  plt.savefig(f"dvcs_t_fit{period}.png", dpi=300)
-  plt.close()
-
-  #print(f"B = {B_fit:.3f} ± {B_err:.3f} GeV^-2")
-  print(f"Saved plot: dvcs_t_fit_{period}.png")
-  
-  return B_fit, B_err, sigma0_fit, sigma0_err
-
-
-# *******************************************************************
-# *                     *** MAIN ***                                *
-# *******************************************************************
-# **********************************
-# Main function - exclude or include functions here 
-def main(): 
-  # Testing with toy sample
-  #toy_test_S_functions()
-
   # Dictionary to store the results 
   dvcs_results = {}
+  acceptance_cache = {} if recalcAcc else load_cache(acceptance_cache_path)
+  cache_updated = False
+  sum_cache = {} if recalcSums else load_cache(sum_cache_path)
+  sum_cache_updated = False
 
-  # Loop over the periods 
-  debug_main = False
+  # Initialize t-dependent cross-section arrays 
   total_sigma_t_muPlus = np.zeros((4,), dtype=np.float64)
   total_sigma_t_muMinus = np.zeros((4,), dtype=np.float64)
   total_var_t_muPlus = np.zeros((4,), dtype=np.float64)
   total_var_t_muMinus = np.zeros((4,), dtype=np.float64)
 
-  for idx, period in enumerate(PERIODS[:1]):
+  # Loop over the periods
+  periods = const.PERIODS
+  for idx, period in enumerate(periods):
     print(idx, period)
+    print(systematic, fac)
     # ***********************************************
     # *          *** 4D ACCEPTANCE ***              * 
     # ***********************************************
-    
-    gen_muPlus, gen_muMinus, gen_muPlus_sq, gen_muMinus_sq = fill_weights(data_type="gen", period=period)
-    rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq = fill_weights(data_type="rec", period=period)
-    acc_muPlus, acc_muMinus = compute_acceptance(rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus)
-
-    if debug_main:
-      test_acceptance(rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq, gen_muPlus, 
-                      gen_muMinus, gen_muPlus_sq, gen_muMinus_sq)
+    try:
+      acc_muPlus, acc_muMinus, varAcc_muPlus, varAcc_muMinus = get_cached_acceptance(period, acceptance_cache)
+      print(f"Using cached acceptance for {period} from {acceptance_cache_path}")
+    except (KeyError, ValueError):
+      gen_muPlus, gen_muMinus, gen_muPlus_sq, gen_muMinus_sq = fill_weights(data_type="gen", period=period)
+      rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq = fill_weights(data_type="rec", period=period)
+      acc_muPlus, acc_muMinus = compute_acceptance(rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus)
+      varAcc_muPlus, varAcc_muMinus, _, _ = compute_acceptance_error(
+        rec_muPlus_sq, rec_muMinus_sq, gen_muPlus_sq, gen_muMinus_sq,
+        rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus)
+      acceptance_cache[period] = {
+        "acc_muPlus": acc_muPlus.copy(), "acc_muMinus": acc_muMinus.copy(),
+        "varAcc_muPlus": varAcc_muPlus.copy(), "varAcc_muMinus": varAcc_muMinus.copy(),
+      }
+      cache_updated = True
 
     # ***********************************************
     # *         *** 4D CROSS SECTION ***            * 
     # ***********************************************
-    """ """
-    # Get the real data sum term in the cross section 
-    real_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
-    real_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    unweighted_sum(real_ijkl_muPlus, real_ijkl_muMinus, real_files, data="real", period=period)
-    if debug_main: 
-      print(f"Total real μ+ events: {np.sum(real_ijkl_muPlus)}")
-      print(f"Total real μ- events: {np.sum(real_ijkl_muMinus)}")
-    
-    # Get the BH sum term in the cross section 
-    BH_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
-    BH_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    weighted_sum(BH_ijkl_muPlus, BH_ijkl_muMinus, hepBH_files, data="hepBH", period=period)
-    if debug_main:
-      print(f"Total BH μ+ events: {np.sum(BH_ijkl_muPlus)}")
-      print(f"Total BH μ- events: {np.sum(BH_ijkl_muMinus)}")
-     
-    # Get the inclusive inv. pi0 sum term in the cross section
-    lepPi0_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
-    lepPi0_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    unweighted_sum(lepPi0_ijkl_muPlus, lepPi0_ijkl_muMinus, lepPi0_files, data="lepPi0", period=period)
-    if debug_main:
-      print(f"Total inc. pi0 μ+ events: {np.sum(lepPi0_ijkl_muPlus)}")
-      print(f"Total inc. pi0 μ- events: {np.sum(lepPi0_ijkl_muMinus)}")
+    try:
+      (real_ijkl_muPlus, real_ijkl_muMinus, varD_ijkl_muPlus, varD_ijkl_muMinus,
+       BH_ijkl_muPlus, BH_ijkl_muMinus, varB_ijkl_muPlus, varB_ijkl_muMinus,
+       lepPi0_ijkl_muPlus, lepPi0_ijkl_muMinus, varL_ijkl_muPlus, varL_ijkl_muMinus,
+       hepPi0_ijkl_muPlus, hepPi0_ijkl_muMinus, varH_ijkl_muPlus, varH_ijkl_muMinus) = get_cached_sums(period, sum_cache)
+      print(f"Using cached event sums for {period} from {sum_cache_path}")
+    except (KeyError, ValueError):
+      # These sums depend on the period, but not on the systematic factor.
+      real_ijkl_muPlus, real_ijkl_muMinus, varD_ijkl_muPlus, varD_ijkl_muMinus = unweighted_sum(real_files, data="real", period=period)
+      BH_ijkl_muPlus, BH_ijkl_muMinus, varB_ijkl_muPlus, varB_ijkl_muMinus = weighted_sum(hepBH_files, data="hepBH", period=period)
+      lepPi0_ijkl_muPlus, lepPi0_ijkl_muMinus, varL_ijkl_muPlus, varL_ijkl_muMinus = unweighted_sum(lepPi0_files, data="lepPi0", period=period)
+      hepPi0_ijkl_muPlus, hepPi0_ijkl_muMinus, varH_ijkl_muPlus, varH_ijkl_muMinus = weighted_sum(hepPi0_files, data="hepPi0", period=period)
+      sum_cache[period] = {
+        "real_muPlus": real_ijkl_muPlus.copy(), "real_muMinus": real_ijkl_muMinus.copy(),
+        "varD_muPlus": varD_ijkl_muPlus.copy(), "varD_muMinus": varD_ijkl_muMinus.copy(),
+        "BH_muPlus": BH_ijkl_muPlus.copy(), "BH_muMinus": BH_ijkl_muMinus.copy(),
+        "varB_muPlus": varB_ijkl_muPlus.copy(), "varB_muMinus": varB_ijkl_muMinus.copy(),
+        "lepPi0_muPlus": lepPi0_ijkl_muPlus.copy(), "lepPi0_muMinus": lepPi0_ijkl_muMinus.copy(),
+        "varL_muPlus": varL_ijkl_muPlus.copy(), "varL_muMinus": varL_ijkl_muMinus.copy(),
+        "hepPi0_muPlus": hepPi0_ijkl_muPlus.copy(), "hepPi0_muMinus": hepPi0_ijkl_muMinus.copy(),
+        "varH_muPlus": varH_ijkl_muPlus.copy(), "varH_muMinus": varH_ijkl_muMinus.copy(),
+      }
+      sum_cache_updated = True
 
-    # Get the eexclusive inv. pi0 sum term in the cross section 
-    hepPi0_ijkl_muPlus  = np.zeros(phaseSpace, dtype=np.float64)
-    hepPi0_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    weighted_sum(hepPi0_ijkl_muPlus, hepPi0_ijkl_muMinus, hepPi0_files, data="hepPi0", period=period)
-    if debug_main:
-      print(f"Total exc. pi0 μ+ events: {np.sum(hepPi0_ijkl_muPlus)}")
-      print(f"Total exc. pi0 μ- events: {np.sum(hepPi0_ijkl_muMinus)}")
-
-    out_file = f"G_arrays_{period}.pkl"
-    with open(out_file, "wb") as f:
-      pickle.dump({"real_muPlus": real_ijkl_muPlus, "real_muMinus": real_ijkl_muMinus,
-                   "BH_muPlus": BH_ijkl_muPlus, "BH_muMinus": BH_ijkl_muMinus,
-                   "lepPi0_muPlus": lepPi0_ijkl_muPlus, "lepPi0_muMinus": lepPi0_ijkl_muMinus,
-                   "hepPi0_muPlus": hepPi0_ijkl_muPlus, "hepPi0_muMinus": hepPi0_ijkl_muMinus,
-                   },f)
-    print(f"Results written to '{out_file}'")
 
     # Acceptance corrected counts
     sum_ijkl_muPlus = get_S(real_ijkl_muPlus, BH_ijkl_muPlus, lepPi0_ijkl_muPlus, 
-                                  hepPi0_ijkl_muPlus, period_idx=idx, charge="muPlus") 
-    Ncorr_ijkl_muPlus = (1/acc_muPlus) * sum_ijkl_muPlus
+                                  hepPi0_ijkl_muPlus, period_idx=idx, charge="muPlus", systematic=systematic, fac=fac) 
+    Ncorr_ijkl_muPlus = np.zeros_like(sum_ijkl_muPlus)
+    np.divide(sum_ijkl_muPlus, acc_muPlus, out=Ncorr_ijkl_muPlus, where=acc_muPlus != 0)
 
     sum_ijkl_muMinus = get_S(real_ijkl_muMinus, BH_ijkl_muMinus, lepPi0_ijkl_muMinus, 
-                                  hepPi0_ijkl_muMinus, period_idx=idx, charge="muMinus") 
-    Ncorr_ijkl_muMinus = (1/acc_muMinus) * sum_ijkl_muMinus
-
-    """ out_file = f"dvcs_accVar_{period}.pkl"
-    with open(out_file, "wb") as f:
-      pickle.dump({"sum_muPlus": rec_muPlus_sq, "sum_muMinus": rec_muMinus_sq,
-                   "sum_muPlus": gen_muPlus_sq, "sum_muMinus": gen_muMinus_sq,
-                   },f)
-    print(f"Results written to '{out_file}'") """
+                                  hepPi0_ijkl_muMinus, period_idx=idx, charge="muMinus", systematic=systematic, fac=fac) 
+    Ncorr_ijkl_muMinus = np.zeros_like(sum_ijkl_muMinus)
+    np.divide(sum_ijkl_muMinus, acc_muMinus, out=Ncorr_ijkl_muMinus, where=acc_muMinus != 0)
 
     # ***********************************************
     # *     *** T-DEPDENDENT CROSS SECTION ***      * 
@@ -1042,7 +863,7 @@ def main():
     sigma_t_phi_muPlus = compute_sigma_t_phi(Ncorr_ijkl_muPlus)
     sigma_t_muPlus = integrate_over_phi(sigma_t_phi_muPlus)
     total_sigma_t_muPlus += sigma_t_muPlus # add per period unnormalized sigma_t to the total for the full 2016 sample 
-    sigma_t_muPlus /= LUMINOSITY_MUPLUS[idx]
+    sigma_t_muPlus /= const.LUMINOSITY_MUPLUS[idx]
     sigma_t_muPlus *= 1e33 # convert to nb/GeV2
     print(period, "mu+ dsigma/dt (nb/GeV²):", sigma_t_muPlus)
 
@@ -1050,62 +871,15 @@ def main():
     sigma_t_phi_muMinus = compute_sigma_t_phi(Ncorr_ijkl_muMinus)
     sigma_t_muMinus = integrate_over_phi(sigma_t_phi_muMinus)
     total_sigma_t_muMinus += sigma_t_muMinus # add per period unnormalized sigma_t to the total for the full 2016 sample 
-    sigma_t_muMinus /= LUMINOSITY_MUMINUS[idx]
+    sigma_t_muMinus /= const.LUMINOSITY_MUMINUS[idx]
     sigma_t_muMinus *= 1e33 # convert to nb/GeV2
     print(period, "mu- dsigma/dt (nb/GeV²):", sigma_t_muMinus)
     
     # ************************************************
     # *       *** 4D CROSS SECTION ERROR ***         * 
     # ************************************************
-    # Get the acceptance error 
-    varAcc_muPlus, varAcc_muMinus, errAcc_muPlus, errAcc_muMinus = compute_acceptance_error(rec_muPlus_sq, rec_muMinus_sq, gen_muPlus_sq, gen_muMinus_sq,
-                                                      rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus) 
-    
-    # Get the sum term error 
-    varD_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    varD_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    fill_unweighted_var_sum(varD_ijkl_muPlus, varD_ijkl_muMinus, real_files, data="real", period=period)
-    if debug_main: 
-      print("mu+ varD min/max:", np.min(varD_ijkl_muPlus), np.max(varD_ijkl_muPlus))
-      print("mu- varD min/max:", np.min(varD_ijkl_muMinus), np.max(varD_ijkl_muMinus))
-    
-    varB_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    varB_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    fill_weighted_var_sum(varB_ijkl_muPlus, varB_ijkl_muMinus, hepBH_files, data="hepBH", period=period)
-    if debug_main:
-      print("mu+ varB min/max:", np.min(varB_ijkl_muPlus), np.max(varB_ijkl_muPlus))
-      print("mu- varB min/max:", np.min(varB_ijkl_muMinus), np.max(varB_ijkl_muMinus))
-
-    varL_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    varL_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    fill_unweighted_var_sum(varL_ijkl_muPlus, varL_ijkl_muMinus, lepPi0_files, data="lepPi0", period=period)
-    if debug_main:
-      print("mu+ varL min/max:", np.min(varL_ijkl_muPlus), np.max(varL_ijkl_muPlus))
-      print("mu- varL min/max:", np.min(varL_ijkl_muMinus), np.max(varL_ijkl_muMinus))
-
-    varH_ijkl_muPlus = np.zeros(phaseSpace, dtype=np.float64)
-    varH_ijkl_muMinus = np.zeros(phaseSpace, dtype=np.float64)
-    fill_weighted_var_sum(varH_ijkl_muPlus, varH_ijkl_muMinus, hepPi0_files, data="hepPi0", period=period)
-    if debug_main:
-      print("mu+ varH min/max:", np.min(varH_ijkl_muPlus), np.max(varH_ijkl_muPlus))
-      print("mu- varH min/max:", np.min(varH_ijkl_muMinus), np.max(varH_ijkl_muMinus))
-    
-    varS_ijkl_muPlus = get_var_S(varD_ijkl_muPlus, varB_ijkl_muPlus, varL_ijkl_muPlus, varH_ijkl_muPlus, period_idx=idx, charge="muPlus")
-    varS_ijkl_muMinus = get_var_S(varD_ijkl_muMinus, varB_ijkl_muMinus, varL_ijkl_muMinus, varH_ijkl_muMinus, period_idx=idx, charge="muMinus")
-    if debug_main:
-      print("mu+ varS min/max:", np.min(varS_ijkl_muPlus), np.max(varS_ijkl_muPlus))
-      print("mu- varS min/max:", np.min(varS_ijkl_muMinus), np.max(varS_ijkl_muMinus))
-
-    if debug_main: # detailed error calculation check 
-      print("Error diagnostics (muPlus only):")
-      print("S_ijkl: min =", np.min(sum_ijkl_muPlus), "max =", np.max(sum_ijkl_muPlus))
-      print("A_ijkl: min =", np.min(acc_muPlus), "max =", np.max(acc_muPlus))
-      print("varS_ijkl: min =", np.min(varS_ijkl_muPlus), "max =", np.max(varS_ijkl_muPlus))
-      print("varA_ijkl: min =", np.min(varAcc_muPlus), "max =", np.max(varAcc_muPlus))
-      print("S/A ratio: min =", np.min(sum_ijkl_muPlus/acc_muPlus), "max =", np.max(sum_ijkl_muPlus/acc_muPlus))
-      print("varS/S^2: min =", np.min(varS_ijkl_muPlus/(sum_ijkl_muPlus**2)), "max =", np.max(varS_ijkl_muPlus/(sum_ijkl_muPlus**2)))
-      print("varA/A^2: min =", np.min(varAcc_muPlus/(acc_muPlus**2)), "max =", np.max(varAcc_muPlus/(acc_muPlus**2)))
-      print("(S/A)^2 ratio: min =", np.min((sum_ijkl_muPlus**2)/(acc_muPlus**2)), "max =", np.max((sum_ijkl_muPlus**2)/(acc_muPlus**2)))
+    varS_ijkl_muPlus = get_var_S(varD_ijkl_muPlus, varB_ijkl_muPlus, varL_ijkl_muPlus, varH_ijkl_muPlus, period_idx=idx, charge="muPlus", systematic=systematic, fac=fac)
+    varS_ijkl_muMinus = get_var_S(varD_ijkl_muMinus, varB_ijkl_muMinus, varL_ijkl_muMinus, varH_ijkl_muMinus, period_idx=idx, charge="muMinus", systematic=systematic, fac=fac)
 
     # ************************************************
     # *   *** T-DEPDENDENT CROSS SECTION ERROR ***   * 
@@ -1116,7 +890,7 @@ def main():
     var_t_muPlus = get_var_t(var_t_phi_muPlus)
     total_var_t_muPlus += var_t_muPlus # add per period unnormalized variance_t to the total for the full 2016 sample
     err_t_muPlus = np.sqrt(var_t_muPlus)
-    err_t_muPlus /= LUMINOSITY_MUPLUS[idx]
+    err_t_muPlus /= const.LUMINOSITY_MUPLUS[idx]
     err_t_muPlus *= 1e33 # convert to nb/GeV2
     print(period, "mu+ error (nb/GeV²):", err_t_muPlus)
 
@@ -1126,15 +900,9 @@ def main():
     var_t_muMinus = get_var_t(var_t_phi_muMinus)
     total_var_t_muMinus += var_t_muMinus # add per period unnormalized variance_t to the total for the full 2016 sample
     err_t_muMinus = np.sqrt(var_t_muMinus)
-    err_t_muMinus /= LUMINOSITY_MUMINUS[idx]
+    err_t_muMinus /= const.LUMINOSITY_MUMINUS[idx]
     err_t_muMinus *= 1e33 # convert to nb/GeV2
     print(period, "mu- error (nb/GeV²):", err_t_muMinus)
-
-    # Spot check to see if slopes seem reasonable - not actual fitting method but good approx. for a check
-    # If the numbers seem unreasonable there is a problem somewhere 
-    if debug_main:
-      B, B_err, sigma0, sigma0_err = dvcs_slope_period_test(t_edges, sigma_t_muPlus, sigma_t_muMinus, err_t_muPlus, err_t_muMinus, period)
-      print(f"{period} Slope Test: B = {B:.3f} ± {B_err:.3f} GeV^-2, sigma0 = {sigma0:.2f} ± {sigma0_err:.2f} nb/GeV^2")
 
     # Save per period results to the dictionary 
     dvcs_results[period] = {
@@ -1175,13 +943,53 @@ def main():
     "err_muPlus": total_err_t_muPlus.copy(),
     "err_muMinus": total_err_t_muMinus.copy()
   }
+
+  if cache_updated:
+    save_acceptance_cache(acceptance_cache, acceptance_cache_path)
+    print(f"Saved acceptance cache to {acceptance_cache_path}")
+  if sum_cache_updated:
+    save_acceptance_cache(sum_cache, sum_cache_path)
+    print(f"Saved event-sum cache to {sum_cache_path}")
+
+  return dvcs_results
+
+
+# *******************************************************************
+# *                     *** MAIN ***                                *
+# *******************************************************************
+# **********************************
+# Main function - exclude or include functions here 
+
+# Choose which systematic will be studied 
+systematicOptions = ("NONE", "CBH", "CPI0_HEP", "CPI0_LEP", "R_LEPTO",)
+
+def main(systematic: str = "CBH", recalcAcc: bool = False, recalcSums: bool = False): 
+  if systematic not in systematicOptions:
+    raise ValueError(f"Unknown systematic {systematic!r}; choose from {systematicOptions}")
   
-  # Save dictionary to output file for later use 
-  """ 
-  with open("dvcs_xSection_results.pkl", "wb") as f:
-    pickle.dump(dvcs_results, f)
-  print("Results written to 'dvcs_xSection_results.pkl'")
-  """
+  systematic_results = {}
+  log_path = f"{systematic}_dvcs_xSection.log"
+
+  with open(log_path, "w") as log_file, redirect_stdout(log_file):
+    if systematic == "NONE":
+      fac = 1.0
+      systematic_results[fac] = computeXSec(systematic=systematic, fac=fac, recalcAcc=recalcAcc, recalcSums=recalcSums)
+
+    elif systematic == "CBH": 
+      factors = CBH_FACTORS
+      for fac in tqdm(factors, desc=f"{systematic} factors", unit="factor"):
+        systematic_results[fac] = computeXSec(systematic=systematic, fac=fac, recalcAcc=recalcAcc, recalcSums=recalcSums)
+
+    else:
+      print("Not available yet, script still under developement.")
+      return
+
+    results_path = f"{systematic}_dvcs_xSection_results.pkl"
+    with open(results_path, "wb") as f:
+      pickle.dump(systematic_results, f, protocol=pickle.HIGHEST_PROTOCOL)
+    print(f"Results written to '{results_path}'")
+
+  print(f"Log written to '{log_path}'")
 
 if __name__ == "__main__":
   main()

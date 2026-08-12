@@ -4,7 +4,6 @@ import ROOT
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
-from dvcs_constants_2016 import *
 
 # **********************************
 # Real data 

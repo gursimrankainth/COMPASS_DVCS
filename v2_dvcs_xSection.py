@@ -4,7 +4,7 @@ import os
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-import dvcs_constants_2016 as const
+import dvcs_constants_2016_JTest as const
 from contextlib import redirect_stdout
 from typing import Sequence
 
@@ -19,7 +19,7 @@ M_mu = 105.6583755e-3 # GeV/c
 # **********************************
 # Real data 
 real_dir = "/Users/gursimran/cern/2016_data/real/"
-real_files = (os.path.join(real_dir, "filtered_P04.root"),
+real_files = (os.path.join(real_dir, "filtered_P04_JTest.root"),
               os.path.join(real_dir, "filtered_P05.root"),
               os.path.join(real_dir, "filtered_P06.root"),
               os.path.join(real_dir, "filtered_P07.root"),
@@ -36,7 +36,7 @@ gen_files = (os.path.join(hepBH_dir, "gen_P04_muPlus.root"), os.path.join(hepBH_
              os.path.join(hepBH_dir, "gen_P09_muPlus.root"), os.path.join(hepBH_dir, "gen_P09_muMinus.root"))
 
 # HEPGEN BH MC Data (Reconstructed data)
-hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus.root"),
+hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(hepBH_dir, "filtered_P04_muMinus_JTest.root"),
                os.path.join(hepBH_dir, "filtered_P05_muPlus.root"), os.path.join(hepBH_dir, "filtered_P05_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P06_muPlus.root"), os.path.join(hepBH_dir, "filtered_P06_muMinus.root"),
                os.path.join(hepBH_dir, "filtered_P07_muPlus.root"), os.path.join(hepBH_dir, "filtered_P07_muMinus.root"),
@@ -45,7 +45,7 @@ hepBH_files = (os.path.join(hepBH_dir, "filtered_P04_muPlus.root"), os.path.join
 
 # HEPGEN Invisible Pi0 MC Data (Reconstructed data)
 hepPi0_dir = "/Users/gursimran/cern/2016_data/HepgenPi0/"
-hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus.root"),
+hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(hepPi0_dir, "filtered_P04_muMinus_JTest.root"),
                 os.path.join(hepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(hepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(hepPi0_dir, "filtered_P07_muMinus.root"),
@@ -54,7 +54,7 @@ hepPi0_files = (os.path.join(hepPi0_dir, "filtered_P04_muPlus.root"), os.path.jo
 
 # LEPTO Invisible Pi0 MC Data (Reconstructed data)
 lepPi0_dir = "/Users/gursimran/cern/2016_data/LeptoPi0/"
-lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus.root"),
+lepPi0_files = (os.path.join(lepPi0_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(lepPi0_dir, "filtered_P04_muMinus_JTest.root"),
                 os.path.join(lepPi0_dir, "filtered_P05_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P05_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P06_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P06_muMinus.root"),
                 os.path.join(lepPi0_dir, "filtered_P07_muPlus.root"), os.path.join(lepPi0_dir, "filtered_P07_muMinus.root"),
@@ -691,7 +691,7 @@ def get_var_t(var_t_phi: np.ndarray) -> np.ndarray:
 # *******************************************************************
 # **********************************
 # Main function - exclude or include functions here 
-debug_main = False
+debug_main = True
 
 def main() -> None:
   # Dictionary to store the results 
@@ -722,10 +722,10 @@ def main() -> None:
     rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq = fill_weights(data_type="rec", period=period)
     acc_muPlus, acc_muMinus = compute_acceptance(rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus)
 
-    if debug_main:
+    """ if debug_main:
       with redirect_stdout(debug_log):
         test_acceptance(rec_muPlus, rec_muMinus, rec_muPlus_sq, rec_muMinus_sq, gen_muPlus,
-                        gen_muMinus, gen_muPlus_sq, gen_muMinus_sq)
+                        gen_muMinus, gen_muPlus_sq, gen_muMinus_sq) """
 
     # ***********************************************
     # *         *** 4D CROSS SECTION ***            * 
@@ -755,16 +755,14 @@ def main() -> None:
       debug_print(f"Total exc. pi0 μ- events: {np.sum(hepPi0_ijkl_muMinus)}")
 
     if debug_main:
-      out_file = f"G_arrays_{period}.pkl"
-      with open(out_file, "wb") as f:
+      out_file0 = f"G_arrays_{period}.pkl"
+      with open(out_file0, "wb") as f:
         pickle.dump({"real_muPlus": real_ijkl_muPlus, "real_muMinus": real_ijkl_muMinus,
                      "BH_muPlus": BH_ijkl_muPlus, "BH_muMinus": BH_ijkl_muMinus,
                      "lepPi0_muPlus": lepPi0_ijkl_muPlus, "lepPi0_muMinus": lepPi0_ijkl_muMinus,
                      "hepPi0_muPlus": hepPi0_ijkl_muPlus, "hepPi0_muMinus": hepPi0_ijkl_muMinus,
-                     "rec_muPlus_sq": rec_muPlus_sq, "rec_muMinus_sq": rec_muMinus_sq,
-                     "gen_muPlus_sq": gen_muPlus_sq, "gen_muMinus_sq": gen_muMinus_sq,
                      }, f)
-      debug_print(f"Results written to '{out_file}'")
+      debug_print(f"Results written to '{out_file0}'")
 
     # Acceptance corrected counts
     sum_ijkl_muPlus = get_S(real_ijkl_muPlus, BH_ijkl_muPlus, lepPi0_ijkl_muPlus, 
@@ -803,6 +801,14 @@ def main() -> None:
     varAcc_muPlus, varAcc_muMinus, errAcc_muPlus, errAcc_muMinus = compute_acceptance_error(rec_muPlus_sq, rec_muMinus_sq, gen_muPlus_sq, gen_muMinus_sq,
                                                       rec_muPlus, rec_muMinus, gen_muPlus, gen_muMinus) 
     
+    if debug_main:
+      out_file1 = f"G_acc_{period}.pkl"
+      with open(out_file1, "wb") as f:
+        pickle.dump({"acc_muPlus": acc_muPlus, "acc_muMinus": acc_muMinus,
+                     "varAcc_muPlus": varAcc_muPlus, "varAcc_muMinus": varAcc_muMinus,
+                    },f)
+      print(f"Results written to '{out_file1}'")
+
     # Get the sum term error 
     if debug_main: 
       debug_print("mu+ varD min/max:", np.min(varD_ijkl_muPlus), np.max(varD_ijkl_muPlus))

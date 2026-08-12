@@ -4,7 +4,7 @@ import os
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from dvcs_constants_2016 import *
+from dvcs_constants_2016_JTest import *
 from scipy.optimize import curve_fit
 
 # **********************************

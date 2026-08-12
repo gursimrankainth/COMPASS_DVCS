@@ -23,44 +23,44 @@ real_muMinus
 BH_muPlus
   shape: (4, 8, 4, 4)
   ours min/max/mean: 7986.283724986312 6720664.022464974 347622.0686265876
-  J    min/max/mean: 7628.312314620979 6491632.693255814 332226.7059101643
+  J    min/max/mean: 7986.283169767883 6711455.361113733 346548.1450863634
   allclose: False (rtol=1e-05, atol=1e-08)
   nonzero bins (ours/J): 512 512
-  mismatching bins: 512
-  max absolute difference: 6646887.01141294
-  mean absolute difference: 478873.1002581455
+  mismatching bins: 282
+  max absolute difference: 25901.64746313682
+  mean absolute difference: 1090.7931118857202
   first mismatches [t, phi, nu, Q2]:
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=578772.691691, J=74106.4113087, diff=504666.280383
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=278102.889265, J=40638.9539108, diff=237463.935355
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(2)): ours=126260.796956, J=24019.7404217, diff=102241.056534
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=67211.8378712, J=15863.1706817, diff=51348.6671895
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=1213548.75251, J=140004.043755, diff=1073544.70876
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=423829.949549, J=97207.0431212, diff=326622.906428
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(2)): ours=334218.747645, J=64475.4046074, diff=269743.343038
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(3)): ours=192327.088119, J=51937.9428892, diff=140389.14523
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=2067754.4695, J=267013.094337, diff=1800741.37517
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=853128.841557, J=175328.997422, diff=677799.844135
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=75720.5672063, J=75416.1182823, diff=304.448923969
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=42826.1553101, J=42595.0658227, diff=231.089487432
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=16836.4599569, J=16699.6371262, diff=136.822830679
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=148579.610401, J=147848.869386, diff=730.741014977
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=187655.52738, J=187040.017521, diff=615.509859372
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(3)): ours=122580.698337, J=121677.776682, diff=902.921655344
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(0)): ours=494166.476428, J=493312.366783, diff=854.109645346
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(2)): ours=215865.852836, J=213754.00397, diff=2111.84886568
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(3)): ours=190739.616727, J=189403.71423, diff=1335.90249688
+    (np.int64(0), np.int64(1), np.int64(0), np.int64(0)): ours=114307.099802, J=114121.338498, diff=185.761303635
 
 BH_muMinus
   shape: (4, 8, 4, 4)
   ours min/max/mean: 5860.705853719214 6081207.967142478 335512.09426502365
-  J    min/max/mean: 5740.694641664572 5777319.652902331 325831.8964783689
+  J    min/max/mean: 5794.183832582773 5817387.674787462 328896.47560738923
   allclose: False (rtol=1e-05, atol=1e-08)
   nonzero bins (ours/J): 512 512
-  mismatching bins: 512
-  max absolute difference: 6016300.072304243
-  mean absolute difference: 464556.8912238627
+  mismatching bins: 498
+  max absolute difference: 263820.2923550159
+  mean absolute difference: 6615.618657634504
   first mismatches [t, phi, nu, Q2]:
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=590083.181873, J=69354.6240347, diff=520728.557838
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=229087.406115, J=41583.145811, diff=187504.260304
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(2)): ours=128806.667074, J=27683.6582921, diff=101123.008782
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=67651.9205214, J=13237.9430106, diff=54413.9775109
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=1114210.04828, J=155900.561803, diff=958309.486474
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=419007.347011, J=94560.9164962, diff=324446.430515
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(2)): ours=277788.429814, J=73010.1485046, diff=204778.281309
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(3)): ours=180732.773743, J=44611.9305884, diff=136120.843155
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=1804297.1873, J=245897.950622, diff=1558399.23667
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=887976.763727, J=164098.72721, diff=723878.036518
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=71262.3597643, J=69765.2005577, diff=1497.15920668
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=43618.0531064, J=42172.7823043, diff=1445.27080212
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(2)): ours=28313.4824167, J=28233.8579965, diff=79.6244202383
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=13912.8634171, J=13464.4078203, diff=448.455596775
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=165395.47109, J=158591.481062, diff=6803.99002788
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=97068.7159485, J=95616.9788919, diff=1451.73705662
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(2)): ours=76151.866743, J=73422.6502335, diff=2729.21650941
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(3)): ours=45648.6603713, J=45443.9782388, diff=204.682132492
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=254139.941249, J=247231.043566, diff=6908.89768345
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=168284.352933, J=165236.177701, diff=3048.17523176
 
 lepPi0_muPlus
   shape: (4, 8, 4, 4)
@@ -68,20 +68,12 @@ lepPi0_muPlus
   J    min/max/mean: 0.0 60988.35159880445 2746.4418217260727
   allclose: False (rtol=1e-05, atol=1e-08)
   nonzero bins (ours/J): 67 66
-  mismatching bins: 111
-  max absolute difference: 60988.35159880445
-  mean absolute difference: 4470.11197984124
+  mismatching bins: 2
+  max absolute difference: 32957.350418547765
+  mean absolute difference: 82.08600843064464
   first mismatches [t, phi, nu, Q2]:
-    (np.int64(0), np.int64(1), np.int64(0), np.int64(3)): ours=0, J=27241.290369, diff=-27241.290369
-    (np.int64(0), np.int64(1), np.int64(2), np.int64(0)): ours=19177.696962, J=0, diff=19177.696962
-    (np.int64(0), np.int64(2), np.int64(0), np.int64(2)): ours=0, J=22367.294784, diff=-22367.294784
-    (np.int64(0), np.int64(3), np.int64(1), np.int64(0)): ours=0, J=10052.4863726, diff=-10052.4863726
-    (np.int64(0), np.int64(3), np.int64(3), np.int64(0)): ours=25740.750728, J=0, diff=25740.750728
-    (np.int64(0), np.int64(5), np.int64(0), np.int64(3)): ours=27241.2901869, J=0, diff=27241.2901869
-    (np.int64(0), np.int64(5), np.int64(2), np.int64(0)): ours=0, J=19177.69709, diff=-19177.69709
-    (np.int64(0), np.int64(6), np.int64(0), np.int64(2)): ours=22367.2946344, J=0, diff=22367.2946344
-    (np.int64(0), np.int64(7), np.int64(1), np.int64(0)): ours=10052.4863056, J=0, diff=10052.4863056
-    (np.int64(0), np.int64(7), np.int64(3), np.int64(0)): ours=0, J=25740.7508994, diff=-25740.7508994
+    (np.int64(3), np.int64(3), np.int64(0), np.int64(0)): ours=21531.7248905, J=12461.0483016, diff=9070.67658885
+    (np.int64(3), np.int64(7), np.int64(2), np.int64(1)): ours=32957.3504185, J=0, diff=32957.3504185
 
 lepPi0_muMinus
   shape: (4, 8, 4, 4)
@@ -89,20 +81,16 @@ lepPi0_muMinus
   J    min/max/mean: 0.0 56266.474346808136 2435.9385584544543
   allclose: False (rtol=1e-05, atol=1e-08)
   nonzero bins (ours/J): 59 56
-  mismatching bins: 104
-  max absolute difference: 71645.43154595475
-  mean absolute difference: 4482.444523543332
+  mismatching bins: 6
+  max absolute difference: 35696.422605320746
+  mean absolute difference: 250.44915787822984
   first mismatches [t, phi, nu, Q2]:
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=16831.6660143, J=0, diff=16831.6660143
-    (np.int64(0), np.int64(1), np.int64(0), np.int64(1)): ours=0, J=14960.1608489, diff=-14960.1608489
-    (np.int64(0), np.int64(1), np.int64(0), np.int64(3)): ours=35199.2656897, J=0, diff=35199.2656897
-    (np.int64(0), np.int64(2), np.int64(0), np.int64(2)): ours=28376.8201378, J=0, diff=28376.8201378
-    (np.int64(0), np.int64(4), np.int64(2), np.int64(0)): ours=0, J=16831.6661266, diff=-16831.6661266
-    (np.int64(0), np.int64(5), np.int64(0), np.int64(1)): ours=14960.1607489, J=0, diff=14960.1607489
-    (np.int64(0), np.int64(6), np.int64(0), np.int64(2)): ours=0, J=28376.8203275, diff=-28376.8203275
-    (np.int64(1), np.int64(0), np.int64(0), np.int64(1)): ours=32427.1643646, J=0, diff=32427.1643646
-    (np.int64(1), np.int64(0), np.int64(0), np.int64(2)): ours=31801.7391289, J=0, diff=31801.7391289
-    (np.int64(1), np.int64(0), np.int64(0), np.int64(3)): ours=0, J=26363.1884572, diff=-26363.1884572
+    (np.int64(0), np.int64(5), np.int64(0), np.int64(3)): ours=35199.2656897, J=0, diff=35199.2656897
+    (np.int64(1), np.int64(1), np.int64(0), np.int64(0)): ours=24583.5506635, J=18166.9190533, diff=6416.63161022
+    (np.int64(2), np.int64(5), np.int64(1), np.int64(1)): ours=24187.8026692, J=0, diff=24187.8026692
+    (np.int64(3), np.int64(0), np.int64(0), np.int64(0)): ours=41852.3454087, J=32952.7253601, diff=8899.62004857
+    (np.int64(3), np.int64(3), np.int64(1), np.int64(2)): ours=71645.431546, J=35949.0089406, diff=35696.4226053
+    (np.int64(3), np.int64(7), np.int64(3), np.int64(0)): ours=17830.2184599, J=0, diff=17830.2184599
 
 hepPi0_muPlus
   shape: (4, 8, 4, 4)
@@ -110,20 +98,20 @@ hepPi0_muPlus
   J    min/max/mean: 5178.498592370144 373387.6980191779 74695.92573279391
   allclose: False (rtol=1e-05, atol=1e-08)
   nonzero bins (ours/J): 512 512
-  mismatching bins: 512
-  max absolute difference: 181484.63644075464
-  mean absolute difference: 29954.45804476139
+  mismatching bins: 406
+  max absolute difference: 16284.464090288675
+  mean absolute difference: 1292.4385902488984
   first mismatches [t, phi, nu, Q2]:
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=81386.7610113, J=97526.3252285, diff=-16139.5642173
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=49345.7325263, J=47583.3112749, diff=1762.42125133
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(2)): ours=35928.0446285, J=30985.7978444, diff=4942.24678408
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=18144.3878391, J=10960.4500709, diff=7183.93776827
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=54793.8178779, J=73599.6482247, diff=-18805.8303468
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=26297.9245882, J=59394.2747327, diff=-33096.3501445
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(2)): ours=24803.6107507, J=33841.9460606, diff=-9038.33530981
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(3)): ours=18005.015287, J=20039.223487, diff=-2034.20819997
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=40323.4739065, J=41676.0849859, diff=-1352.61107938
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=17926.0207672, J=31685.7173977, diff=-13759.6966305
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=98688.2281421, J=97526.3252285, diff=1161.90291359
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=47908.9407824, J=47583.3112749, diff=325.629507435
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(2)): ours=31687.4506056, J=30985.7978444, diff=701.652761209
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=11517.8907806, J=10960.4500709, diff=557.440709735
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=73320.7532411, J=73599.6482247, diff=-278.894983556
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=60470.0358102, J=59394.2747327, diff=1075.7610775
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(3)): ours=19289.2742044, J=20039.223487, diff=-749.949282627
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=32744.9651606, J=31685.7173977, diff=1059.24776281
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(2)): ours=34417.7716956, J=32717.4268136, diff=1700.34488201
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(0)): ours=51604.3917507, J=50717.0511295, diff=887.340621125
 
 hepPi0_muMinus
   shape: (4, 8, 4, 4)
@@ -131,17 +119,17 @@ hepPi0_muMinus
   J    min/max/mean: 3842.741374956178 376128.79811824864 75041.9327914224
   allclose: False (rtol=1e-05, atol=1e-08)
   nonzero bins (ours/J): 512 512
-  mismatching bins: 512
-  max absolute difference: 183714.52401878906
-  mean absolute difference: 28743.67508570882
+  mismatching bins: 420
+  max absolute difference: 13354.444551129476
+  mean absolute difference: 1403.742523330995
   first mismatches [t, phi, nu, Q2]:
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=96966.0696893, J=92163.2524454, diff=4802.81724393
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(1)): ours=60809.6827834, J=55485.8655595, diff=5323.8172239
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(2)): ours=24114.5796603, J=23890.3052088, diff=224.274451502
-    (np.int64(0), np.int64(0), np.int64(0), np.int64(3)): ours=17609.2522898, J=11667.723476, diff=5941.52881382
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=56333.0968892, J=86366.6366107, diff=-30033.5397215
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=33715.8674689, J=74067.6764075, diff=-40351.8089387
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(2)): ours=25678.9878126, J=31842.0092722, diff=-6163.0214596
-    (np.int64(0), np.int64(0), np.int64(1), np.int64(3)): ours=16874.0920406, J=15797.0090117, diff=1077.08302887
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=52300.8801158, J=36711.2955875, diff=15589.5845282
-    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=21303.1053526, J=38740.9854342, diff=-17437.8800816
+    (np.int64(0), np.int64(0), np.int64(0), np.int64(0)): ours=93502.4653119, J=92163.2524454, diff=1339.21286655
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(0)): ours=87340.8150289, J=86366.6366107, diff=974.178418163
+    (np.int64(0), np.int64(0), np.int64(1), np.int64(1)): ours=73190.0493783, J=74067.6764075, diff=-877.627029244
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(0)): ours=38144.496235, J=36711.2955875, diff=1433.20064752
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(1)): ours=40313.2774388, J=38740.9854342, diff=1572.29200457
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(2)): ours=27262.2905168, J=26864.1492716, diff=398.141245216
+    (np.int64(0), np.int64(0), np.int64(2), np.int64(3)): ours=20071.6021602, J=19646.4024172, diff=425.199743005
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(0)): ours=48005.3157021, J=47132.8559142, diff=872.459787899
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(2)): ours=14249.4701535, J=13847.7279758, diff=401.742177616
+    (np.int64(0), np.int64(0), np.int64(3), np.int64(3)): ours=10703.12047, J=9695.70597235, diff=1007.41449764

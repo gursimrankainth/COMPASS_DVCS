@@ -1,0 +1,1326 @@
+0 P04
+CBH 0.76
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [23.61498406 26.78065715 10.73615718  1.77363621]
+P04 mu- dsigma/dt (nb/GeV²): [23.19378793 21.86920359  4.97336743  3.11811684]
+P04 mu+ error (nb/GeV²): [10.57264706  6.50072551  3.79901113  1.44132606]
+P04 mu- error (nb/GeV²): [8.55522706 7.91576221 2.75440986 1.64734246]
+1 P05
+CBH 0.76
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [33.10260358 15.92518643 12.21962441  3.47703672]
+P05 mu- dsigma/dt (nb/GeV²): [30.96260149 22.54094622 16.2755655   0.60453404]
+P05 mu+ error (nb/GeV²): [10.96879632  6.40884717  4.76694426  1.78802837]
+P05 mu- error (nb/GeV²): [12.20337187  8.41469744  4.98077513  1.58405954]
+2 P06
+CBH 0.76
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [41.31958673 14.22793348 11.83900214  2.18829906]
+P06 mu- dsigma/dt (nb/GeV²): [44.3043776  12.23089651 12.23187182  4.25689219]
+P06 mu+ error (nb/GeV²): [12.38208543  5.39796564  4.01718685  1.39854745]
+P06 mu- error (nb/GeV²): [13.41452877  5.93854374  4.91401541  2.30138496]
+3 P07
+CBH 0.76
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [23.47332139 13.01416509  8.78804573  3.18020923]
+P07 mu- dsigma/dt (nb/GeV²): [34.98287908 23.61991621  6.60264949  2.07381608]
+P07 mu+ error (nb/GeV²): [8.66350042 5.9149294  3.38549668 1.66079241]
+P07 mu- error (nb/GeV²): [9.24663447 7.74115097 2.70217854 1.64233963]
+4 P08
+CBH 0.76
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [35.80123694 21.88735988 13.53294163  7.31334546]
+P08 mu- dsigma/dt (nb/GeV²): [46.06154343 17.39428204 11.71727379  4.26236314]
+P08 mu+ error (nb/GeV²): [10.36412398  5.47029092  3.12270998  1.92174346]
+P08 mu- error (nb/GeV²): [12.00650571  5.69172844  4.36447653  1.78971151]
+5 P09
+CBH 0.76
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [24.05435309 20.04983957 13.37042751  5.54009115]
+P09 mu- dsigma/dt (nb/GeV²): [35.75529962 27.8302683   9.3531002   4.48851523]
+P09 mu+ error (nb/GeV²): [7.81941052 6.91525363 4.07506902 1.89141178]
+P09 mu- error (nb/GeV²): [12.44241243  8.84348008  3.87212215  1.91874954]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [30.04258765 18.92569309 11.68663664  3.91734172]
+total mu+ error (nb/GeV²): [4.20071507 2.50183722 1.56582715 0.69374533]
+total mu- dsigma/dt (nb/GeV²): [35.91453951 20.99518232 10.07285211  3.134572  ]
+total mu- error (nb/GeV²): [4.62853996 3.0615867  1.62481318 0.73907308]
+0 P04
+CBH 0.78
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [23.17696091 26.53172619 10.59280035  1.68228742]
+P04 mu- dsigma/dt (nb/GeV²): [22.76610611 21.62561618  4.83613831  3.0301482 ]
+P04 mu+ error (nb/GeV²): [10.57265105  6.50073814  3.79903757  1.44159149]
+P04 mu- error (nb/GeV²): [8.55530191 7.91576292 2.7544777  1.64756345]
+1 P05
+CBH 0.78
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [32.65988476 15.67746601 12.07709298  3.39229363]
+P05 mu- dsigma/dt (nb/GeV²): [30.53771712 22.299852   16.13438418  0.51824014]
+P05 mu+ error (nb/GeV²): [10.96879914  6.40889643  4.76696989  1.78814649]
+P05 mu- error (nb/GeV²): [12.20338293  8.41470667  4.98078346  1.58425677]
+2 P06
+CBH 0.78
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [40.88399255 13.97886514 11.69523057  2.09805993]
+P06 mu- dsigma/dt (nb/GeV²): [43.87552406 11.98758157 12.09146564  4.16611077]
+P06 mu+ error (nb/GeV²): [12.38210165  5.39805068  4.01723933  1.39882057]
+P06 mu- error (nb/GeV²): [13.41447812  5.93859517  4.91405064  2.30154539]
+3 P07
+CBH 0.78
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [23.02965046 12.76390883  8.64326822  3.09155011]
+P07 mu- dsigma/dt (nb/GeV²): [34.55575362 23.37905963  6.4615374   1.98491517]
+P07 mu+ error (nb/GeV²): [8.66354076 5.91498102 3.38555741 1.66104022]
+P07 mu- error (nb/GeV²): [9.24665361 7.74116162 2.70224694 1.64254289]
+4 P08
+CBH 0.78
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [35.36156318 21.63885411 13.38916654  7.22418876]
+P08 mu- dsigma/dt (nb/GeV²): [45.63218146 17.15077598 11.57523379  4.17614998]
+P08 mu+ error (nb/GeV²): [10.36414024  5.47033525  3.12273885  1.9218941 ]
+P08 mu- error (nb/GeV²): [12.00648465  5.69173452  4.36449068  1.78985572]
+5 P09
+CBH 0.78
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [23.61543527 19.80242639 13.22488377  5.4524012 ]
+P09 mu- dsigma/dt (nb/GeV²): [35.32500984 27.58317859  9.2104628   4.3986438 ]
+P09 mu+ error (nb/GeV²): [7.81938361 6.91526379 4.07513306 1.89167271]
+P09 mu- error (nb/GeV²): [12.44244752  8.8434449   3.87221744  1.91910137]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [29.60279888 18.67698909 11.54269469  3.82856623]
+total mu+ error (nb/GeV²): [4.20071962 2.50185324 1.56584394 0.69383276]
+total mu- dsigma/dt (nb/GeV²): [35.48649544 20.75197401  9.93207301  3.04632586]
+total mu- error (nb/GeV²): [4.62854327 3.06158816 1.62483011 0.73915841]
+0 P04
+CBH 0.8
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [22.73893776 26.28279522 10.44944353  1.59093864]
+P04 mu- dsigma/dt (nb/GeV²): [22.33842429 21.38202878  4.6989092   2.94217955]
+P04 mu+ error (nb/GeV²): [10.57265805  6.50075265  3.79906557  1.44186393]
+P04 mu- error (nb/GeV²): [8.55538036 7.91576518 2.75454762 1.64779045]
+1 P05
+CBH 0.8
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [32.21716593 15.42974558 11.93456154  3.30755054]
+P05 mu- dsigma/dt (nb/GeV²): [30.11283275 22.05875777 15.99320286  0.43194624]
+P05 mu+ error (nb/GeV²): [10.96880498  6.4089476   4.76699678  1.78826842]
+P05 mu- error (nb/GeV²): [12.20339691  8.41471747  4.98079314  1.58445937]
+2 P06
+CBH 0.8
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [40.44839837 13.72979681 11.55145899  2.0078208 ]
+P06 mu- dsigma/dt (nb/GeV²): [43.44667051 11.74426664 11.95105946  4.07532934]
+P06 mu+ error (nb/GeV²): [12.38212093  5.39813869  4.01729376  1.39910157]
+P06 mu- error (nb/GeV²): [13.41443017  5.93864909  4.91408729  2.30171064]
+3 P07
+CBH 0.8
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [22.58597953 12.51365258  8.4984907   3.00289099]
+P07 mu- dsigma/dt (nb/GeV²): [34.12862817 23.13820305  6.3204253   1.89601426]
+P07 mu+ error (nb/GeV²): [8.66358514 5.91503481 3.38562016 1.66129453]
+P07 mu- error (nb/GeV²): [9.24667604 7.7411737  2.70231767 1.64275226]
+4 P08
+CBH 0.8
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [34.92188941 21.39034833 13.24539144  7.13503205]
+P08 mu- dsigma/dt (nb/GeV²): [45.20281948 16.90726991 11.43319379  4.08993682]
+P08 mu+ error (nb/GeV²): [10.36415946  5.47038173  3.12276962  1.92204929]
+P08 mu- error (nb/GeV²): [12.00646574  5.6917424   4.36450603  1.79000368]
+5 P09
+CBH 0.8
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [23.17651744 19.55501321 13.07934004  5.36471124]
+P09 mu- dsigma/dt (nb/GeV²): [34.89472006 27.33608888  9.06782541  4.30877237]
+P09 mu+ error (nb/GeV²): [7.81936241 6.91527642 4.07519925 1.89194144]
+P09 mu- error (nb/GeV²): [12.44248803  8.84341291  3.87231624  1.91946387]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [29.16301011 18.42828508 11.39875273  3.73979074]
+total mu+ error (nb/GeV²): [4.20072557 2.50187017 1.56586145 0.69392268]
+total mu- dsigma/dt (nb/GeV²): [35.05845137 20.50876571  9.7912939   2.95807972]
+total mu- error (nb/GeV²): [4.62854791 3.06159041 1.62484779 0.73924619]
+0 P04
+CBH 0.82
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [22.30091461 26.03386426 10.30608671  1.49958985]
+P04 mu- dsigma/dt (nb/GeV²): [21.91074247 21.13844137  4.56168008  2.8542109 ]
+P04 mu+ error (nb/GeV²): [10.57266807  6.50076907  3.79909514  1.4421434 ]
+P04 mu- error (nb/GeV²): [8.55546243 7.91576899 2.75461963 1.64802345]
+1 P05
+CBH 0.82
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [31.77444711 15.18202515 11.7920301   3.22280745]
+P05 mu- dsigma/dt (nb/GeV²): [29.68794838 21.81766354 15.85202154  0.34565234]
+P05 mu+ error (nb/GeV²): [10.96881383  6.40900068  4.76702495  1.78839415]
+P05 mu- error (nb/GeV²): [12.20341379  8.41472984  4.98080417  1.58466732]
+2 P06
+CBH 0.82
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [40.01280419 13.48072848 11.40768741  1.91758167]
+P06 mu- dsigma/dt (nb/GeV²): [43.01781696 11.5009517  11.81065328  3.98454792]
+P06 mu+ error (nb/GeV²): [12.38214327  5.39822967  4.01735014  1.39939044]
+P06 mu- error (nb/GeV²): [13.41438491  5.93870549  4.91412535  2.30188074]
+3 P07
+CBH 0.82
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [22.14230861 12.26339632  8.35371318  2.91423187]
+P07 mu- dsigma/dt (nb/GeV²): [33.70150271 22.89734647  6.1793132   1.80711334]
+P07 mu+ error (nb/GeV²): [8.66363355 5.91509079 3.38568492 1.66155532]
+P07 mu- error (nb/GeV²): [9.24670176 7.74118723 2.70239074 1.64296775]
+4 P08
+CBH 0.82
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [34.48221565 21.14184256 13.10161634  7.04587535]
+P08 mu- dsigma/dt (nb/GeV²): [44.77345751 16.66376385 11.29115379  4.00372366]
+P08 mu+ error (nb/GeV²): [10.36418163  5.47043036  3.1228023   1.92220901]
+P08 mu- error (nb/GeV²): [12.006449    5.69175207  4.36452259  1.79015539]
+5 P09
+CBH 0.82
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [22.73759961 19.30760003 12.93379631  5.27702129]
+P09 mu- dsigma/dt (nb/GeV²): [34.46443028 27.08899917  8.92518802  4.21890094]
+P09 mu+ error (nb/GeV²): [7.81934691 6.91529153 4.0752676  1.89221796]
+P09 mu- error (nb/GeV²): [12.44253395  8.84338413  3.87241854  1.91983702]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [28.72322134 18.17958107 11.25481077  3.65101525]
+total mu+ error (nb/GeV²): [4.20073291 2.50188799 1.56587969 0.69401509]
+total mu- dsigma/dt (nb/GeV²): [34.63040729 20.2655574   9.6505148   2.86983357]
+total mu- error (nb/GeV²): [4.62855388 3.06159346 1.62486622 0.73933642]
+0 P04
+CBH 0.84
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [21.86289147 25.78493329 10.16272989  1.40824106]
+P04 mu- dsigma/dt (nb/GeV²): [21.48306065 20.89485397  4.42445096  2.76624226]
+P04 mu+ error (nb/GeV²): [10.5726811   6.50078738  3.79912627  1.44242987]
+P04 mu- error (nb/GeV²): [8.55554812 7.91577434 2.75469372 1.64826245]
+1 P05
+CBH 0.84
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [31.33172828 14.93430473 11.64949867  3.13806436]
+P05 mu- dsigma/dt (nb/GeV²): [29.26306401 21.57656931 15.71084022  0.25935844]
+P05 mu+ error (nb/GeV²): [10.9688257   6.40905568  4.76705438  1.78852369]
+P05 mu- error (nb/GeV²): [12.20343359  8.41474379  4.98081655  1.58488063]
+2 P06
+CBH 0.84
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [39.57721001 13.23166014 11.26391583  1.82734254]
+P06 mu- dsigma/dt (nb/GeV²): [42.58896341 11.25763676 11.67024709  3.8937665 ]
+P06 mu+ error (nb/GeV²): [12.38216867  5.39832362  4.01740848  1.3996872 ]
+P06 mu- error (nb/GeV²): [13.41434236  5.93876437  4.91416484  2.30205566]
+3 P07
+CBH 0.84
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [21.69863768 12.01314006  8.20893566  2.82557274]
+P07 mu- dsigma/dt (nb/GeV²): [33.27437725 22.65648989  6.03820111  1.71821243]
+P07 mu+ error (nb/GeV²): [8.663686   5.91514894 3.3857517  1.6618226 ]
+P07 mu- error (nb/GeV²): [9.24673079 7.74120219 2.70246615 1.64318936]
+4 P08
+CBH 0.84
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [34.04254189 20.89333679 12.95784124  6.95671865]
+P08 mu- dsigma/dt (nb/GeV²): [44.34409554 16.42025779 11.14911379  3.9175105 ]
+P08 mu+ error (nb/GeV²): [10.36420675  5.47048114  3.12283689  1.92237328]
+P08 mu- error (nb/GeV²): [12.00643441  5.69176356  4.36454037  1.79031086]
+5 P09
+CBH 0.84
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [22.29868178 19.06018685 12.78825257  5.18933134]
+P09 mu- dsigma/dt (nb/GeV²): [34.0341405  26.84190946  8.78255062  4.12902951]
+P09 mu+ error (nb/GeV²): [7.81933711 6.91530911 4.0753381  1.89250227]
+P09 mu- error (nb/GeV²): [12.44258529  8.84335855  3.87252436  1.92022083]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [28.28343256 17.93087707 11.11086882  3.56223976]
+total mu+ error (nb/GeV²): [4.20074164 2.50190673 1.56589865 0.69410998]
+total mu- dsigma/dt (nb/GeV²): [34.20236322 20.0223491   9.5097357   2.78158743]
+total mu- error (nb/GeV²): [4.62856118 3.06159731 1.6248854  0.7394291 ]
+0 P04
+CBH 0.86
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [21.42486832 25.53600233 10.01937306  1.31689228]
+P04 mu- dsigma/dt (nb/GeV²): [21.05537883 20.65126656  4.28722185  2.67827361]
+P04 mu+ error (nb/GeV²): [10.57269714  6.50080758  3.79915897  1.44272335]
+P04 mu- error (nb/GeV²): [8.55563741 7.91578124 2.75476989 1.64850745]
+1 P05
+CBH 0.86
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [30.88900945 14.6865843  11.50696723  3.05332127]
+P05 mu- dsigma/dt (nb/GeV²): [28.83817965 21.33547509 15.5696589   0.17306454]
+P05 mu+ error (nb/GeV²): [10.96884058  6.40911259  4.76708508  1.78865702]
+P05 mu- error (nb/GeV²): [12.20345629  8.41475932  4.98083029  1.58509929]
+2 P06
+CBH 0.86
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [39.14161583 12.98259181 11.12014426  1.73710341]
+P06 mu- dsigma/dt (nb/GeV²): [42.16010986 11.01432182 11.52984091  3.80298508]
+P06 mu+ error (nb/GeV²): [12.38219712  5.39842054  4.01746877  1.39999182]
+P06 mu- error (nb/GeV²): [13.41430249  5.93882573  4.91420574  2.30223542]
+3 P07
+CBH 0.86
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [21.25496675 11.7628838   8.06415814  2.73691362]
+P07 mu- dsigma/dt (nb/GeV²): [32.8472518  22.41563331  5.89708901  1.62931152]
+P07 mu+ error (nb/GeV²): [8.66374248 5.91520927 3.3858205  1.66209636]
+P07 mu- error (nb/GeV²): [9.24676311 7.74121859 2.7025439  1.64341707]
+4 P08
+CBH 0.86
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [33.60286812 20.64483101 12.81406615  6.86756195]
+P08 mu- dsigma/dt (nb/GeV²): [43.91473356 16.17675173 11.00707379  3.83129735]
+P08 mu+ error (nb/GeV²): [10.36423482  5.47053408  3.12287339  1.92254208]
+P08 mu- error (nb/GeV²): [12.00642197  5.69177684  4.36455935  1.79047007]
+5 P09
+CBH 0.86
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [21.85976395 18.81277367 12.64270884  5.10164138]
+P09 mu- dsigma/dt (nb/GeV²): [33.60385072 26.59481975  8.63991323  4.03915808]
+P09 mu+ error (nb/GeV²): [7.81933301 6.91532917 4.07541076 1.89279436]
+P09 mu- error (nb/GeV²): [12.44264205  8.84333617  3.87263369  1.92061528]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [27.84364379 17.68217306 10.96692686  3.47346426]
+total mu+ error (nb/GeV²): [4.20075177 2.50192636 1.56591834 0.69420735]
+total mu- dsigma/dt (nb/GeV²): [33.77431915 19.77914079  9.36895659  2.69334129]
+total mu- error (nb/GeV²): [4.6285698  3.06160194 1.62490533 0.73952423]
+0 P04
+CBH 0.88
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [20.98684517 25.28707137  9.87601624  1.22554349]
+P04 mu- dsigma/dt (nb/GeV²): [20.62769701 20.40767915  4.14999273  2.59030497]
+P04 mu+ error (nb/GeV²): [10.5727162   6.50082969  3.79919323  1.44302383]
+P04 mu- error (nb/GeV²): [8.55573032 7.91578969 2.75484814 1.64875844]
+1 P05
+CBH 0.88
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [30.44629063 14.43886387 11.3644358   2.96857818]
+P05 mu- dsigma/dt (nb/GeV²): [28.41329528 21.09438086 15.42847758  0.08677064]
+P05 mu+ error (nb/GeV²): [10.96885848  6.40917141  4.76711705  1.78879415]
+P05 mu- error (nb/GeV²): [12.2034819   8.41477641  4.98084538  1.5853233 ]
+2 P06
+CBH 0.88
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [38.70602165 12.73352348 10.97637268  1.64686428]
+P06 mu- dsigma/dt (nb/GeV²): [41.73125632 10.77100688 11.38943473  3.71220365]
+P06 mu+ error (nb/GeV²): [12.38222864  5.39852044  4.01753102  1.4003043 ]
+P06 mu- error (nb/GeV²): [13.41426533  5.93888957  4.91424807  2.30242   ]
+3 P07
+CBH 0.88
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [20.81129582 11.51262755  7.91938062  2.6482545 ]
+P07 mu- dsigma/dt (nb/GeV²): [32.42012634 22.17477673  5.75597691  1.54041061]
+P07 mu+ error (nb/GeV²): [8.66380299 5.91527178 3.38589131 1.66237659]
+P07 mu- error (nb/GeV²): [9.24679873 7.74123643 2.70262399 1.6436509 ]
+4 P08
+CBH 0.88
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [33.16319436 20.39632524 12.67029105  6.77840524]
+P08 mu- dsigma/dt (nb/GeV²): [43.48537159 15.93324566 10.86503379  3.74508419]
+P08 mu+ error (nb/GeV²): [10.36426585  5.47058916  3.1229118   1.92271542]
+P08 mu- error (nb/GeV²): [12.0064117   5.69179192  4.36457955  1.79063303]
+5 P09
+CBH 0.88
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [21.42084612 18.56536049 12.4971651   5.01395143]
+P09 mu- dsigma/dt (nb/GeV²): [33.17356094 26.34773004  8.49727584  3.94928665]
+P09 mu+ error (nb/GeV²): [7.81933461 6.91535171 4.07548557 1.89309424]
+P09 mu- error (nb/GeV²): [12.44270423  8.84331699  3.87274652  1.92102037]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [27.40385502 17.43346905 10.8229849   3.38468877]
+total mu+ error (nb/GeV²): [4.20076329 2.5019469  1.56593876 0.6943072 ]
+total mu- dsigma/dt (nb/GeV²): [33.34627508 19.53593249  9.22817749  2.60509515]
+total mu- error (nb/GeV²): [4.62857975 3.06160738 1.624926   0.7396218 ]
+0 P04
+CBH 0.9
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [20.54882202 25.0381404   9.73265942  1.13419471]
+P04 mu- dsigma/dt (nb/GeV²): [20.2000152  20.16409175  4.01276362  2.50233632]
+P04 mu+ error (nb/GeV²): [10.57273827  6.50085368  3.79922905  1.44333131]
+P04 mu- error (nb/GeV²): [8.55582685 7.91579969 2.75492848 1.64901542]
+1 P05
+CBH 0.9
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [30.0035718  14.19114345 11.22190436  2.88383509]
+P05 mu- dsigma/dt (nb/GeV²): [2.79884109e+01 2.08532866e+01 1.52872963e+01 4.76737750e-04]
+P05 mu+ error (nb/GeV²): [10.9688794   6.40923215  4.76715028  1.78893509]
+P05 mu- error (nb/GeV²): [12.20351042  8.41479509  4.98086183  1.58555267]
+2 P06
+CBH 0.9
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [38.27042747 12.48445514 10.8326011   1.55662515]
+P06 mu- dsigma/dt (nb/GeV²): [41.30240277 10.52769194 11.24902855  3.62142223]
+P06 mu+ error (nb/GeV²): [12.38226321  5.39862331  4.01759522  1.40062465]
+P06 mu- error (nb/GeV²): [13.41423086  5.9389559   4.91429181  2.30260942]
+3 P07
+CBH 0.9
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [20.3676249  11.26237129  7.7746031   2.55959537]
+P07 mu- dsigma/dt (nb/GeV²): [31.99300089 21.93392015  5.61486482  1.45150969]
+P07 mu+ error (nb/GeV²): [8.66386754 5.91533647 3.38596414 1.66266331]
+P07 mu- error (nb/GeV²): [9.24683765 7.74125571 2.70270641 1.64389082]
+4 P08
+CBH 0.9
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [32.72352059 20.14781947 12.52651595  6.68924854]
+P08 mu- dsigma/dt (nb/GeV²): [43.05600962 15.6897396  10.72299379  3.65887103]
+P08 mu+ error (nb/GeV²): [10.36429982  5.4706464   3.12295211  1.92289329]
+P08 mu- error (nb/GeV²): [12.00640358  5.69180881  4.36460095  1.79079974]
+5 P09
+CBH 0.9
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [20.98192829 18.31794731 12.35162137  4.92626148]
+P09 mu- dsigma/dt (nb/GeV²): [32.74327116 26.10064033  8.35463845  3.85941522]
+P09 mu+ error (nb/GeV²): [7.81934191 6.91537672 4.07556254 1.8934019 ]
+P09 mu- error (nb/GeV²): [12.44277182  8.84330102  3.87286286  1.9214361 ]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [26.96406625 17.18476504 10.67904294  3.29591328]
+total mu+ error (nb/GeV²): [4.20077621 2.50196835 1.5659599  0.69440953]
+total mu- dsigma/dt (nb/GeV²): [32.91823101 19.29272418  9.08739838  2.51684901]
+total mu- error (nb/GeV²): [4.62859103 3.0616136  1.62494742 0.73972182]
+0 P04
+CBH 0.92
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [20.11079888 24.78920944  9.5893026   1.04284592]
+P04 mu- dsigma/dt (nb/GeV²): [19.77233338 19.92050434  3.8755345   2.41436768]
+P04 mu+ error (nb/GeV²): [10.57276335  6.50087958  3.79926644  1.44364578]
+P04 mu- error (nb/GeV²): [8.55592698 7.91581123 2.7550109  1.6492784 ]
+1 P05
+CBH 0.92
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [29.56085298 13.94342302 11.07937292  2.799092  ]
+P05 mu- dsigma/dt (nb/GeV²): [27.56352654 20.61219241 15.14611494 -0.08581716]
+P05 mu+ error (nb/GeV²): [10.96890333  6.4092948   4.76718478  1.78907982]
+P05 mu- error (nb/GeV²): [12.20354185  8.41481533  4.98087963  1.58578738]
+2 P06
+CBH 0.92
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [37.8348333  12.23538681 10.68882953  1.46638601]
+P06 mu- dsigma/dt (nb/GeV²): [40.87354922 10.284377   11.10862237  3.53064081]
+P06 mu+ error (nb/GeV²): [12.38230085  5.39872915  4.01766137  1.40095284]
+P06 mu- error (nb/GeV²): [13.41419908  5.9390247   4.91433697  2.30280366]
+3 P07
+CBH 0.92
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [19.92395397 11.01211503  7.62982559  2.47093625]
+P07 mu- dsigma/dt (nb/GeV²): [31.56587543 21.69306357  5.47375272  1.36260878]
+P07 mu+ error (nb/GeV²): [8.66393612 5.91540333 3.38603899 1.66295649]
+P07 mu- error (nb/GeV²): [9.24687986 7.74127643 2.70279117 1.64413686]
+4 P08
+CBH 0.92
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [32.28384683 19.89931369 12.38274085  6.60009184]
+P08 mu- dsigma/dt (nb/GeV²): [42.62664765 15.44623354 10.58095379  3.57265787]
+P08 mu+ error (nb/GeV²): [10.36433675  5.47070579  3.12299434  1.9230757 ]
+P08 mu- error (nb/GeV²): [12.00639761  5.69182749  4.36462357  1.79097019]
+5 P09
+CBH 0.92
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [20.54301046 18.07053413 12.20607764  4.83857152]
+P09 mu- dsigma/dt (nb/GeV²): [32.31298138 25.85355062  8.21200105  3.76954379]
+P09 mu+ error (nb/GeV²): [7.81935492 6.9154042  4.07564166 1.89371733]
+P09 mu- error (nb/GeV²): [12.44284484  8.84328825  3.87298271  1.92186245]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [26.52427748 16.93606104 10.53510099  3.20713779]
+total mu+ error (nb/GeV²): [4.20079053 2.5019907  1.56598177 0.69451433]
+total mu- dsigma/dt (nb/GeV²): [32.49018694 19.04951588  8.94661928  2.42860287]
+total mu- error (nb/GeV²): [4.62860364 3.06162063 1.6249696  0.73982428]
+0 P04
+CBH 0.94
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [19.67277573 24.54027847  9.44594578  0.95149714]
+P04 mu- dsigma/dt (nb/GeV²): [19.34465156 19.67691694  3.73830538  2.32639903]
+P04 mu+ error (nb/GeV²): [10.57279144  6.50090736  3.79930539  1.44396724]
+P04 mu- error (nb/GeV²): [8.55603073 7.91582432 2.7550954  1.64954736]
+1 P05
+CBH 0.94
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [29.11813415 13.69570259 10.93684149  2.71434891]
+P05 mu- dsigma/dt (nb/GeV²): [27.13864217 20.37109818 15.00493362 -0.17211106]
+P05 mu+ error (nb/GeV²): [10.96893027  6.40935937  4.76722056  1.78922835]
+P05 mu- error (nb/GeV²): [12.20357618  8.41483715  4.98089878  1.58602743]
+2 P06
+CBH 0.94
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [37.39923912 11.98631848 10.54505795  1.37614688]
+P06 mu- dsigma/dt (nb/GeV²): [40.44469567 10.04106206 10.96821619  3.43985939]
+P06 mu+ error (nb/GeV²): [12.38234154  5.39883796  4.01772947  1.40128889]
+P06 mu- error (nb/GeV²): [13.41417001  5.93909599  4.91438355  2.30300273]
+3 P07
+CBH 0.94
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [19.48028304 10.76185878  7.48504807  2.38227713]
+P07 mu- dsigma/dt (nb/GeV²): [31.13874997 21.45220698  5.33264062  1.27370787]
+P07 mu+ error (nb/GeV²): [8.66400873 5.91547237 3.38611585 1.66325615]
+P07 mu- error (nb/GeV²): [9.24692537 7.74129859 2.70287827 1.64438899]
+4 P08
+CBH 0.94
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [31.84417307 19.65080792 12.23896576  6.51093514]
+P08 mu- dsigma/dt (nb/GeV²): [42.19728567 15.20272747 10.43891379  3.48644471]
+P08 mu+ error (nb/GeV²): [10.36437663  5.47076733  3.12303847  1.92326264]
+P08 mu- error (nb/GeV²): [12.00639381  5.69184798  4.36464739  1.79114439]
+5 P09
+CBH 0.94
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [20.10409263 17.82312095 12.0605339   4.75088157]
+P09 mu- dsigma/dt (nb/GeV²): [31.8826916  25.60646091  8.06936366  3.67967236]
+P09 mu+ error (nb/GeV²): [7.81937363 6.91543416 4.07572293 1.89404053]
+P09 mu- error (nb/GeV²): [12.44292326  8.84327868  3.87310606  1.92229942]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [26.08448871 16.68735703 10.39115903  3.1183623 ]
+total mu+ error (nb/GeV²): [4.20080624 2.50201395 1.56600436 0.69462162]
+total mu- dsigma/dt (nb/GeV²): [32.06214287 18.80630758  8.80584017  2.34035673]
+total mu- error (nb/GeV²): [4.62861758 3.06162845 1.62499251 0.73992919]
+0 P04
+CBH 0.96
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [19.23475258 24.29134751  9.30258895  0.86014835]
+P04 mu- dsigma/dt (nb/GeV²): [18.91696974 19.43332953  3.60107627  2.23843039]
+P04 mu+ error (nb/GeV²): [10.57282255  6.50093705  3.79934591  1.44429568]
+P04 mu- error (nb/GeV²): [8.55613809 7.91583896 2.75518198 1.6498223 ]
+1 P05
+CBH 0.96
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [28.67541532 13.44798216 10.79431005  2.62960583]
+P05 mu- dsigma/dt (nb/GeV²): [26.7137578  20.13000395 14.8637523  -0.25840496]
+P05 mu+ error (nb/GeV²): [10.96896023  6.40942584  4.76725759  1.78938067]
+P05 mu- error (nb/GeV²): [12.20361343  8.41486055  4.98091929  1.58627283]
+2 P06
+CBH 0.96
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [36.96364494 11.73725014 10.40128637  1.28590775]
+P06 mu- dsigma/dt (nb/GeV²): [40.01584212  9.79774712 10.82781     3.34907797]
+P06 mu+ error (nb/GeV²): [12.38238529  5.39894974  4.01779953  1.40163278]
+P06 mu- error (nb/GeV²): [13.41414363  5.93916976  4.91443155  2.30320662]
+3 P07
+CBH 0.96
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [19.03661211 10.51160252  7.34027055  2.293618  ]
+P07 mu- dsigma/dt (nb/GeV²): [30.71162452 21.2113504   5.19152853  1.18480695]
+P07 mu+ error (nb/GeV²): [8.66408538 5.91554359 3.38619473 1.66356226]
+P07 mu- error (nb/GeV²): [9.24697418 7.74132219 2.70296771 1.64464722]
+4 P08
+CBH 0.96
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [31.4044993  19.40230215 12.09519066  6.42177844]
+P08 mu- dsigma/dt (nb/GeV²): [41.7679237  14.95922141 10.29687379  3.40023155]
+P08 mu+ error (nb/GeV²): [10.36441945  5.47083101  3.12308451  1.92345411]
+P08 mu- error (nb/GeV²): [12.00639215  5.69187027  4.36467243  1.79132234]
+5 P09
+CBH 0.96
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [19.66517481 17.57570777 11.91499017  4.66319161]
+P09 mu- dsigma/dt (nb/GeV²): [31.45240181 25.3593712   7.92672627  3.58980093]
+P09 mu+ error (nb/GeV²): [7.81939803 6.9154666  4.07580636 1.8943715 ]
+P09 mu- error (nb/GeV²): [12.44300711  8.84327231  3.87323293  1.922747  ]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [25.64469994 16.43865302 10.24721707  3.02958681]
+total mu+ error (nb/GeV²): [4.20082334 2.50203811 1.56602768 0.69473138]
+total mu- dsigma/dt (nb/GeV²): [31.6340988  18.56309927  8.66506107  2.25211059]
+total mu- error (nb/GeV²): [4.62863284 3.06163706 1.62501618 0.74003655]
+0 P04
+CBH 0.98
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [18.79672943 24.04241655  9.15923213  0.76879956]
+P04 mu- dsigma/dt (nb/GeV²): [18.48928792 19.18974212  3.46384715  2.15046174]
+P04 mu+ error (nb/GeV²): [10.57285667  6.50096863  3.79938799  1.44463111]
+P04 mu- error (nb/GeV²): [8.55624907 7.91585514 2.75527064 1.65010322]
+1 P05
+CBH 0.98
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [28.2326965  13.20026174 10.65177861  2.54486274]
+P05 mu- dsigma/dt (nb/GeV²): [26.28887343 19.88890972 14.72257099 -0.34469886]
+P05 mu+ error (nb/GeV²): [10.96899321  6.40949424  4.7672959   1.78953679]
+P05 mu- error (nb/GeV²): [12.20365358  8.41488552  4.98094115  1.58652356]
+2 P06
+CBH 0.98
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [36.52805076 11.48818181 10.2575148   1.19566862]
+P06 mu- dsigma/dt (nb/GeV²): [39.58698858  9.55443218 10.68740382  3.25829654]
+P06 mu+ error (nb/GeV²): [12.3824321   5.39906449  4.01787154  1.4019845 ]
+P06 mu- error (nb/GeV²): [13.41411994  5.93924601  4.91448096  2.30341534]
+3 P07
+CBH 0.98
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [18.59294119 10.26134626  7.19549303  2.20495888]
+P07 mu- dsigma/dt (nb/GeV²): [30.28449906 20.97049382  5.05041643  1.09590604]
+P07 mu+ error (nb/GeV²): [8.66416606 5.91561698 3.38627563 1.66387484]
+P07 mu- error (nb/GeV²): [9.24702629 7.74134722 2.70305948 1.64491154]
+4 P08
+CBH 0.98
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [30.96482554 19.15379638 11.95141556  6.33262173]
+P08 mu- dsigma/dt (nb/GeV²): [41.33856173 14.71571535 10.15483379  3.31401839]
+P08 mu+ error (nb/GeV²): [10.36446524  5.47089685  3.12313246  1.92365011]
+P08 mu- error (nb/GeV²): [12.00639266  5.69189436  4.36469867  1.79150403]
+5 P09
+CBH 0.98
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [19.22625698 17.32829459 11.76944644  4.57550166]
+P09 mu- dsigma/dt (nb/GeV²): [31.02211203 25.11228149  7.78408887  3.4999295 ]
+P09 mu+ error (nb/GeV²): [7.81942814 6.91550152 4.07589193 1.89471023]
+P09 mu- error (nb/GeV²): [12.44309637  8.84326915  3.8733633   1.92320519]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [25.20491116 16.18994902 10.10327512  2.94081132]
+total mu+ error (nb/GeV²): [4.20084184 2.50206317 1.56605173 0.69484361]
+total mu- dsigma/dt (nb/GeV²): [31.20605472 18.31989097  8.52428197  2.16386445]
+total mu- error (nb/GeV²): [4.62864943 3.06164647 1.6250406  0.74014634]
+0 P04
+CBH 1.0
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [18.35870629 23.79348558  9.01587531  0.67745078]
+P04 mu- dsigma/dt (nb/GeV²): [18.0616061  18.94615472  3.32661804  2.06249309]
+P04 mu+ error (nb/GeV²): [10.5728938   6.5010021   3.79943163  1.4449735 ]
+P04 mu- error (nb/GeV²): [8.55636366 7.91587287 2.75536139 1.65039012]
+1 P05
+CBH 1.0
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [27.78997767 12.95254131 10.50924718  2.46011965]
+P05 mu- dsigma/dt (nb/GeV²): [25.86398906 19.6478155  14.58138967 -0.43099277]
+P05 mu+ error (nb/GeV²): [10.9690292   6.40956454  4.76733547  1.78969671]
+P05 mu- error (nb/GeV²): [12.20369664  8.41491206  4.98096436  1.58677964]
+2 P06
+CBH 1.0
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [36.09245658 11.23911347 10.11374322  1.10542949]
+P06 mu- dsigma/dt (nb/GeV²): [39.15813503  9.31111724 10.54699764  3.16751512]
+P06 mu+ error (nb/GeV²): [12.38248196  5.39918222  4.0179455   1.40234405]
+P06 mu- error (nb/GeV²): [13.41409895  5.93932474  4.9145318   2.30362889]
+3 P07
+CBH 1.0
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [18.14927026 10.01109     7.05071551  2.11629976]
+P07 mu- dsigma/dt (nb/GeV²): [29.85737361 20.72963724  4.90930433  1.00700513]
+P07 mu+ error (nb/GeV²): [8.66425078 5.91569255 3.38635854 1.66419388]
+P07 mu- error (nb/GeV²): [9.2470817  7.7413737  2.70315359 1.64518196]
+4 P08
+CBH 1.0
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [30.52515177 18.9052906  11.80764046  6.24346503]
+P08 mu- dsigma/dt (nb/GeV²): [40.90919975 14.47220929 10.01279379  3.22780523]
+P08 mu+ error (nb/GeV²): [10.36451397  5.47096485  3.12318231  1.92385064]
+P08 mu- error (nb/GeV²): [12.00639532  5.69192025  4.36472613  1.79168945]
+5 P09
+CBH 1.0
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [18.78733915 17.08088141 11.6239027   4.48781171]
+P09 mu- dsigma/dt (nb/GeV²): [30.59182225 24.86519178  7.64145148  3.41005807]
+P09 mu+ error (nb/GeV²): [7.81946395 6.9155389  4.07597967 1.89505672]
+P09 mu- error (nb/GeV²): [12.44319105  8.84326918  3.87349717  1.92367397]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [24.76512239 15.94124501  9.95933316  2.85203583]
+total mu+ error (nb/GeV²): [4.20086173 2.50208914 1.5660765  0.69495832]
+total mu- dsigma/dt (nb/GeV²): [30.77801065 18.07668266  8.38350286  2.0756183 ]
+total mu- error (nb/GeV²): [4.62866735 3.06165667 1.62506576 0.74025858]
+0 P04
+CBH 1.02
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [17.92068314 23.54455462  8.87251849  0.58610199]
+P04 mu- dsigma/dt (nb/GeV²): [17.63392428 18.70256731  3.18938892  1.97452445]
+P04 mu+ error (nb/GeV²): [10.57293395  6.50103747  3.79947684  1.44532287]
+P04 mu- error (nb/GeV²): [8.55648186 7.91589215 2.75545421 1.650683  ]
+1 P05
+CBH 1.02
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [27.34725884 12.70482088 10.36671574  2.37537656]
+P05 mu- dsigma/dt (nb/GeV²): [25.43910469 19.40672127 14.44020835 -0.51728667]
+P05 mu+ error (nb/GeV²): [10.96906821  6.40963676  4.76737631  1.78986041]
+P05 mu- error (nb/GeV²): [12.20374262  8.41494018  4.98098892  1.58704104]
+2 P06
+CBH 1.02
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [35.6568624  10.99004514  9.96997164  1.01519036]
+P06 mu- dsigma/dt (nb/GeV²): [38.72928148  9.06780231 10.40659146  3.0767337 ]
+P06 mu+ error (nb/GeV²): [12.38253489  5.39930291  4.01802141  1.40271143]
+P06 mu- error (nb/GeV²): [13.41408066  5.93940595  4.91458406  2.30384725]
+3 P07
+CBH 1.02
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [17.70559933  9.76083375  6.90593799  2.02764063]
+P07 mu- dsigma/dt (nb/GeV²): [29.43024815 20.48878066  4.76819224  0.91810422]
+P07 mu+ error (nb/GeV²): [8.66433953 5.9157703  3.38644347 1.66451937]
+P07 mu- error (nb/GeV²): [9.2471404  7.74140161 2.70325003 1.64545846]
+4 P08
+CBH 1.02
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [30.08547801 18.65678483 11.66386537  6.15430833]
+P08 mu- dsigma/dt (nb/GeV²): [40.47983778 14.22870322  9.87075379  3.14159208]
+P08 mu+ error (nb/GeV²): [10.36456565  5.47103499  3.12323408  1.9240557 ]
+P08 mu- error (nb/GeV²): [12.00640014  5.69194795  4.3647548   1.79187862]
+5 P09
+CBH 1.02
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [18.34842132 16.83346824 11.47835897  4.40012175]
+P09 mu- dsigma/dt (nb/GeV²): [30.16153247 24.61810207  7.49881409  3.32018664]
+P09 mu+ error (nb/GeV²): [7.81950546 6.91557877 4.07606955 1.89541097]
+P09 mu- error (nb/GeV²): [12.44329115  8.84327242  3.87363455  1.92415334]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [24.32533362 15.692541    9.8153912   2.76326034]
+total mu+ error (nb/GeV²): [4.20088302 2.50211601 1.56610199 0.69507551]
+total mu- dsigma/dt (nb/GeV²): [30.34996658 17.83347436  8.24272376  1.98737216]
+total mu- error (nb/GeV²): [4.62868659 3.06166767 1.62509167 0.74037325]
+0 P04
+CBH 1.04
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [17.48265999 23.29562365  8.72916166  0.49475321]
+P04 mu- dsigma/dt (nb/GeV²): [17.20624246 18.4589799   3.0521598   1.8865558 ]
+P04 mu+ error (nb/GeV²): [10.57297711  6.50107474  3.79952361  1.4456792 ]
+P04 mu- error (nb/GeV²): [8.55660367 7.91591298 2.75554912 1.65098184]
+1 P05
+CBH 1.04
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [26.90454002 12.45710046 10.22418431  2.29063347]
+P05 mu- dsigma/dt (nb/GeV²): [25.01422032 19.16562704 14.29902703 -0.60358057]
+P05 mu+ error (nb/GeV²): [10.96911023  6.40971089  4.76741842  1.79002791]
+P05 mu- error (nb/GeV²): [12.2037915   8.41496987  4.98101484  1.58730778]
+2 P06
+CBH 1.04
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [35.22126822 10.74097681  9.82620006  0.92495123]
+P06 mu- dsigma/dt (nb/GeV²): [38.30042793  8.82448737 10.26618528  2.98595228]
+P06 mu+ error (nb/GeV²): [12.38259088  5.39942658  4.01809928  1.40308663]
+P06 mu- error (nb/GeV²): [13.41406507  5.93948964  4.91463773  2.30407044]
+3 P07
+CBH 1.04
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [17.2619284   9.51057749  6.76116048  1.93898151]
+P07 mu- dsigma/dt (nb/GeV²): [29.00312269 20.24792408  4.62708014  0.8292033 ]
+P07 mu+ error (nb/GeV²): [8.66443231 5.91585023 3.38653041 1.66485131]
+P07 mu- error (nb/GeV²): [9.2472024  7.74143097 2.70334881 1.64574105]
+4 P08
+CBH 1.04
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [29.64580424 18.40827906 11.52009027  6.06515163]
+P08 mu- dsigma/dt (nb/GeV²): [40.05047581 13.98519716  9.72871379  3.05537892]
+P08 mu+ error (nb/GeV²): [10.36462029  5.47110728  3.12328775  1.92426528]
+P08 mu- error (nb/GeV²): [12.00640712  5.69197744  4.36478467  1.79207153]
+5 P09
+CBH 1.04
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [17.90950349 16.58605506 11.33281524  4.3124318 ]
+P09 mu- dsigma/dt (nb/GeV²): [29.73124269 24.37101236  7.35617669  3.23031521]
+P09 mu+ error (nb/GeV²): [7.81955268 6.91562111 4.07616159 1.89577297]
+P09 mu- error (nb/GeV²): [12.44339666  8.84327886  3.87377544  1.92464329]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [23.88554485 15.443837    9.67144925  2.67448485]
+total mu+ error (nb/GeV²): [4.2009057  2.50214379 1.56612822 0.69519516]
+total mu- dsigma/dt (nb/GeV²): [29.92192251 17.59026605  8.10194465  1.89912602]
+total mu- error (nb/GeV²): [4.62870717 3.06167946 1.62511833 0.74049037]
+0 P04
+CBH 1.06
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [17.04463684 23.04669269  8.58580484  0.40340442]
+P04 mu- dsigma/dt (nb/GeV²): [16.77856064 18.2153925   2.91493069  1.79858716]
+P04 mu+ error (nb/GeV²): [10.57302328  6.5011139   3.79957194  1.44604249]
+P04 mu- error (nb/GeV²): [8.55672909 7.91593536 2.75564611 1.65128665]
+1 P05
+CBH 1.06
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [26.46182119 12.20938003 10.08165287  2.20589038]
+P05 mu- dsigma/dt (nb/GeV²): [24.58933596 18.92453281 14.15784571 -0.68987447]
+P05 mu+ error (nb/GeV²): [10.96915527  6.40978693  4.7674618   1.7901992 ]
+P05 mu- error (nb/GeV²): [12.20384328  8.41500114  4.98104211  1.58757985]
+2 P06
+CBH 1.06
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [34.78567404 10.49190847  9.68242849  0.8347121 ]
+P06 mu- dsigma/dt (nb/GeV²): [37.87157439  8.58117243 10.12577909  2.89517085]
+P06 mu+ error (nb/GeV²): [12.38264992  5.39955321  4.0181791   1.40346964]
+P06 mu- error (nb/GeV²): [13.41405217  5.93957581  4.91469282  2.30429844]
+3 P07
+CBH 1.06
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [16.81825748  9.26032123  6.61638296  1.85032239]
+P07 mu- dsigma/dt (nb/GeV²): [28.57599724 20.0070675   4.48596804  0.74030239]
+P07 mu+ error (nb/GeV²): [8.66452912 5.91593233 3.38661937 1.6651897 ]
+P07 mu- error (nb/GeV²): [9.24726769 7.74146176 2.70344993 1.64602973]
+4 P08
+CBH 1.06
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [29.20613048 18.15977328 11.37631517  5.97599492]
+P08 mu- dsigma/dt (nb/GeV²): [39.62111384 13.7416911   9.58667379  2.96916576]
+P08 mu+ error (nb/GeV²): [10.36467787  5.47118172  3.12334333  1.92447939]
+P08 mu- error (nb/GeV²): [12.00641625  5.69200874  4.36481576  1.79226818]
+5 P09
+CBH 1.06
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [17.47058566 16.33864188 11.1872715   4.22474185]
+P09 mu- dsigma/dt (nb/GeV²): [29.30095291 24.12392265  7.2135393   3.14044378]
+P09 mu+ error (nb/GeV²): [7.81960559 6.91566592 4.07625578 1.89614271]
+P09 mu- error (nb/GeV²): [12.44350759  8.84328851  3.87391983  1.92514381]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [23.44575608 15.19513299  9.52750729  2.58570936]
+total mu+ error (nb/GeV²): [4.20092978 2.50217247 1.56615516 0.69531728]
+total mu- dsigma/dt (nb/GeV²): [29.49387844 17.34705775  7.96116555  1.81087988]
+total mu- error (nb/GeV²): [4.62872907 3.06169205 1.62514573 0.74060992]
+0 P04
+CBH 1.08
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [16.6066137  22.79776173  8.44244802  0.31205564]
+P04 mu- dsigma/dt (nb/GeV²): [16.35087882 17.97180509  2.77770157  1.71061851]
+P04 mu+ error (nb/GeV²): [10.57307246  6.50115495  3.79962184  1.44641273]
+P04 mu- error (nb/GeV²): [8.55685813 7.91595928 2.75574518 1.65159743]
+1 P05
+CBH 1.08
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [26.01910237 11.9616596   9.93912143  2.12114729]
+P05 mu- dsigma/dt (nb/GeV²): [24.16445159 18.68343859 14.01666439 -0.77616837]
+P05 mu+ error (nb/GeV²): [10.96920332  6.40986489  4.76750644  1.79037429]
+P05 mu- error (nb/GeV²): [12.20389798  8.41503398  4.98107074  1.58785725]
+2 P06
+CBH 1.08
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [34.35007986 10.24284014  9.53865691  0.74447297]
+P06 mu- dsigma/dt (nb/GeV²): [37.44272084  8.33785749  9.98537291  2.80438943]
+P06 mu+ error (nb/GeV²): [12.38271202  5.39968282  4.01826087  1.40386046]
+P06 mu- error (nb/GeV²): [13.41404197  5.93966446  4.91474933  2.30453126]
+3 P07
+CBH 1.08
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [16.37458655  9.01006497  6.47160544  1.76166327]
+P07 mu- dsigma/dt (nb/GeV²): [28.14887178 19.76621092  4.34485595  0.65140148]
+P07 mu+ error (nb/GeV²): [8.66462997 5.91601661 3.38671034 1.66553453]
+P07 mu- error (nb/GeV²): [9.24733629 7.74149399 2.70355338 1.64632448]
+4 P08
+CBH 1.08
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [28.76645672 17.91126751 11.23254007  5.88683822]
+P08 mu- dsigma/dt (nb/GeV²): [39.19175186 13.49818504  9.44463379  2.8829526 ]
+P08 mu+ error (nb/GeV²): [10.36473841  5.47125831  3.12340082  1.92469802]
+P08 mu- error (nb/GeV²): [12.00642754  5.69204184  4.36484806  1.79246856]
+5 P09
+CBH 1.08
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [17.03166783 16.0912287  11.04172777  4.13705189]
+P09 mu- dsigma/dt (nb/GeV²): [28.87066313 23.87683294  7.07090191  3.05057235]
+P09 mu+ error (nb/GeV²): [7.8196642  6.91571321 4.07635212 1.89652019]
+P09 mu- error (nb/GeV²): [12.44362394  8.84330135  3.87406772  1.9256549 ]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [23.00596731 14.94642898  9.38356533  2.49693387]
+total mu+ error (nb/GeV²): [4.20095525 2.50220205 1.56618283 0.69544187]
+total mu- dsigma/dt (nb/GeV²): [29.06583437 17.10384944  7.82038644  1.72263374]
+total mu- error (nb/GeV²): [4.6287523  3.06170543 1.62517389 0.74073191]
+0 P04
+CBH 1.1
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [16.16859055 22.54883076  8.2990912   0.22070685]
+P04 mu- dsigma/dt (nb/GeV²): [15.923197   17.72821769  2.64047246  1.62264987]
+P04 mu+ error (nb/GeV²): [10.57312465  6.5011979   3.7996733   1.44678992]
+P04 mu- error (nb/GeV²): [8.55699078 7.91598475 2.75584632 1.65191417]
+1 P05
+CBH 1.1
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [25.57638354 11.71393918  9.79659     2.0364042 ]
+P05 mu- dsigma/dt (nb/GeV²): [23.73956722 18.44234436 13.87548307 -0.86246227]
+P05 mu+ error (nb/GeV²): [10.96925439  6.40994475  4.76755235  1.79055316]
+P05 mu- error (nb/GeV²): [12.20395559  8.41506839  4.98110071  1.58813997]
+2 P06
+CBH 1.1
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [33.91448569  9.99377181  9.39488533  0.65423384]
+P06 mu- dsigma/dt (nb/GeV²): [37.01386729  8.09454255  9.84496673  2.71360801]
+P06 mu+ error (nb/GeV²): [12.38277718  5.3998154   4.01834459  1.40425907]
+P06 mu- error (nb/GeV²): [13.41403447  5.9397556   4.91480726  2.3047689 ]
+3 P07
+CBH 1.1
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [15.93091562  8.75980872  6.32682792  1.67300414]
+P07 mu- dsigma/dt (nb/GeV²): [27.72174633 19.52535434  4.20374385  0.56250056]
+P07 mu+ error (nb/GeV²): [8.66473485 5.91610306 3.38680333 1.6658858 ]
+P07 mu- error (nb/GeV²): [9.24740818 7.74152766 2.70365917 1.64662531]
+4 P08
+CBH 1.1
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [28.32678295 17.66276174 11.08876498  5.79768152]
+P08 mu- dsigma/dt (nb/GeV²): [38.76238989 13.25467897  9.30259379  2.79673944]
+P08 mu+ error (nb/GeV²): [10.3648019   5.47133706  3.12346021  1.92492117]
+P08 mu- error (nb/GeV²): [12.00644099  5.69207674  4.36488157  1.79267268]
+5 P09
+CBH 1.1
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [16.59275    15.84381552 10.89618404  4.04936194]
+P09 mu- dsigma/dt (nb/GeV²): [28.44037335 23.62974323  6.92826452  2.96070092]
+P09 mu+ error (nb/GeV²): [7.81972852 6.91576298 4.07645062 1.89690541]
+P09 mu- error (nb/GeV²): [12.4437457   8.8433174   3.87421912  1.92617654]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [22.56617854 14.69772497  9.23962337  2.40815837]
+total mu+ error (nb/GeV²): [4.20098212 2.50223254 1.56621123 0.69556893]
+total mu- dsigma/dt (nb/GeV²): [28.6377903  16.86064114  7.67960734  1.6343876 ]
+total mu- error (nb/GeV²): [4.62877686 3.0617196  1.62520279 0.74085633]
+0 P04
+CBH 1.12
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [15.7305674  22.2998998   8.15573438  0.12935806]
+P04 mu- dsigma/dt (nb/GeV²): [15.49551519 17.48463028  2.50324334  1.53468122]
+P04 mu+ error (nb/GeV²): [10.57317986  6.50124275  3.79972632  1.44717405]
+P04 mu- error (nb/GeV²): [8.55712703 7.91601176 2.75594955 1.65223687]
+1 P05
+CBH 1.12
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [25.13366471 11.46621875  9.65405856  1.95166111]
+P05 mu- dsigma/dt (nb/GeV²): [23.31468285 18.20125013 13.73430175 -0.94875617]
+P05 mu+ error (nb/GeV²): [10.96930847  6.41002653  4.76759953  1.79073581]
+P05 mu- error (nb/GeV²): [12.2040161   8.41510438  4.98113205  1.58842801]
+2 P06
+CBH 1.12
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [33.47889151  9.74470347  9.25111376  0.56399471]
+P06 mu- dsigma/dt (nb/GeV²): [36.58501374  7.85122761  9.70456055  2.62282659]
+P06 mu+ error (nb/GeV²): [12.3828454   5.39995094  4.01843027  1.40466548]
+P06 mu- error (nb/GeV²): [13.41402966  5.93984921  4.91486661  2.30501135]
+3 P07
+CBH 1.12
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [15.48724469  8.50955246  6.1820504   1.58434502]
+P07 mu- dsigma/dt (nb/GeV²): [27.29462087 19.28449776  4.06263175  0.47359965]
+P07 mu+ error (nb/GeV²): [8.66484376 5.9161917  3.38689833 1.6662435 ]
+P07 mu- error (nb/GeV²): [9.24748336 7.74156277 2.70376729 1.64693221]
+4 P08
+CBH 1.12
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [27.88710919 17.41425596 10.94498988  5.70852482]
+P08 mu- dsigma/dt (nb/GeV²): [38.33302792 13.01117291  9.16055379  2.71052628]
+P08 mu+ error (nb/GeV²): [10.36486834  5.47141795  3.12352151  1.92514885]
+P08 mu- error (nb/GeV²): [12.00645659  5.69211344  4.36491628  1.79288054]
+5 P09
+CBH 1.12
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [16.15383218 15.59640234 10.7506403   3.96167198]
+P09 mu- dsigma/dt (nb/GeV²): [28.01008357 23.38265352  6.78562712  2.87082949]
+P09 mu+ error (nb/GeV²): [7.81979854 6.91581522 4.07655127 1.89729836]
+P09 mu- error (nb/GeV²): [12.44387288  8.84333665  3.87437403  1.92670874]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [22.12638976 14.44902097  9.09568142  2.31938288]
+total mu+ error (nb/GeV²): [4.20101038 2.50226393 1.56624036 0.69569846]
+total mu- dsigma/dt (nb/GeV²): [28.20974623 16.61743284  7.53882824  1.54614146]
+total mu- error (nb/GeV²): [4.62880274 3.06173458 1.62523244 0.74098319]
+0 P04
+CBH 1.14
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [15.29254425 22.05096883  8.01237755  0.03800928]
+P04 mu- dsigma/dt (nb/GeV²): [15.06783337 17.24104287  2.36601422  1.44671258]
+P04 mu+ error (nb/GeV²): [10.57323808  6.50128949  3.79978091  1.44756512]
+P04 mu- error (nb/GeV²): [8.5572669  7.91604033 2.75605486 1.65256552]
+1 P05
+CBH 1.14
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [24.69094589 11.21849832  9.51152713  1.86691802]
+P05 mu- dsigma/dt (nb/GeV²): [22.88979848 17.96015591 13.59312043 -1.03505007]
+P05 mu+ error (nb/GeV²): [10.96936557  6.41011023  4.76764798  1.79092226]
+P05 mu- error (nb/GeV²): [12.20407952  8.41514194  4.98116473  1.58872137]
+2 P06
+CBH 1.14
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [33.04329733  9.49563514  9.10734218  0.47375558]
+P06 mu- dsigma/dt (nb/GeV²): [36.15616019  7.60791267  9.56415437  2.53204517]
+P06 mu+ error (nb/GeV²): [12.38291668  5.40008946  4.0185179   1.40507967]
+P06 mu- error (nb/GeV²): [13.41402755  5.9399453   4.91492737  2.30525861]
+3 P07
+CBH 1.14
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [15.04357377  8.2592962   6.03727288  1.4956859 ]
+P07 mu- dsigma/dt (nb/GeV²): [26.86749541 19.04364117  3.92151966  0.38469874]
+P07 mu+ error (nb/GeV²): [8.6649567  5.91628251 3.38699535 1.66660763]
+P07 mu- error (nb/GeV²): [9.24756185 7.74159932 2.70387775 1.64724518]
+4 P08
+CBH 1.14
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [27.44743542 17.16575019 10.80121478  5.61936812]
+P08 mu- dsigma/dt (nb/GeV²): [37.90366594 12.76766685  9.01851379  2.62431312]
+P08 mu+ error (nb/GeV²): [10.36493773  5.47150099  3.12358472  1.92538104]
+P08 mu- error (nb/GeV²): [12.00647435  5.69215194  4.36495221  1.79309213]
+5 P09
+CBH 1.14
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [15.71491435 15.34898916 10.60509657  3.87398203]
+P09 mu- dsigma/dt (nb/GeV²): [27.57979379 23.13556381  6.64298973  2.78095806]
+P09 mu+ error (nb/GeV²): [7.81987425 6.91586993 4.07665407 1.89769904]
+P09 mu- error (nb/GeV²): [12.44400547  8.8433591   3.87453243  1.92725147]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [21.68660099 14.20031696  8.95173946  2.23060739]
+total mu+ error (nb/GeV²): [4.20104004 2.50229622 1.5662702  0.69583045]
+total mu- dsigma/dt (nb/GeV²): [27.78170215 16.37422453  7.39804913  1.45789532]
+total mu- error (nb/GeV²): [4.62882995 3.06175034 1.62526283 0.74111248]
+0 P04
+CBH 1.16
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [14.85452111 21.80203787  7.86902073 -0.05333951]
+P04 mu- dsigma/dt (nb/GeV²): [14.64015155 16.99745547  2.22878511  1.35874393]
+P04 mu+ error (nb/GeV²): [10.57329931  6.50133813  3.79983706  1.44796312]
+P04 mu- error (nb/GeV²): [8.55741039 7.91607044 2.75616225 1.65290012]
+1 P05
+CBH 1.16
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [24.24822706 10.9707779   9.36899569  1.78217493]
+P05 mu- dsigma/dt (nb/GeV²): [22.46491411 17.71906168 13.45193911 -1.12134397]
+P05 mu+ error (nb/GeV²): [10.96942568  6.41019583  4.76769769  1.79111249]
+P05 mu- error (nb/GeV²): [12.20414585  8.41518108  4.98119877  1.58902004]
+2 P06
+CBH 1.16
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [32.60770315  9.24656681  8.9635706   0.38351645]
+P06 mu- dsigma/dt (nb/GeV²): [35.72730665  7.36459773  9.42374819  2.44126374]
+P06 mu+ error (nb/GeV²): [12.38299101  5.40023094  4.01860748  1.40550165]
+P06 mu- error (nb/GeV²): [13.41402813  5.94004387  4.91498955  2.30551069]
+3 P07
+CBH 1.16
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [14.59990284  8.00903995  5.89249536  1.40702677]
+P07 mu- dsigma/dt (nb/GeV²): [26.44036996 18.80278459  3.78040756  0.29579782]
+P07 mu+ error (nb/GeV²): [8.66507368 5.91637549 3.38709438 1.66697819]
+P07 mu- error (nb/GeV²): [9.24764363 7.74163731 2.70399054 1.64756421]
+4 P08
+CBH 1.16
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [27.00776166 16.91724442 10.65743968  5.53021141]
+P08 mu- dsigma/dt (nb/GeV²): [37.47430397 12.52416079  8.87647379  2.53809996]
+P08 mu+ error (nb/GeV²): [10.36501007  5.47158619  3.12364984  1.92561774]
+P08 mu- error (nb/GeV²): [12.00649426  5.69219225  4.36498935  1.79330745]
+5 P09
+CBH 1.16
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [15.27599652 15.10157598 10.45955284  3.78629208]
+P09 mu- dsigma/dt (nb/GeV²): [27.14950401 22.8884741   6.50035234  2.69108663]
+P09 mu+ error (nb/GeV²): [7.81995567 6.91592712 4.07675902 1.89810744]
+P09 mu- error (nb/GeV²): [12.44414348  8.84338476  3.87469434  1.92780472]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [21.24681222 13.95161295  8.8077975   2.1418319 ]
+total mu+ error (nb/GeV²): [4.20107109 2.50232942 1.56630078 0.6959649 ]
+total mu- dsigma/dt (nb/GeV²): [27.35365808 16.13101623  7.25727003  1.36964918]
+total mu- error (nb/GeV²): [4.62885849 3.0617669  1.62529398 0.74124421]
+0 P04
+CBH 1.18
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [14.41649796 21.5531069   7.72566391 -0.14468829]
+P04 mu- dsigma/dt (nb/GeV²): [14.21246973 16.75386806  2.09155599  1.27077528]
+P04 mu+ error (nb/GeV²): [10.57336356  6.50138866  3.79989477  1.44836805]
+P04 mu- error (nb/GeV²): [8.55755748 7.9161021  2.75627172 1.65324066]
+1 P05
+CBH 1.18
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [23.80550824 10.72305747  9.22646425  1.69743185]
+P05 mu- dsigma/dt (nb/GeV²): [22.04002974 17.47796745 13.31075779 -1.20763787]
+P05 mu+ error (nb/GeV²): [10.96948881  6.41028335  4.76774867  1.7913065 ]
+P05 mu- error (nb/GeV²): [12.20421509  8.41522179  4.98123416  1.58932402]
+2 P06
+CBH 1.18
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [32.17210897  8.99749847  8.81979902  0.29327732]
+P06 mu- dsigma/dt (nb/GeV²): [35.2984531   7.12128279  9.283342    2.35048232]
+P06 mu+ error (nb/GeV²): [12.38306841  5.40037539  4.01869901  1.40593139]
+P06 mu- error (nb/GeV²): [13.41403141  5.94014493  4.91505316  2.30576757]
+3 P07
+CBH 1.18
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [14.15623191  7.75878369  5.74771785  1.31836765]
+P07 mu- dsigma/dt (nb/GeV²): [26.0132445  18.56192801  3.63929546  0.20689691]
+P07 mu+ error (nb/GeV²): [8.66519469 5.91647065 3.38719543 1.66735517]
+P07 mu- error (nb/GeV²): [9.24772871 7.74167674 2.70410566 1.64788931]
+4 P08
+CBH 1.18
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [26.5680879  16.66873865 10.51366459  5.44105471]
+P08 mu- dsigma/dt (nb/GeV²): [37.044942   12.28065472  8.73443379  2.45188681]
+P08 mu+ error (nb/GeV²): [10.36508537  5.47167353  3.12371686  1.92585896]
+P08 mu- error (nb/GeV²): [12.00651633  5.69223435  4.36502769  1.7935265 ]
+5 P09
+CBH 1.18
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [14.83707869 14.8541628  10.3140091   3.69860212]
+P09 mu- dsigma/dt (nb/GeV²): [26.71921423 22.64138439  6.35771494  2.6012152 ]
+P09 mu+ error (nb/GeV²): [7.82004278 6.91598679 4.07686612 1.89852356]
+P09 mu- error (nb/GeV²): [12.44428691  8.84341362  3.87485975  1.92836851]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [20.80702345 13.70290895  8.66385555  2.05305641]
+total mu+ error (nb/GeV²): [4.20110353 2.50236352 1.56633208 0.69610181]
+total mu- dsigma/dt (nb/GeV²): [26.92561401 15.88780792  7.11649092  1.28140303]
+total mu- error (nb/GeV²): [4.62888836 3.06178426 1.62532587 0.74137836]
+0 P04
+CBH 1.2
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [13.97847481 21.30417594  7.58230709 -0.23603708]
+P04 mu- dsigma/dt (nb/GeV²): [13.78478791 16.51028066  1.95432688  1.18280664]
+P04 mu+ error (nb/GeV²): [10.57343081  6.50144109  3.79995405  1.4487799 ]
+P04 mu- error (nb/GeV²): [8.55770818 7.9161353  2.75638326 1.65358715]
+1 P05
+CBH 1.2
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [23.36278941 10.47533704  9.08393282  1.61268876]
+P05 mu- dsigma/dt (nb/GeV²): [21.61514537 17.23687322 13.16957647 -1.29393177]
+P05 mu+ error (nb/GeV²): [10.96955495  6.41037278  4.76780092  1.7915043 ]
+P05 mu- error (nb/GeV²): [12.20428724  8.41526407  4.9812709   1.58963332]
+2 P06
+CBH 1.2
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [31.73651479  8.74843014  8.67602745  0.20303819]
+P06 mu- dsigma/dt (nb/GeV²): [34.86959955  6.87796785  9.14293582  2.2597009 ]
+P06 mu+ error (nb/GeV²): [12.38314886  5.40052282  4.01879249  1.4063689 ]
+P06 mu- error (nb/GeV²): [13.41403739  5.94024846  4.91511818  2.30602927]
+3 P07
+CBH 1.2
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [13.71256098  7.50852743  5.60294033  1.22970853]
+P07 mu- dsigma/dt (nb/GeV²): [25.58611905 18.32107143  3.49818337  0.117996  ]
+P07 mu+ error (nb/GeV²): [8.66531973 5.91656799 3.38729849 1.66773857]
+P07 mu- error (nb/GeV²): [9.24781708 7.7417176  2.70422312 1.64822046]
+4 P08
+CBH 1.2
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [26.12841413 16.42023287 10.36988949  5.35189801]
+P08 mu- dsigma/dt (nb/GeV²): [36.61558003 12.03714866  8.59239379  2.36567365]
+P08 mu+ error (nb/GeV²): [10.36516361  5.47176302  3.1237858   1.9261047 ]
+P08 mu- error (nb/GeV²): [12.00654056  5.69227826  4.36506725  1.79374928]
+5 P09
+CBH 1.2
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [14.39816086 14.60674962 10.16846537  3.61091217]
+P09 mu- dsigma/dt (nb/GeV²): [26.28892445 22.39429468  6.21507755  2.51134377]
+P09 mu+ error (nb/GeV²): [7.8201356  6.91604893 4.07697538 1.89894739]
+P09 mu- error (nb/GeV²): [12.44443575  8.84344567  3.87502867  1.9289428 ]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [20.36723468 13.45420494  8.51991359  1.96428092]
+total mu+ error (nb/GeV²): [4.20113737 2.50239853 1.5663641  0.69624119]
+total mu- dsigma/dt (nb/GeV²): [26.49756994 15.64459962  6.97571182  1.19315689]
+total mu- error (nb/GeV²): [4.62891956 3.06180241 1.62535851 0.74151494]
+0 P04
+CBH 1.22
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [13.54045166 21.05524498  7.43895026 -0.32738586]
+P04 mu- dsigma/dt (nb/GeV²): [13.35710609 16.26669325  1.81709776  1.09483799]
+P04 mu+ error (nb/GeV²): [10.57350108  6.50149541  3.80001489  1.44919866]
+P04 mu- error (nb/GeV²): [8.5578625  7.91617005 2.75649689 1.65393958]
+1 P05
+CBH 1.22
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [22.92007058 10.22761662  8.94140138  1.52794567]
+P05 mu- dsigma/dt (nb/GeV²): [21.190261   16.995779   13.02839515 -1.38022567]
+P05 mu+ error (nb/GeV²): [10.96962411  6.41046413  4.76785443  1.79170588]
+P05 mu- error (nb/GeV²): [12.20436229  8.41530793  4.981309    1.58994792]
+2 P06
+CBH 1.22
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [31.30092061  8.4993618   8.53225587  0.11279906]
+P06 mu- dsigma/dt (nb/GeV²): [34.440746    6.63465291  9.00252964  2.16891948]
+P06 mu+ error (nb/GeV²): [12.38323237  5.40067321  4.01888792  1.40681417]
+P06 mu- error (nb/GeV²): [13.41404607  5.94035447  4.91518461  2.30629577]
+3 P07
+CBH 1.22
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [13.26889006  7.25827117  5.45816281  1.1410494 ]
+P07 mu- dsigma/dt (nb/GeV²): [25.15899359 18.08021485  3.35707127  0.02909509]
+P07 mu+ error (nb/GeV²): [8.6654488  5.9166675  3.38740357 1.66812838]
+P07 mu- error (nb/GeV²): [9.24790875 7.74175991 2.70434291 1.64855768]
+4 P08
+CBH 1.22
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [25.68874037 16.1717271  10.22611439  5.26274131]
+P08 mu- dsigma/dt (nb/GeV²): [36.18621805 11.7936426   8.45035379  2.27946049]
+P08 mu+ error (nb/GeV²): [10.3652448   5.47185467  3.12385663  1.92635495]
+P08 mu- error (nb/GeV²): [12.00656695  5.69232396  4.36510802  1.79397578]
+5 P09
+CBH 1.22
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [13.95924303 14.35933644 10.02292164  3.52322222]
+P09 mu- dsigma/dt (nb/GeV²): [25.85863467 22.14720497  6.07244016  2.42147234]
+P09 mu+ error (nb/GeV²): [7.82023412 6.91611355 4.07708678 1.89937893]
+P09 mu- error (nb/GeV²): [12.44459     8.84348094  3.87520108  1.92952759]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [19.92744591 13.20550093  8.37597163  1.87550543]
+total mu+ error (nb/GeV²): [4.20117261 2.50243444 1.56639685 0.69638302]
+total mu- dsigma/dt (nb/GeV²): [26.06952587 15.40139131  6.83493271  1.10491075]
+total mu- error (nb/GeV²): [4.62895208 3.06182136 1.6253919  0.74165395]
+0 P04
+CBH 1.24
+Using cached acceptance for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P04 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P04 mu+ dsigma/dt (nb/GeV²): [13.10242852 20.80631401  7.29559344 -0.41873465]
+P04 mu- dsigma/dt (nb/GeV²): [12.92942427 16.02310584  1.67986864  1.00686935]
+P04 mu+ error (nb/GeV²): [10.57357436  6.50155163  3.80007729  1.44962433]
+P04 mu- error (nb/GeV²): [8.55802042 7.91620635 2.75661259 1.65429795]
+1 P05
+CBH 1.24
+Using cached acceptance for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P05 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P05 mu+ dsigma/dt (nb/GeV²): [22.47735176  9.97989619  8.79886994  1.44320258]
+P05 mu- dsigma/dt (nb/GeV²): [20.76537664 16.75468477 12.88721384 -1.46651957]
+P05 mu+ error (nb/GeV²): [10.96969628  6.41055738  4.76790921  1.79191124]
+P05 mu- error (nb/GeV²): [12.20444026  8.41535336  4.98134845  1.59026782]
+2 P06
+CBH 1.24
+Using cached acceptance for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P06 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P06 mu+ dsigma/dt (nb/GeV²): [3.08653264e+01 8.25029347e+00 8.38848429e+00 2.25599273e-02]
+P06 mu- dsigma/dt (nb/GeV²): [34.01189245  6.39133798  8.86212346  2.07813805]
+P06 mu+ error (nb/GeV²): [12.38331894  5.40082656  4.01898531  1.40726718]
+P06 mu- error (nb/GeV²): [13.41405744  5.94046296  4.91525247  2.30656707]
+3 P07
+CBH 1.24
+Using cached acceptance for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P07 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P07 mu+ dsigma/dt (nb/GeV²): [12.82521913  7.00801492  5.31338529  1.05239028]
+P07 mu- dsigma/dt (nb/GeV²): [24.73186813 17.83935827  3.21595917 -0.05980583]
+P07 mu+ error (nb/GeV²): [8.6655819  5.91676919 3.38751066 1.6685246 ]
+P07 mu- error (nb/GeV²): [9.24800372 7.74180365 2.70446504 1.64890094]
+4 P08
+CBH 1.24
+Using cached acceptance for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P08 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P08 mu+ dsigma/dt (nb/GeV²): [25.2490666  15.92322133 10.08233929  5.1735846 ]
+P08 mu- dsigma/dt (nb/GeV²): [35.75685608 11.55013654  8.30831379  2.19324733]
+P08 mu+ error (nb/GeV²): [10.36532895  5.47194846  3.12392938  1.9266097 ]
+P08 mu- error (nb/GeV²): [12.00659549  5.69237147  4.36514999  1.79420602]
+5 P09
+CBH 1.24
+Using cached acceptance for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/acceptance_cache.pkl
+Using cached event sums for P09 from /Users/gursimran/cern/COMPASS_DVCS/systematics/sum_cache.pkl
+P09 mu+ dsigma/dt (nb/GeV²): [13.5203252  14.11192326  9.8773779   3.43553226]
+P09 mu- dsigma/dt (nb/GeV²): [25.42834489 21.90011526  5.92980276  2.33160091]
+P09 mu+ error (nb/GeV²): [7.82033833 6.91618064 4.07720034 1.89981817]
+P09 mu- error (nb/GeV²): [12.44474967  8.8435194   3.875377    1.93012288]
+Total 2016 Sample
+total mu+ dsigma/dt (nb/GeV²): [19.48765714 12.95679692  8.23202968  1.78672994]
+total mu+ error (nb/GeV²): [4.20120923 2.50247125 1.56643033 0.69652731]
+total mu- dsigma/dt (nb/GeV²): [25.6414818  15.15818301  6.69415361  1.01666461]
+total mu- error (nb/GeV²): [4.62898593 3.0618411  1.62542603 0.74179539]
+Results written to 'CBH_dvcs_xSection_results.pkl'

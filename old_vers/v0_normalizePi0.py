@@ -4,7 +4,7 @@ import ROOT
 import numpy as np
 from array import array
 import datetime
-from dvcs_constants_2016 import *
+from dvcs_constants_2016_JTest import *
 
 # **********************************
 print("/!\ Make sure to use correct directories if calculating r_lepto")

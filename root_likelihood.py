@@ -1,6 +1,6 @@
 import ROOT
 import numpy as np
-from dvcs_constants_2016 import * 
+from dvcs_constants_2016_JTest import * 
 
 # **********************************
 # Slope fit function - binned likelihood fit using ROOT 

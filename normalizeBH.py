@@ -15,7 +15,7 @@ mcGen_files = ([os.path.join(gen_dir, "gen_P04_muPlus.root"), os.path.join(gen_d
 
 # HEPGEN BH MC Data (reconstructed data)
 rec_dir = "/Users/gursimran/cern/2016_data/BH/"
-mcRec_files = ([os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(rec_dir, "filtered_P04_muMinus.root")],
+mcRec_files = ([os.path.join(rec_dir, "filtered_P04_muPlus_JTest.root"), os.path.join(rec_dir, "filtered_P04_muMinus_JTest.root")],
                [os.path.join(rec_dir, "filtered_P05_muPlus.root"), os.path.join(rec_dir, "filtered_P05_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P06_muPlus.root"), os.path.join(rec_dir, "filtered_P06_muMinus.root")],
                [os.path.join(rec_dir, "filtered_P07_muPlus.root"), os.path.join(rec_dir, "filtered_P07_muMinus.root")],
@@ -24,7 +24,7 @@ mcRec_files = ([os.path.join(rec_dir, "filtered_P04_muPlus.root"), os.path.join(
 
 # Real data 
 real_dir = "/Users/gursimran/cern/2016_data/real/"
-real_files = ([os.path.join(real_dir, "filtered_P04.root")],
+real_files = ([os.path.join(real_dir, "filtered_P04_JTest.root")],
               [os.path.join(real_dir, "filtered_P05.root")],
               [os.path.join(real_dir, "filtered_P06.root")],
               [os.path.join(real_dir, "filtered_P07.root")],
@@ -154,6 +154,9 @@ def get_MC_luminosity(mc_files, period=9, charge="muMinus"):
   sum_weight = 0.0
   for i in range(tree.GetEntries()):
     tree.GetEntry(i)
+
+    """ if not (2 < tree.nu_gen < 170):
+      continue """
 
     weight_DVCS = float(tree.weight_DVCS)
     sum_weight += weight_DVCS
