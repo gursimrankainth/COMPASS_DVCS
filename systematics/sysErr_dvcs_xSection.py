@@ -622,16 +622,16 @@ def get_S(real_sum: np.ndarray, BH_sum: np.ndarray, lepPi0_sum: np.ndarray, hepP
   cbh_fac = fac if systematic == "CBH" else 1.0
   cpi0_hep_fac = fac if systematic == "CPI0_HEP" else 1.0
   cpi0_lep_fac = fac if systematic == "CPI0_LEP" else 1.0
-  r_lepto_fac = fac if systematic == "R_LEPTO" else 1.0
+  r_lepto = fac if systematic == "R_LEPTO" else const.R_LEPTO
 
   if charge == "muPlus":
     sum_term = (real_sum - cbh_fac*const.CBH_MUPLUS[period_idx]*BH_sum
-                - cpi0_lep_fac*const.CPI0_LEP_MUPLUS[period_idx]*r_lepto_fac*const.R_LEPTO*lepPi0_sum
-                - cpi0_hep_fac*const.CPI0_HEP_MUPLUS[period_idx]*(1-r_lepto_fac*const.R_LEPTO)*hepPi0_sum)
+                - cpi0_lep_fac*const.CPI0_LEP_MUPLUS[period_idx]*r_lepto*lepPi0_sum
+                - cpi0_hep_fac*const.CPI0_HEP_MUPLUS[period_idx]*(1-r_lepto)*hepPi0_sum)
   elif charge == "muMinus": 
     sum_term = (real_sum - cbh_fac*const.CBH_MUMINUS[period_idx]*BH_sum
-                - cpi0_lep_fac*const.CPI0_LEP_MUMINUS[period_idx]*r_lepto_fac*const.R_LEPTO*lepPi0_sum
-                - cpi0_hep_fac*const.CPI0_HEP_MUMINUS[period_idx]*(1-r_lepto_fac*const.R_LEPTO)*hepPi0_sum)
+                - cpi0_lep_fac*const.CPI0_LEP_MUMINUS[period_idx]*r_lepto*lepPi0_sum
+                - cpi0_hep_fac*const.CPI0_HEP_MUMINUS[period_idx]*(1-r_lepto)*hepPi0_sum)
   else:
     raise ValueError('Invalid charge, please use "muPlus" or "muMinus"')
   return sum_term
@@ -693,7 +693,7 @@ def get_var_S(D_array: np.ndarray, B_array: np.ndarray, L_array: np.ndarray, H_a
   cbh_fac = fac if systematic == "CBH" else 1.0
   cpi0_hep_fac = fac if systematic == "CPI0_HEP" else 1.0
   cpi0_lep_fac = fac if systematic == "CPI0_LEP" else 1.0
-  r_lepto = fac * const.R_LEPTO if systematic == "R_LEPTO" else const.R_LEPTO
+  r_lepto = fac if systematic == "R_LEPTO" else const.R_LEPTO
 
   # the arrays are just the sums, NOT the sqaure root of the sums (no need to sqaure them)
   t1 = D_array
@@ -963,7 +963,7 @@ def computeXSec(systematic: str = "CBH", fac: float = 1.0,
 # Choose which systematic will be studied 
 systematicOptions = ("NONE", "CBH", "CPI0_HEP", "CPI0_LEP", "R_LEPTO",)
 
-def main(systematic: str = "CBH", recalcAcc: bool = False, recalcSums: bool = False): 
+def main(systematic: str = "R_LEPTO", recalcAcc: bool = False, recalcSums: bool = False): 
   if systematic not in systematicOptions:
     raise ValueError(f"Unknown systematic {systematic!r}; choose from {systematicOptions}")
   
@@ -978,6 +978,21 @@ def main(systematic: str = "CBH", recalcAcc: bool = False, recalcSums: bool = Fa
     elif systematic == "CBH": 
       factors = CBH_FACTORS
       for fac in tqdm(factors, desc=f"{systematic} factors", unit="factor"):
+        systematic_results[fac] = computeXSec(systematic=systematic, fac=fac, recalcAcc=recalcAcc, recalcSums=recalcSums)
+
+    elif systematic == "CPI0_HEP": 
+      factors = CPI0_FACTORS
+      for fac in tqdm(factors, desc=f"{systematic} factors", unit="factor"):
+        systematic_results[fac] = computeXSec(systematic=systematic, fac=fac, recalcAcc=recalcAcc, recalcSums=recalcSums)
+
+    elif systematic == "CPI0_LEP": 
+      factors = CPI0_FACTORS
+      for fac in tqdm(factors, desc=f"{systematic} factors", unit="factor"):
+        systematic_results[fac] = computeXSec(systematic=systematic, fac=fac, recalcAcc=recalcAcc, recalcSums=recalcSums)
+
+    elif systematic == "R_LEPTO":
+      factors = R_LEPTO_VALS
+      for fac in tqdm(factors, desc=f"{systematic} values", unit="value"):
         systematic_results[fac] = computeXSec(systematic=systematic, fac=fac, recalcAcc=recalcAcc, recalcSums=recalcSums)
 
     else:
