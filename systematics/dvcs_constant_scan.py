@@ -22,3 +22,8 @@ R_LEPTO_VALS = (
   0.75, 0.80, 0.85, 0.90, 0.95,
   1.00,
 )
+
+# Different values used for systematic error study 
+PI0_ECAL_THRES = ((0.3, 0.3), (0.5, 1.0))
+
+RED_CHI2_VALS = (4.0, 6.0, 8.0) #10.0 is the value used for the base analysis 
